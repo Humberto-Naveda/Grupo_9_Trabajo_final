@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2025 a las 01:52:13
+-- Tiempo de generación: 23-10-2025 a las 20:55:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,11 +44,25 @@ CREATE TABLE `asiento` (
 --
 
 CREATE TABLE `comprador` (
-  `dni` int(11) DEFAULT NULL,
+  `dni` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `fechaNac` date NOT NULL,
   `password` int(11) NOT NULL,
   `medioPago` varchar(120) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_ticket`
+--
+
+CREATE TABLE `detalle_ticket` (
+  `idDetalle` int(11) NOT NULL,
+  `idTicket` int(11) NOT NULL,
+  `idFuncion` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,8 +90,8 @@ CREATE TABLE `funcion` (
 --
 
 CREATE TABLE `pelicula` (
-  `id` int(11) NOT NULL,
-  `titulo` varchar(30) NOT NULL,
+  `idPelicula` int(11) NOT NULL,
+  `titulo` varchar(30) DEFAULT NULL,
   `director` varchar(30) NOT NULL,
   `actores` varchar(30) NOT NULL,
   `origen` varchar(30) NOT NULL,
@@ -111,7 +125,8 @@ CREATE TABLE `ticketcompra` (
   `fechaCompra` int(11) NOT NULL,
   `fechaFuncion` int(11) NOT NULL,
   `monto` int(11) NOT NULL,
-  `idComprador` int(11) NOT NULL
+  `dni` int(11) NOT NULL,
+  `idAsiento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -122,25 +137,37 @@ CREATE TABLE `ticketcompra` (
 -- Indices de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  ADD PRIMARY KEY (`idAsiento`);
+  ADD PRIMARY KEY (`idAsiento`),
+  ADD KEY `idFuncion` (`idFuncion`);
 
 --
 -- Indices de la tabla `comprador`
 --
 ALTER TABLE `comprador`
+  ADD PRIMARY KEY (`dni`),
   ADD UNIQUE KEY `dni` (`nombre`);
+
+--
+-- Indices de la tabla `detalle_ticket`
+--
+ALTER TABLE `detalle_ticket`
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD KEY `idFuncion` (`idFuncion`),
+  ADD KEY `idTicket` (`idTicket`);
 
 --
 -- Indices de la tabla `funcion`
 --
 ALTER TABLE `funcion`
-  ADD PRIMARY KEY (`idFuncion`);
+  ADD PRIMARY KEY (`idFuncion`),
+  ADD UNIQUE KEY `idPelicula` (`idPelicula`),
+  ADD UNIQUE KEY `idSala` (`idSala`);
 
 --
 -- Indices de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idPelicula`),
   ADD UNIQUE KEY `titulo` (`titulo`);
 
 --
@@ -155,7 +182,39 @@ ALTER TABLE `sala`
 --
 ALTER TABLE `ticketcompra`
   ADD PRIMARY KEY (`idTicket`),
-  ADD KEY `idComprador` (`idComprador`);
+  ADD KEY `idComprador` (`dni`),
+  ADD KEY `idAsiento` (`idAsiento`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `asiento`
+--
+ALTER TABLE `asiento`
+  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`idFuncion`) REFERENCES `funcion` (`idFuncion`);
+
+--
+-- Filtros para la tabla `detalle_ticket`
+--
+ALTER TABLE `detalle_ticket`
+  ADD CONSTRAINT `detalle_ticket_ibfk_1` FOREIGN KEY (`idFuncion`) REFERENCES `funcion` (`idFuncion`),
+  ADD CONSTRAINT `detalle_ticket_ibfk_2` FOREIGN KEY (`idTicket`) REFERENCES `ticketcompra` (`idTicket`);
+
+--
+-- Filtros para la tabla `funcion`
+--
+ALTER TABLE `funcion`
+  ADD CONSTRAINT `funcion_ibfk_1` FOREIGN KEY (`idPelicula`) REFERENCES `pelicula` (`idPelicula`),
+  ADD CONSTRAINT `funcion_ibfk_2` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`);
+
+--
+-- Filtros para la tabla `ticketcompra`
+--
+ALTER TABLE `ticketcompra`
+  ADD CONSTRAINT `ticketcompra_ibfk_1` FOREIGN KEY (`dni`) REFERENCES `comprador` (`dni`),
+  ADD CONSTRAINT `ticketcompra_ibfk_2` FOREIGN KEY (`idAsiento`) REFERENCES `asiento` (`idAsiento`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
