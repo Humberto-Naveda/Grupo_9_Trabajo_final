@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2025 a las 20:55:03
+-- Tiempo de generación: 24-10-2025 a las 01:09:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gp3_nombre_base.sql`
+-- Base de datos: `gp9_cinemacentro_basededatos`
 --
-CREATE DATABASE IF NOT EXISTS `gp3_nombre_base.sql` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `gp3_nombre_base.sql`;
+CREATE DATABASE IF NOT EXISTS `gp9_cinemacentro_basededatos` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gp9_cinemacentro_basededatos`;
 
 -- --------------------------------------------------------
 
@@ -44,12 +44,20 @@ CREATE TABLE `asiento` (
 --
 
 CREATE TABLE `comprador` (
+  `id_comprador` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `fechaNac` date NOT NULL,
   `password` int(11) NOT NULL,
   `medioPago` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comprador`
+--
+
+INSERT INTO `comprador` (`id_comprador`, `dni`, `nombre`, `fechaNac`, `password`, `medioPago`) VALUES
+(1, 44221133, 'Juan Zarate', '1995-05-15', 1234, 'Tarjeta Debito');
 
 -- --------------------------------------------------------
 
@@ -125,7 +133,7 @@ CREATE TABLE `ticketcompra` (
   `fechaCompra` int(11) NOT NULL,
   `fechaFuncion` int(11) NOT NULL,
   `monto` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
+  `Id_comprador` int(11) NOT NULL,
   `idAsiento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -144,7 +152,7 @@ ALTER TABLE `asiento`
 -- Indices de la tabla `comprador`
 --
 ALTER TABLE `comprador`
-  ADD PRIMARY KEY (`dni`),
+  ADD PRIMARY KEY (`id_comprador`),
   ADD UNIQUE KEY `dni` (`nombre`);
 
 --
@@ -182,8 +190,18 @@ ALTER TABLE `sala`
 --
 ALTER TABLE `ticketcompra`
   ADD PRIMARY KEY (`idTicket`),
-  ADD KEY `idComprador` (`dni`),
+  ADD KEY `idComprador` (`Id_comprador`),
   ADD KEY `idAsiento` (`idAsiento`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `comprador`
+--
+ALTER TABLE `comprador`
+  MODIFY `id_comprador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -213,7 +231,7 @@ ALTER TABLE `funcion`
 -- Filtros para la tabla `ticketcompra`
 --
 ALTER TABLE `ticketcompra`
-  ADD CONSTRAINT `ticketcompra_ibfk_1` FOREIGN KEY (`dni`) REFERENCES `comprador` (`dni`),
+  ADD CONSTRAINT `fk_ticketcompra_comprador` FOREIGN KEY (`Id_comprador`) REFERENCES `comprador` (`id_comprador`),
   ADD CONSTRAINT `ticketcompra_ibfk_2` FOREIGN KEY (`idAsiento`) REFERENCES `asiento` (`idAsiento`);
 COMMIT;
 
