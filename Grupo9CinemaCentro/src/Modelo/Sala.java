@@ -10,7 +10,7 @@ package Modelo;
  * @author Usuario
  */
 public class Sala {
-   
+   private int idSala;
     private int nroSala;
     private boolean apta3D;
     private int capacidad;
@@ -24,6 +24,14 @@ public class Sala {
     }
 
     public Sala() {
+    }
+
+    public int getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
     }
 
    

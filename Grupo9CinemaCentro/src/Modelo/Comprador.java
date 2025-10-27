@@ -21,6 +21,7 @@ public class Comprador {
 
     public Comprador() {
     }
+    
 
     public int getIdComprador() {
         return idComprador;
