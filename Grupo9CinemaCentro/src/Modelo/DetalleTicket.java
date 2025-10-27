@@ -5,6 +5,11 @@
  */
 package Modelo;
 
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
+import static java.util.Collections.list;
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -12,13 +17,13 @@ package Modelo;
 public class DetalleTicket {
     private int idDetalle;
     private Proyeccion proyeccion; 
-    private Lugar lugar;
+    private List<Lugar> lugar;
     private int cantidad;
     private double subtotal;
 
     public DetalleTicket(Proyeccion proyeccion, Lugar lugar, int cantidad, double subtotal) {
         this.proyeccion = proyeccion;
-        this.lugar = lugar;
+        this.lugar = (List<Lugar>) lugar;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
     }
@@ -43,11 +48,11 @@ public class DetalleTicket {
     }
 
     public Lugar getLugar() {
-        return lugar;
+        return (Lugar) lugar;
     }
 
     public void setLugar(Lugar lugar) {
-        this.lugar = lugar;
+        this.lugar = (List<Lugar>) lugar;
     }
 
     public int getCantidad() {

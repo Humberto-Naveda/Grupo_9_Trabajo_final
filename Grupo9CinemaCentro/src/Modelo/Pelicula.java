@@ -12,8 +12,9 @@ import java.time.LocalDate;
  * @author Usuario
  */
 public class Pelicula {
-    private int idPelicula;
+    
     private String titulo;
+    private String idPelicula;
             private String director;
             private String actores;
             private String origen;
@@ -31,13 +32,9 @@ public class Pelicula {
         this.enCartelera = enCartelera;
     }
 
-    public int getIdPelicula() {
-        return idPelicula;
-    }
+  
 
-    public void setIdPelicula(int idPelicula) {
-        this.idPelicula = idPelicula;
-    }
+   
 
     public String getTitulo() {
         return titulo;

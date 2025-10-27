@@ -10,7 +10,7 @@ package Modelo;
  * @author Usuario
  */
 public class Sala {
-    private int sala;
+   
     private int nroSala;
     private boolean apta3D;
     private int capacidad;
@@ -26,13 +26,9 @@ public class Sala {
     public Sala() {
     }
 
-    public int getSala() {
-        return sala;
-    }
+   
 
-    public void setSala(int sala) {
-        this.sala = sala;
-    }
+   
 
     public int getNroSala() {
         return nroSala;
@@ -68,7 +64,7 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" + "sala=" + sala + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
+        return "Sala{" + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
     }
    
     
