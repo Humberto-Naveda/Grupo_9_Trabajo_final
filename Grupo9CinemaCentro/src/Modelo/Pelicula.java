@@ -12,9 +12,8 @@ import java.time.LocalDate;
  * @author Usuario
  */
 public class Pelicula {
-    
+     private String idPelicula;
     private String titulo;
-    private String idPelicula;
             private String director;
             private String actores;
             private String origen;
