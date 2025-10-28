@@ -2,7 +2,7 @@
 
 <ClassDiagram name="CinemaCentro">
   <ClassDiagramComponents>
-    <Class name="Comprador" package="" visibility="public" xPosition="42.0" yPosition="397.0">
+    <Class name="Comprador" package="" visibility="public" xPosition="61.0" yPosition="365.0">
       <Fields>
         <Field name="idComprador" type="int" visibility="private"/>
         <Field name="dni" type="int" visibility="private"/>
@@ -19,30 +19,14 @@
         <Method name="Setters" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Ticket" package="" visibility="public" xPosition="42.0" yPosition="48.0">
+    <Class name="Ticket" package="" visibility="public" xPosition="473.0" yPosition="365.0">
       <Fields>
         <Field name="idTiket" type="int" visibility="private"/>
         <Field name="fechaCompra" type="LocalDate" visibility="private"/>
         <Field name="fechaFuncion" type="LocalDate" visibility="private"/>
         <Field name="monto" type="double" visibility="private"/>
         <Field name="comprador" type="Comprador" visibility="private"/>
-        <Field name="detalles" type="List&lt;DetalleTicket&gt;" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-      </Constructors>
-      <Methods>
-        <Method name="Getters" returnType="void" visibility="public"/>
-        <Method name="Setters" returnType="void" visibility="public"/>
-      </Methods>
-    </Class>
-    <Class name="DetalleTicket" package="" visibility="public" xPosition="347.0" yPosition="397.0">
-      <Fields>
-        <Field name="idDetalle" type="int" visibility="private"/>
-        <Field name="proyeccion" type="Proyeccion" visibility="private"/>
         <Field name="lugar" type="Lugar" visibility="private"/>
-        <Field name="cantidad" type="int" visibility="private"/>
-        <Field name="subtotal" type="double" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -52,7 +36,7 @@
         <Method name="Setters" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Lugar" package="" visibility="public" xPosition="871.0" yPosition="332.0">
+    <Class name="Lugar" package="" visibility="public" xPosition="797.0" yPosition="330.0">
       <Fields>
         <Field name="idLugar" type="int" visibility="private"/>
         <Field name="fila" type="int" visibility="private"/>
@@ -68,7 +52,7 @@
         <Method name="Setters" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Proyeccion" package="" visibility="public" xPosition="583.0" yPosition="38.0">
+    <Class name="Proyeccion" package="" visibility="public" xPosition="376.0" yPosition="19.0">
       <Fields>
         <Field name="idProyeccion" type="int" visibility="private"/>
         <Field name="idioma" type="String" visibility="private"/>
@@ -88,7 +72,7 @@
         <Method name="Setters" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Pelicula" package="" visibility="public" xPosition="315.0" yPosition="10.0">
+    <Class name="Pelicula" package="" visibility="public" xPosition="61.0" yPosition="19.0">
       <Fields>
         <Field name="idPelicula" type="int" visibility="private"/>
         <Field name="titulo" type="String" visibility="private"/>
@@ -107,7 +91,7 @@
         <Method name="Setters" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Sala " package="" visibility="public" xPosition="871.0" yPosition="48.0">
+    <Class name="Sala " package="" visibility="public" xPosition="765.0" yPosition="3.0">
       <Fields>
         <Field name="idSala" type="int" visibility="private"/>
         <Field name="nroSala" type="int" visibility="private"/>
@@ -125,12 +109,10 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="tiene" source="Ticket" target="DetalleTicket" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="proyecta" source="Sala " target="Proyeccion" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="tiene" source="Pelicula" target="Proyeccion" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="tiene" source="DetalleTicket" target="Lugar" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Lugar" target="Ticket" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Proyeccion" target="Lugar" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Comprador" target="Ticket" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <UseRelation name="usa" source="DetalleTicket" target="Proyeccion" sourceCardinality="1..*" targetCardinality="1..*"/>
+    <HasRelation name="tiene" source="Pelicula" target="Proyeccion" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="proyecta" source="Sala " target="Proyeccion" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
