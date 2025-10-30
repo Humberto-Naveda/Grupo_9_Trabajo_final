@@ -14,11 +14,12 @@ import java.util.List;
  */
 public class Ticket {
    private int idTicket;
+     private Lugar asiento;
    private Comprador comprador;
    private LocalDate fechaCompra;
    private LocalDate fechaFuncion;
    private double monto;
-   private Lugar asiento;
+ 
 
     public Ticket(Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, Lugar asiento) {
         this.comprador = comprador;
