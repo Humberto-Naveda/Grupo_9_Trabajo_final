@@ -14,12 +14,25 @@ import java.time.LocalDate;
 public class Pelicula {
      private int idPelicula;
     private String titulo;
+    
             private String director;
             private String actores;
             private String origen;
             private String genero;
             private LocalDate estreno;
             private boolean enCartelera;
+
+    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
+        this.idPelicula = idPelicula;
+        this.titulo = titulo;
+        this.director = director;
+        this.actores = actores;
+        this.origen = origen;
+        this.genero = genero;
+        this.estreno = estreno;
+        this.enCartelera = enCartelera;
+    }
+            
 
     public Pelicula(String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
         this.titulo = titulo;
@@ -29,6 +42,14 @@ public class Pelicula {
         this.genero = genero;
         this.estreno = estreno;
         this.enCartelera = enCartelera;
+    }
+
+    public int getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
   

@@ -117,9 +117,12 @@ public class CompradorData {
             ps.setString(4, comprador.getMedioPago());
             ps.setDate(5, Date.valueOf(comprador.getFechaNac()));
             ps.setInt(6, comprador.getIdComprador());
-            ps.executeUpdate();
+           int rs= ps.executeUpdate();
             
+           if(rs>0){
             JOptionPane.showMessageDialog(null, "actualizacion exitosa");
+           
+           }else{ JOptionPane.showMessageDialog(null, "no se actualizo ninguna fila");}
            ps.close();
         } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "actualizacion erronea");

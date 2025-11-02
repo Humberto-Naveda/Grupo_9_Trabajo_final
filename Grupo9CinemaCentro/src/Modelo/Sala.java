@@ -16,6 +16,14 @@ public class Sala {
     private int capacidad;
    private String estado;
 
+    public Sala(int idSala, int nroSala, boolean apta3D, int capacidad, String estado) {
+        this.idSala = idSala;
+        this.nroSala = nroSala;
+        this.apta3D = apta3D;
+        this.capacidad = capacidad;
+        this.estado = estado;
+    }
+
     public Sala(int nroSala, boolean apta3D, int capacidad, String estado) {
         this.nroSala = nroSala;
         this.apta3D = apta3D;

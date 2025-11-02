@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import static java.time.temporal.TemporalQueries.localDate;
 import static java.time.temporal.TemporalQueries.localTime;
@@ -24,6 +26,18 @@ public class Proyeccion {
    private  LocalTime horaFin;
     private double precio;
 
+    public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
+        this.idProyeccion = idProyeccion;
+        this.pelicula = pelicula;
+        this.sala = sala;
+        this.idioma = idioma;
+        this.es3D = es3D;
+        this.subtitulada = subtitulada;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.precio = precio;
+    }
+
     public Proyeccion(Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
         this.pelicula = pelicula;
         this.sala = sala;
@@ -36,6 +50,10 @@ public class Proyeccion {
     }
 
     public Proyeccion() {
+    }
+
+    public Proyeccion(Pelicula pelicula, Sala sala, String español, boolean b, boolean b0, LocalDate of, LocalDate of0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdProyeccion() {

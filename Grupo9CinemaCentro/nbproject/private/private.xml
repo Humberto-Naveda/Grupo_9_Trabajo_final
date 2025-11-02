@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Persistencia/PeliculaData.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Persistencia/CompradorData.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Modelo/Pelicula.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Modelo/Lugar.java</file>
@@ -12,6 +13,8 @@
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Modelo/Conexion.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Vistas/Test.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Modelo/Proyeccion.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Persistencia/ProyeccionData.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/GitHub/tranversal/Grupo_9_Trabajo_final/Grupo9CinemaCentro/src/Persistencia/SalaData.java</file>
         </group>
     </open-files>
 </project-private>
