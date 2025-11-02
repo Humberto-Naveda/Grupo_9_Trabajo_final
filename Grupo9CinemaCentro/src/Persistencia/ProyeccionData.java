@@ -203,5 +203,21 @@ String sql="UPDATE `proyeccion` SET  idioma=?,es3D=?,subtitulada=?,horaInicio=?,
            JOptionPane.showMessageDialog(null, "error al actualizar la proyeccion");
         }
 }
+public void eliminarProyeccion(int id_proyeccion){
+String sql="DELETE FROM proyeccion WHERE Id_proyeccion=?";
+        try {
+            PreparedStatement ps=conec.prepareStatement(sql);
+            ps.setInt(1, id_proyeccion);
+            int rs=ps.executeUpdate();
+            if(rs>0){
+            JOptionPane.showMessageDialog(null, "Proyeccion eliminada");
+            }else{JOptionPane.showMessageDialog(null, "No se elimnino ninguna fila");}
+            ps.close();
+            
+        } catch (SQLException ex) {
+          {JOptionPane.showMessageDialog(null, "Error al eliminar proyeccion");}
+        }
+
+}
     
 }
