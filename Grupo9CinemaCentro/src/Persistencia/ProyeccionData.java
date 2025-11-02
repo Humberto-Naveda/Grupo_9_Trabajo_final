@@ -104,7 +104,7 @@ public class ProyeccionData {
            sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getString("estado"));
+           sala.setEstado(rs.getBoolean("estado"));
            
            sala.setNroSala(rs.getInt("nroSala"));
            
@@ -164,7 +164,7 @@ public class ProyeccionData {
              sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getString("estado"));
+           sala.setEstado(rs.getBoolean("estado"));
            
            sala.setNroSala(rs.getInt("nroSala"));
             
@@ -180,6 +180,44 @@ public class ProyeccionData {
 
     return lista;
 }
+public void modificarProyeccion(Proyeccion pro){
 
+String sql="UPDATE `proyeccion` SET  idioma=?,es3D=?,subtitulada=?,horaInicio=?,horaFin=?,precio=? WHERE Id_proyeccion=?";
+        try {
+            PreparedStatement ps=conec.prepareStatement(sql);
+         
+            ps.setString(1, pro.getIdioma());
+            ps.setBoolean(2, pro.isEs3D());
+            ps.setBoolean(3, pro.isSubtitulada());
+            ps.setTime(4,Time.valueOf(pro.getHoraInicio()));
+            ps.setTime(5, Time.valueOf(pro.getHoraFin()));
+            ps.setDouble(6, pro.getPrecio());
+            ps.setInt(7, pro.getIdProyeccion());
+           
+            int rs=ps.executeUpdate();
+            if(rs>=1){
+            JOptionPane.showMessageDialog(null, "actualizacion exitosa");
+            }else{JOptionPane.showMessageDialog(null, "no se actualizo nada");}
+            ps.close();
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "error al actualizar la proyeccion");
+        }
+}
+public void eliminarProyeccion(int id_proyeccion){
+String sql="DELETE FROM proyeccion WHERE Id_proyeccion=?";
+        try {
+            PreparedStatement ps=conec.prepareStatement(sql);
+            ps.setInt(1, id_proyeccion);
+            int rs=ps.executeUpdate();
+            if(rs>0){
+            JOptionPane.showMessageDialog(null, "Proyeccion eliminada");
+            }else{JOptionPane.showMessageDialog(null, "No se elimnino ninguna fila");}
+            ps.close();
+            
+        } catch (SQLException ex) {
+          {JOptionPane.showMessageDialog(null, "Error al eliminar proyeccion");}
+        }
+
+}
     
 }

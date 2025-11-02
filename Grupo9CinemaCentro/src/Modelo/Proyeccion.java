@@ -52,9 +52,7 @@ public class Proyeccion {
     public Proyeccion() {
     }
 
-    public Proyeccion(Pelicula pelicula, Sala sala, String español, boolean b, boolean b0, LocalDate of, LocalDate of0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     public int getIdProyeccion() {
         return idProyeccion;

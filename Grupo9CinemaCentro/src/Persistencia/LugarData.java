@@ -162,11 +162,13 @@ public class LugarData {
 
                 while (rs.next()) {
                     Lugar asiento = new Lugar();
-                    asiento.getIdLugar(rs.getInt("Id_lugar"));
-                    asiento.getProyeccion().getIdProyeccion(rs.getInt("Id_proyeccion"));
-                    asiento.getFila();
-                    asiento.getNumero();
-                    asiento.isEstado();
+                    Proyeccion proyeccion = new Proyeccion();
+                    proyeccion.setIdProyeccion(rs.getInt("Id_proyeccion"));
+                    asiento.setIdLugar(rs.getInt("Id_lugar"));
+                    asiento.setProyeccion(proyeccion);
+                    asiento.setFila(rs.getInt("fila"));
+                    asiento.setNumero(rs.getInt("numero"));
+                    asiento.setEstado(rs.getBoolean("estado"));
                     lista.add(asiento);
                 }
             }
