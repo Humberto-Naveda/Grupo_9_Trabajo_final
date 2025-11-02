@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CompradorData {
-    private Connection conec =null;
+    private Connection conec = null;
 
     public CompradorData(Conexion conexion) {
         this.conec = conexion.conectar();
