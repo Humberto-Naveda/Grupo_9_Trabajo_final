@@ -7,6 +7,7 @@ package Vistas;
 import Modelo.*;
 import Persistencia.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -16,16 +17,13 @@ public class Test {
 
     public static void main(String[] args) {
           Conexion conn = new Conexion("gp9_cinemacentro_basededatos","jdbc:mariadb://localhost/","root","","org.mariadb.jdbc.Driver");
-          CompradorData cd = new CompradorData(conn);
-        
-          Comprador nuevo = new Comprador(44221133, "Juan Zarate", 1234, "Tarjeta Debito", LocalDate.of(1995, 5, 15));
-          cd.guardarComprador(nuevo);
-        
-          System.out.println("Lista de compradores:");
-          for (Comprador c : cd.listarCompradores()) {
-             System.out.println(c);
-          }
-         
-    }
-    
+      ProyeccionData pd=new ProyeccionData(conn);
+     Proyeccion p= pd.buscarProyeccion(10);
+        System.out.println(p);
+   
+     /*  for(Proyeccion p:pd.listarProyeccion()){
+       
+           System.out.println(p);
+       }*/
+}
 }

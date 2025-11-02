@@ -11,6 +11,15 @@ public class Comprador {
     private String medioPago;
     private LocalDate fechaNac;
 
+    public Comprador(int idComprador, int dni, String nombre, int password, String medioPago, LocalDate fechaNac) {
+        this.idComprador = idComprador;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.password = password;
+        this.medioPago = medioPago;
+        this.fechaNac = fechaNac;
+    }
+
     public Comprador(int dni, String nombre, int password, String medioPago, LocalDate fechaNac) {
         this.dni = dni;
         this.nombre = nombre;
