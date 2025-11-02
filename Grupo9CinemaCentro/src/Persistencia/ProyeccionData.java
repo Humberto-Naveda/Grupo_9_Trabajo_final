@@ -180,6 +180,28 @@ public class ProyeccionData {
 
     return lista;
 }
+public void modificarProyeccion(Proyeccion pro){
 
+String sql="UPDATE `proyeccion` SET  idioma=?,es3D=?,subtitulada=?,horaInicio=?,horaFin=?,precio=? WHERE Id_proyeccion=?";
+        try {
+            PreparedStatement ps=conec.prepareStatement(sql);
+         
+            ps.setString(1, pro.getIdioma());
+            ps.setBoolean(2, pro.isEs3D());
+            ps.setBoolean(3, pro.isSubtitulada());
+            ps.setTime(4,Time.valueOf(pro.getHoraInicio()));
+            ps.setTime(5, Time.valueOf(pro.getHoraFin()));
+            ps.setDouble(6, pro.getPrecio());
+            ps.setInt(7, pro.getIdProyeccion());
+           
+            int rs=ps.executeUpdate();
+            if(rs>=1){
+            JOptionPane.showMessageDialog(null, "actualizacion exitosa");
+            }else{JOptionPane.showMessageDialog(null, "no se actualizo nada");}
+            ps.close();
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "error al actualizar la proyeccion");
+        }
+}
     
 }
