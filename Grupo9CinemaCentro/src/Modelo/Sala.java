@@ -10,13 +10,14 @@ package Modelo;
  * @author Usuario
  */
 public class Sala {
-   private int idSala;
+
+    private int idSala;
     private int nroSala;
     private boolean apta3D;
     private int capacidad;
-   private String estado;
+    private boolean estado;
 
-    public Sala(int idSala, int nroSala, boolean apta3D, int capacidad, String estado) {
+    public Sala(int idSala, int nroSala, boolean apta3D, int capacidad, boolean estado) {
         this.idSala = idSala;
         this.nroSala = nroSala;
         this.apta3D = apta3D;
@@ -24,7 +25,7 @@ public class Sala {
         this.estado = estado;
     }
 
-    public Sala(int nroSala, boolean apta3D, int capacidad, String estado) {
+    public Sala(int nroSala, boolean apta3D, int capacidad, boolean estado) {
         this.nroSala = nroSala;
         this.apta3D = apta3D;
         this.capacidad = capacidad;
@@ -41,10 +42,6 @@ public class Sala {
     public void setIdSala(int idSala) {
         this.idSala = idSala;
     }
-
-   
-
-   
 
     public int getNroSala() {
         return nroSala;
@@ -70,11 +67,11 @@ public class Sala {
         this.capacidad = capacidad;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
@@ -83,8 +80,4 @@ public class Sala {
         return "Sala{" + "idSala=" + idSala + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
     }
 
-   
-   
-   
-    
 }

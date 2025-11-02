@@ -62,21 +62,30 @@ public class ProyeccionData {
         
  String sql = "SELECT "
         + "P.Id_proyeccion, "
-        + "P.Id_pelicula, "
         + "P.idioma, "
         + "P.es3D, "
         + "P.subtitulada, "
         + "P.horaInicio, "
         + "P.horaFin, "
         + "P.precio, "
+        + "PE.Id_pelicula, "
+        + "PE.titulo, "
+        + "PE.director, "
+        + "PE.actores, "
+        + "PE.genero, "
+        + "PE.origen, "
+        + "PE.estreno, "
+        + "PE.enCartelera, "
         + "S.Id_sala, "
         + "S.nroSala, "
         + "S.apta3D, "
         + "S.capacidad, "
         + "S.estado "
         + "FROM proyeccion P "
+        + "JOIN pelicula PE ON P.Id_pelicula = PE.Id_pelicula "
         + "JOIN sala S ON S.Id_sala = P.Id_sala "
         + "WHERE P.Id_proyeccion = ?";
+
 
     Proyeccion p=null;
         try {
@@ -104,7 +113,7 @@ public class ProyeccionData {
            sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getString("estado"));
+           sala.setEstado(rs.getBoolean("estado"));
            
            sala.setNroSala(rs.getInt("nroSala"));
            
@@ -113,7 +122,13 @@ public class ProyeccionData {
             
           Pelicula pe= new Pelicula();
           pe.setIdPelicula(rs.getInt("Id_pelicula"));
-          
+           pe.setTitulo(rs.getString("titulo"));
+                    pe.setDirector(rs.getString("director"));
+                    pe.setActores(rs.getString("actores"));
+                    pe.setOrigen(rs.getString("origen"));
+                    pe.setGenero(rs.getString("genero"));
+                    pe.setEstreno(rs.getDate("estreno").toLocalDate());
+                    pe.setEnCartelera(rs.getBoolean("enCartelera"));
         p.setPelicula(pe);
 
             JOptionPane.showMessageDialog(null, "busqueda exitosa");
@@ -127,11 +142,12 @@ public class ProyeccionData {
     }
     public List<Proyeccion> listarProyeccion() {
     String sql = "SELECT p.Id_proyeccion, p.idioma, p.es3D, p.subtitulada, p.horaInicio, p.horaFin, p.precio, " +
-             "pe.Id_pelicula, pe.titulo, pe.director, pe.genero, pe.origen, pe.estreno, pe.enCartelera, " +
-             "s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.estado " +
-             "FROM proyeccion p " +
-             "JOIN pelicula pe ON p.Id_pelicula = pe.Id_pelicula " +
-             "JOIN sala s ON p.Id_sala = s.Id_sala";
+                 "pe.Id_pelicula, pe.titulo, pe.director, pe.actores, pe.genero, pe.origen, pe.estreno, pe.enCartelera, " +
+                 "s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.estado " +
+                 "FROM proyeccion p " +
+                 "JOIN pelicula pe ON p.Id_pelicula = pe.Id_pelicula " +
+                 "JOIN sala s ON p.Id_sala = s.Id_sala " +
+                 "ORDER BY p.Id_proyeccion;";
 
     List<Proyeccion> lista = new ArrayList<>();
 
@@ -164,12 +180,19 @@ public class ProyeccionData {
              sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getString("estado"));
-           
+           sala.setEstado(rs.getBoolean("estado"));
            sala.setNroSala(rs.getInt("nroSala"));
             
-            
-            
+             pel.setIdPelicula(rs.getInt("id_Pelicula"));
+                    pel.setTitulo(rs.getString("titulo"));
+                    pel.setDirector(rs.getString("director"));
+                    pel.setActores(rs.getString("actores"));
+                    pel.setOrigen(rs.getString("origen"));
+                    pel.setGenero(rs.getString("genero"));
+                    pel.setEstreno(rs.getDate("estreno").toLocalDate());
+                    pel.setEnCartelera(rs.getBoolean("enCartelera"));
+            p.setPelicula(pel);
+           
             lista.add(p);
         }
 

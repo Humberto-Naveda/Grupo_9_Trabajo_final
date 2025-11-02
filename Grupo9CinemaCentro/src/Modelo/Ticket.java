@@ -13,13 +13,13 @@ import java.util.List;
  * @author Usuario
  */
 public class Ticket {
-   private int idTicket;
-     private Lugar asiento;
-   private Comprador comprador;
-   private LocalDate fechaCompra;
-   private LocalDate fechaFuncion;
-   private double monto;
- 
+
+    private int idTicket;
+    private Lugar asiento;
+    private Comprador comprador;
+    private LocalDate fechaCompra;
+    private LocalDate fechaFuncion;
+    private double monto;
 
     public Ticket(Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, Lugar asiento) {
         this.comprador = comprador;
@@ -82,6 +82,4 @@ public class Ticket {
         return "Ticket{" + "idTicket=" + idTicket + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", asiento=" + asiento + '}';
     }
 
-   
-   
 }

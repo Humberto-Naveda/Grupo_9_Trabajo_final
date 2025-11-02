@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CompradorData {
-    private Connection conec =null;
+    private Connection conec = null;
 
     public CompradorData(Conexion conexion) {
         this.conec = conexion.conectar();

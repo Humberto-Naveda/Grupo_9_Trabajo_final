@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2025 a las 20:32:23
+-- Tiempo de generación: 02-11-2025 a las 18:44:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -49,7 +49,7 @@ CREATE TABLE `lugar` (
   `Id_proyeccion` int(11) NOT NULL,
   `fila` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `estado` varchar(11) NOT NULL
+  `estado` tinyint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -66,7 +66,7 @@ CREATE TABLE `pelicula` (
   `origen` varchar(30) NOT NULL,
   `genero` varchar(30) NOT NULL,
   `estreno` date NOT NULL,
-  `enCartelera` int(11) NOT NULL
+  `enCartelera` tinyint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -80,7 +80,7 @@ CREATE TABLE `proyeccion` (
   `Id_pelicula` int(11) NOT NULL,
   `Id_sala` int(11) NOT NULL,
   `idioma` varchar(30) NOT NULL,
-  `es3D` int(11) NOT NULL,
+  `es3D` tinyint(11) NOT NULL,
   `subtitula` int(11) NOT NULL,
   `horaInicio` time NOT NULL,
   `horaFin` time NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `sala` (
   `nroSala` int(11) NOT NULL,
   `apta3D` int(11) NOT NULL,
   `capacidad` int(11) NOT NULL,
-  `estado` varchar(30) NOT NULL
+  `estado` tinyint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
