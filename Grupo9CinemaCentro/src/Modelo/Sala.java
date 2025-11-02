@@ -80,8 +80,11 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
+        return "Sala{" + "idSala=" + idSala + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
     }
+
+   
+   
    
     
 }
