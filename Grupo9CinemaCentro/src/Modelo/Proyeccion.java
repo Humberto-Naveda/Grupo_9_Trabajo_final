@@ -16,14 +16,15 @@ import static java.time.temporal.TemporalQueries.localTime;
  * @author Usuario
  */
 public class Proyeccion {
-   private int idProyeccion;
-   private Pelicula pelicula;
-   private Sala sala;
-   private String idioma;
-   private boolean es3D;
-   private boolean subtitulada;
-     private LocalTime horaInicio;
-   private  LocalTime horaFin;
+
+    private int idProyeccion;
+    private Pelicula pelicula;
+    private Sala sala;
+    private String idioma;
+    private boolean es3D;
+    private boolean subtitulada;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private double precio;
 
     public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
@@ -51,8 +52,6 @@ public class Proyeccion {
 
     public Proyeccion() {
     }
-
-    
 
     public int getIdProyeccion() {
         return idProyeccion;
@@ -130,6 +129,5 @@ public class Proyeccion {
     public String toString() {
         return "Proyeccion{" + "idProyeccion=" + idProyeccion + ", pelicula=" + pelicula + ", sala=" + sala + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", precio=" + precio + '}';
     }
-    
-    
+
 }

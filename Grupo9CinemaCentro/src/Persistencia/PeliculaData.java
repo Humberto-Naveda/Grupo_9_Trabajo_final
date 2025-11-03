@@ -8,9 +8,7 @@ package Persistencia;
 import Modelo.Conexion;
 import Modelo.Lugar;
 import Modelo.Pelicula;
-import Modelo.Proyeccion;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,9 +16,6 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -97,7 +92,8 @@ public class PeliculaData {
         }
         return peli;
     }
-
+    
+    // Baja Fisica
     public void borrarPelicula(int idPeli) {
         String delete = "DELETE FROM pelicula WHERE Id_Pelicula = ?";
 
@@ -193,6 +189,31 @@ public class PeliculaData {
            JOptionPane.showMessageDialog(null, " Error al listar peliculas: " + ex.getMessage());
         }
         return lista;
-
     }
+    
+    // Baja Logica
+    public void sacarDeCartelera(int idPeli) {
+    
+    String update = "UPDATE pelicula SET enCartelera = ? WHERE id_Pelicula = ?";
+
+    try (PreparedStatement statement = conex.prepareStatement(update)) {
+        
+        // 1. Asignamos FALSE
+        statement.setBoolean(1, false); 
+        
+        // 2. Asignamos el ID para la cláusula WHERE
+        statement.setInt(2, idPeli);
+
+        int filasAfectadas = statement.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(null, "Pelicula con ID " + idPeli + " fue sacada de cartelera.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Advertencia: No se encontró la pelicula para sacar de cartelera.");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al sacar la pelicula de cartelera: " + ex.getMessage());
+    }
+}
 }
