@@ -166,11 +166,11 @@ public class PeliculaData {
         }
     }
 
-    public List<Pelicula> listarPeliculas() {
+    public List<Pelicula> listarPeliculasActivas() {
 
         List<Pelicula> lista = new ArrayList<>();
 
-        String list = "SELECT * FROM pelicula";
+        String list = "SELECT * FROM pelicula WHERE activa=1";
 
         try (PreparedStatement ps = conex.prepareStatement(list)) {
 
@@ -186,6 +186,7 @@ public class PeliculaData {
                     peli.setGenero(rs.getString("genero"));
                     peli.setEstreno(rs.getDate("estreno").toLocalDate());
                     peli.setEnCartelera(rs.getBoolean("enCartelera"));
+                    peli.setActiva(rs.getBoolean("activa"));
                     
                     lista.add(peli);
                 }
