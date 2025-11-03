@@ -141,6 +141,7 @@ public class PeliculaData {
     }
 
     // Metodos Adicionales
+    
     public void reservarButaca(Lugar asiento) {
         String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
 
