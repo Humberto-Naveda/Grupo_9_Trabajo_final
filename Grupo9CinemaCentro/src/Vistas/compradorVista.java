@@ -261,6 +261,7 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
 
     private void jbnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnuevoActionPerformed
        limpiar();
+        txtid.setText("");
        txtid.setEditable(false);
     }//GEN-LAST:event_jbnuevoActionPerformed
 

@@ -102,7 +102,7 @@ public class SalaData {
             }
 
             ps.close();
-            JOptionPane.showMessageDialog(null, "lista exitosa");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al listar salas");
         }

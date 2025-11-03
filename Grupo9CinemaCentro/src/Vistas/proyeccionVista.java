@@ -5,17 +5,40 @@
  */
 package Vistas;
 
+import Modelo.Pelicula;
+import Modelo.Proyeccion;
+import Modelo.Sala;
+import Persistencia.CompradorData;
+import Persistencia.PeliculaData;
+import Persistencia.ProyeccionData;
+import Persistencia.SalaData;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Usuario
  */
 public class proyeccionVista extends javax.swing.JInternalFrame {
+private  SistemaCine sc= new SistemaCine();
+private ProyeccionData pd=new ProyeccionData(sc.conexionDb());
+private PeliculaData ped=new PeliculaData(sc.conexionDb());
+private SalaData sd=new SalaData(sc.conexionDb());
 
     /**
      * Creates new form proyeccionVista
      */
+    private List<Pelicula> p;
+    private List<Sala>s;
     public proyeccionVista() {
         initComponents();
+        cargarPelicula();
+       cargarSala();
+       
+        
     }
 
     /**
@@ -27,21 +50,320 @@ public class proyeccionVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtpelicula = new javax.swing.JComboBox<>();
+        txtsala = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtes3d = new javax.swing.JCheckBox();
+        txtsubtitulada = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtid = new java.awt.TextField();
+        txtidioma = new java.awt.TextField();
+        txthorainicio = new java.awt.TextField();
+        txthorafin = new java.awt.TextField();
+        txtprecio = new java.awt.TextField();
+        jbguardar = new javax.swing.JButton();
+        jbeliminar = new javax.swing.JButton();
+        jbnuevo = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jbbuscar = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 2, 24)); // NOI18N
+        jLabel1.setText("Proyeccion");
+
+        jLabel2.setText("ID:");
+
+        txtpelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtsala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtsala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsalaActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("idioma");
+
+        jLabel5.setText("Pelicula");
+
+        jLabel6.setText("Sala");
+
+        txtes3d.setText("es 3D?");
+
+        txtsubtitulada.setText("subtitulada");
+
+        jLabel8.setText("Hora inicio");
+
+        jLabel9.setText("Hora fin");
+
+        jLabel10.setText("precio");
+
+        jbguardar.setText("guardar");
+        jbguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbguardarActionPerformed(evt);
+            }
+        });
+
+        jbeliminar.setText("eliminar");
+
+        jbnuevo.setText("nuevo");
+        jbnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbnuevoActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("modificar");
+
+        jbbuscar.setText("buscar");
+        jbbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbbuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtsala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtpelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtsubtitulada, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtes3d))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txthorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jbbuscar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jbnuevo))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txthorainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbguardar)
+                                .addGap(14, 14, 14)
+                                .addComponent(jbeliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton4))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(jLabel1)))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtpelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtsala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel10)
+                                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(42, 42, 42)
+                                    .addComponent(txthorainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtes3d)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtsubtitulada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txthorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(txtidioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbnuevo)
+                    .addComponent(jbguardar)
+                    .addComponent(jbeliminar)
+                    .addComponent(jButton4)
+                    .addComponent(jbbuscar))
+                .addGap(78, 78, 78))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtsalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsalaActionPerformed
+
+    private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
+       txtid.setEditable(true);
+      Proyeccion p=  pd.buscarProyeccion(Integer.parseInt(txtid.getText()));
+      txtpelicula.setSelectedItem(p.getPelicula());
+      txtsala.setSelectedItem(p.getSala());
+      txtidioma.setText(p.getIdioma());
+      txtes3d.setSelected(p.isEs3D());
+      txtsubtitulada.setSelected(p.isSubtitulada());
+      txthorainicio.setText(p.getHoraInicio().toString()) ;
+      txthorafin.setText(p.getHoraFin().toString());
+      txtprecio.setText(String.valueOf(p.getPrecio()));
+      
+    }//GEN-LAST:event_jbbuscarActionPerformed
+
+    private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
+       Proyeccion p;
+       Pelicula pe=(Pelicula) txtpelicula.getSelectedItem();
+       Sala sa=(Sala) txtsala.getSelectedItem();
+       String idioma=txtidioma.getText();
+       boolean es3d=txtes3d.isSelected();
+       boolean subtitulada=txtsubtitulada.isSelected();
+       double precio=Double.parseDouble(txtprecio.getText());
+       LocalTime inicio=LocalTime.parse(txthorainicio.getText());
+       LocalTime fin=LocalTime.parse(txthorafin.getText());
+       p=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio);
+       pd.agregarProyeccion(p);
+       limpiar();
+       txtid.setText("");
+    }//GEN-LAST:event_jbguardarActionPerformed
+
+    private void jbnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnuevoActionPerformed
+        limpiar();
+        txtid.setText("");
+        txtid.setEditable(false);
+    }//GEN-LAST:event_jbnuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jbbuscar;
+    private javax.swing.JButton jbeliminar;
+    private javax.swing.JButton jbguardar;
+    private javax.swing.JButton jbnuevo;
+    private javax.swing.JCheckBox txtes3d;
+    private java.awt.TextField txthorafin;
+    private java.awt.TextField txthorainicio;
+    private java.awt.TextField txtid;
+    private java.awt.TextField txtidioma;
+    private javax.swing.JComboBox<String> txtpelicula;
+    private java.awt.TextField txtprecio;
+    private javax.swing.JComboBox<String> txtsala;
+    private javax.swing.JCheckBox txtsubtitulada;
     // End of variables declaration//GEN-END:variables
+public void cargarPelicula(){
+p=ped.listarPeliculasActivas();
+
+
+String[] peliculasStr = new String[p.size()];
+
+
+for (int i = 0; i < p.size(); i++) {
+             Pelicula a = p.get(i);
+             
+             peliculasStr[i] = "ID: " + a.getIdPelicula() + 
+                  " | Título: " + a.getTitulo() + 
+                  " | Director: " + a.getDirector() + 
+                  " | Género: " + a.getGenero() + 
+                  " | Origen: " + a.getOrigen() + 
+                  " | Actores: " + a.getActores() + 
+                  " | Estreno: " + a.getEstreno() + 
+                  " | Activa: " + (a.isActiva() ? "Sí" : "No") + 
+                  " | En cartelera: " + (a.isEnCartelera() );
+        
+
+          }
+     
+             txtpelicula.setModel(new DefaultComboBoxModel<>(peliculasStr));
 }
+public void cargarSala(){
+s=sd.listarSalasActivas();
+String[] salasStr = new String[s.size()];
+
+for(int i=0;i<s.size();i++){
+Sala e=s.get(i);
+salasStr[i] = "ID: " + e.getIdSala() +
+              " | N° Sala: " + e.getNroSala() +
+              " | Capacidad: " + e.getCapacidad() +
+              " | Apta 3D: " + (e.isApta3D() ) +
+              " | Estado: " + (e.getEstado() );
+
+}
+txtsala.setModel(new DefaultComboBoxModel<>(salasStr));
+
+}
+
+
+public void limpiar() {
+    txtid.setText("");
+    txtidioma.setText("");
+    txtprecio.setText("");
+    txthorainicio.setText("");
+    txthorafin.setText("");
+    txtes3d.setSelected(false);
+    txtsubtitulada.setSelected(false);
+    txtpelicula.setSelectedIndex(-1); // Deselecciona el combo
+    txtsala.setSelectedIndex(-1);     // Deselecciona el combo
+}
+
+
+}
+

@@ -348,6 +348,7 @@ txtid.setEditable(false);
 
     private void jbnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnuevoActionPerformed
          limpiar();
+         txtid.setText("");
     txtid.setEditable(false);
     }//GEN-LAST:event_jbnuevoActionPerformed
 
