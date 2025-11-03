@@ -4,6 +4,8 @@
  */
 package Vistas;
 
+import Modelo.Conexion;
+
 /**
  *
  * @author PC1
@@ -29,23 +31,151 @@ public class SistemaCine extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        menuBar1 = new java.awt.MenuBar();
+        menu1 = new java.awt.Menu();
+        menu2 = new java.awt.Menu();
+        menuBar2 = new java.awt.MenuBar();
+        menu3 = new java.awt.Menu();
+        menu4 = new java.awt.Menu();
+        menuBar3 = new java.awt.MenuBar();
+        menu5 = new java.awt.Menu();
+        menu6 = new java.awt.Menu();
+        menuBar4 = new java.awt.MenuBar();
+        menu7 = new java.awt.Menu();
+        menu8 = new java.awt.Menu();
+        escritorio = new javax.swing.JDesktopPane();
+        escritorio1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        hhbh = new javax.swing.JMenu();
+        menusala = new javax.swing.JMenuItem();
+        menucomprador = new javax.swing.JMenuItem();
+        menuproyeccion = new javax.swing.JMenuItem();
+        menupelicula = new javax.swing.JMenuItem();
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu6.setText("jMenu6");
+
+        menu1.setLabel("File");
+        menuBar1.add(menu1);
+
+        menu2.setLabel("Edit");
+        menuBar1.add(menu2);
+
+        menu3.setLabel("File");
+        menuBar2.add(menu3);
+
+        menu4.setLabel("Edit");
+        menuBar2.add(menu4);
+
+        menu5.setLabel("File");
+        menuBar3.add(menu5);
+
+        menu6.setLabel("Edit");
+        menuBar3.add(menu6);
+
+        menu7.setLabel("File");
+        menuBar4.add(menu7);
+
+        menu8.setLabel("Edit");
+        menuBar4.add(menu8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        getContentPane().add(escritorio1, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        hhbh.setText("gestor");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menusala.setText("salas");
+        menusala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menusalaActionPerformed(evt);
+            }
+        });
+        hhbh.add(menusala);
+
+        menucomprador.setText("compradores");
+        menucomprador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menucompradorActionPerformed(evt);
+            }
+        });
+        hhbh.add(menucomprador);
+
+        menuproyeccion.setText("proyeccion");
+        menuproyeccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuproyeccionActionPerformed(evt);
+            }
+        });
+        hhbh.add(menuproyeccion);
+
+        menupelicula.setText("Peliculas");
+        menupelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menupeliculaActionPerformed(evt);
+            }
+        });
+        hhbh.add(menupelicula);
+
+        jMenuBar1.add(hhbh);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menupeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menupeliculaActionPerformed
+       escritorio1.removeAll();
+        escritorio1.repaint();
+        
+        peliculaVista GUI = new peliculaVista();
+        GUI.setVisible(true);
+        
+        escritorio1.add(GUI);
+        escritorio1.moveToFront(GUI);
+    }//GEN-LAST:event_menupeliculaActionPerformed
+
+    private void menuproyeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuproyeccionActionPerformed
+         escritorio1.removeAll();
+        escritorio1.repaint();
+        
+        proyeccionVista GUI = new proyeccionVista ();
+        GUI.setVisible(true);
+        
+        escritorio1.add(GUI);
+        escritorio1.moveToFront(GUI);
+    }//GEN-LAST:event_menuproyeccionActionPerformed
+
+    private void menucompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menucompradorActionPerformed
+        escritorio1.removeAll();
+        escritorio1.repaint();
+        
+        compradorVista GUI = new compradorVista();
+        GUI.setVisible(true);
+        
+        escritorio1.add(GUI);
+        escritorio1.moveToFront(GUI);
+    }//GEN-LAST:event_menucompradorActionPerformed
+
+    private void menusalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusalaActionPerformed
+         escritorio1.removeAll();
+        escritorio1.repaint();
+        
+        salaVista GUI = new salaVista();
+        GUI.setVisible(true);
+        
+        escritorio1.add(GUI);
+        escritorio1.moveToFront(GUI);
+    }//GEN-LAST:event_menusalaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,8 +213,37 @@ public class SistemaCine extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JDesktopPane escritorio1;
+    private javax.swing.JMenu hhbh;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private java.awt.Menu menu1;
+    private java.awt.Menu menu2;
+    private java.awt.Menu menu3;
+    private java.awt.Menu menu4;
+    private java.awt.Menu menu5;
+    private java.awt.Menu menu6;
+    private java.awt.Menu menu7;
+    private java.awt.Menu menu8;
+    private java.awt.MenuBar menuBar1;
+    private java.awt.MenuBar menuBar2;
+    private java.awt.MenuBar menuBar3;
+    private java.awt.MenuBar menuBar4;
+    private javax.swing.JMenuItem menucomprador;
+    private javax.swing.JMenuItem menupelicula;
+    private javax.swing.JMenuItem menuproyeccion;
+    private javax.swing.JMenuItem menusala;
     // End of variables declaration//GEN-END:variables
-}
+
+
+
+
+
+public Conexion conexionDb(){
+    Conexion conn = new Conexion("gp9_cinemacentro_basededatos","jdbc:mariadb://localhost/","root","","org.mariadb.jdbc.Driver");
+    return conn;
+}}
