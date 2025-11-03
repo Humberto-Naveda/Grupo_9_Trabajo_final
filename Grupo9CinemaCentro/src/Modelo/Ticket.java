@@ -29,6 +29,10 @@ public class Ticket {
         this.asiento = asiento;
     }
 
+    public Ticket() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getIdTicket() {
         return idTicket;
     }

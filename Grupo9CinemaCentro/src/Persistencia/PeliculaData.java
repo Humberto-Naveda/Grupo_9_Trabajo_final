@@ -198,10 +198,8 @@ public class PeliculaData {
 
     try (PreparedStatement statement = conex.prepareStatement(update)) {
         
-        // 1. Asignamos FALSE
         statement.setBoolean(1, false); 
-        
-        // 2. Asignamos el ID para la cláusula WHERE
+
         statement.setInt(2, idPeli);
 
         int filasAfectadas = statement.executeUpdate();
