@@ -21,12 +21,23 @@ public class Pelicula {
     private String genero;
     private LocalDate estreno;
     private boolean enCartelera;
+    private boolean activa;
 
     public Pelicula() {
     }
 
-            
-    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
+    public Pelicula(String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera, boolean activa) {
+        this.titulo = titulo;
+        this.director = director;
+        this.actores = actores;
+        this.origen = origen;
+        this.genero = genero;
+        this.estreno = estreno;
+        this.enCartelera = enCartelera;
+        this.activa = activa;
+    }
+
+    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera, boolean activa) {
         this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.director = director;
@@ -35,7 +46,18 @@ public class Pelicula {
         this.genero = genero;
         this.estreno = estreno;
         this.enCartelera = enCartelera;
+        this.activa = activa;
     }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+   
 
     public int getIdPelicula() {
         return idPelicula;
@@ -103,7 +125,8 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{" + "idPelicula=" + idPelicula + ", titulo=" + titulo + ", director=" + director + ", actores=" + actores + ", origen=" + origen + ", genero=" + genero + ", estreno=" + estreno + ", enCartelera=" + enCartelera + '}';
+        return "Pelicula{" + "idPelicula=" + idPelicula + ", titulo=" + titulo + ", director=" + director + ", actores=" + actores + ", origen=" + origen + ", genero=" + genero + ", estreno=" + estreno + ", enCartelera=" + enCartelera + ", activa=" + activa + '}';
     }
 
+   
 }

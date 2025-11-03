@@ -33,7 +33,7 @@ public class PeliculaData {
     // Metodos CRUD
     public void agregarPelicula(Pelicula p) {
 
-        String sql = "INSERT INTO `pelicula`( `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `pelicula`( `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`,`activa`) VALUES (?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, p.getTitulo());
@@ -43,6 +43,7 @@ public class PeliculaData {
             ps.setString(5, p.getGenero());
             ps.setDate(6, Date.valueOf(p.getEstreno()));
             ps.setBoolean(7, p.isEnCartelera());
+            ps.setBoolean(8, p.isActiva());
 
             int filasAgregadas = ps.executeUpdate();
 
