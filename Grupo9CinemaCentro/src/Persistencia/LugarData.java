@@ -6,16 +6,13 @@ package Persistencia;
 
 import Modelo.*;
 import Modelo.Conexion;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -86,6 +83,7 @@ public class LugarData {
         return asiento;
     }
 
+    // Baja Fisica
     public void borrarButaca(int idLugar) {
         String delete = "DELETE FROM lugar WHERE Id_lugar = ?";
 
@@ -106,7 +104,7 @@ public class LugarData {
     }
 
     public void actualizarButaca(Lugar lugar) {
-        String update = "UPDATE lugar SET fila = ?, numero = ?, estado = ?, idFuncion = ? WHERE idLugar = ?";
+        String update = "UPDATE lugar SET fila = ?, numero = ?, estado = ?, idFuncion = ? WHERE id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
             statement.setInt(1, lugar.getFila());
@@ -130,7 +128,7 @@ public class LugarData {
 
     // Metodos Adicionales
     public void reservarButaca(Lugar asiento) {
-        String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+        String update = "UPDATE lugar SET estado = ? WHERE id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
@@ -176,7 +174,53 @@ public class LugarData {
             System.out.println(" Error al listar lugares: " + ex.getMessage());
         }
         return lista;
-
     }
+
+    // Alta Logica
+    public void ocuparLugar(int idLugar) {
+
+        String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+
+        try (PreparedStatement statement = conex.prepareStatement(update)) {
+
+            statement.setBoolean(1, true);
+            statement.setInt(2, idLugar);
+
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Lugar con ID " + idLugar + " ocupado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el lugar para ocupar.");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al ocupar lugar: " + ex.getMessage());
+        }
+    }
+    
+    // Baja Logica
+    public void liberarLugar(int idLugar) {
+    
+    String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+
+    try (PreparedStatement statement = conex.prepareStatement(update)) {
+
+        
+        statement.setBoolean(1, false); 
+        statement.setInt(2, idLugar);
+
+        int filasAfectadas = statement.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(null, "Lugar con ID " + idLugar + " liberado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el lugar para liberar.");
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al liberar lugar: " + ex.getMessage());
+    }
+}
 
 }
