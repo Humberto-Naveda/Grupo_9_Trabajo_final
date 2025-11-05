@@ -21,13 +21,19 @@ public class Ticket {
     private LocalDate fechaFuncion;
     private double monto;
 
-    public Ticket(Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, Lugar asiento) {
+    public Ticket() {
+    }
+
+    public Ticket(int idTicket, Lugar asiento, Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto) {
+        this.idTicket = idTicket;
+        this.asiento = asiento;
         this.comprador = comprador;
         this.fechaCompra = fechaCompra;
         this.fechaFuncion = fechaFuncion;
         this.monto = monto;
-        this.asiento = asiento;
     }
+
+    
 
     public int getIdTicket() {
         return idTicket;
@@ -79,7 +85,9 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "idTicket=" + idTicket + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", asiento=" + asiento + '}';
+        return "Ticket{" + "idTicket=" + idTicket + ", asiento=" + asiento + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + '}';
     }
+
+   
 
 }

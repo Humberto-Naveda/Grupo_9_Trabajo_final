@@ -108,6 +108,11 @@ private SalaData sd=new SalaData(sc.conexionDb());
         });
 
         jbeliminar.setText("eliminar");
+        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbeliminarActionPerformed(evt);
+            }
+        });
 
         jbnuevo.setText("nuevo");
         jbnuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -280,6 +285,13 @@ private SalaData sd=new SalaData(sc.conexionDb());
         txtid.setEditable(false);
     }//GEN-LAST:event_jbnuevoActionPerformed
 
+    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+        pd.eliminarProyeccion(Integer.parseInt(txtid.getText()));
+        txtid.setText("");
+        txtid.setEditable(false);
+        limpiar();
+    }//GEN-LAST:event_jbeliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
@@ -336,8 +348,8 @@ public void limpiar() {
     txthorafin.setText("");
     txtes3d.setSelected(false);
     txtsubtitulada.setSelected(false);
-    txtpelicula.setSelectedIndex(-1); // Deselecciona el combo
-    txtsala.setSelectedIndex(-1);     // Deselecciona el combo
+    txtpelicula.setSelectedIndex(-1); 
+    txtsala.setSelectedIndex(-1);     
 }
 
 

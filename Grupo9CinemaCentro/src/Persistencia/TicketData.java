@@ -13,6 +13,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TicketData {
@@ -29,7 +31,7 @@ public class TicketData {
 
     // Metodos CRUD
 
-    public void generarTicket(Ticket ticket) {
+    public void guardarTicket(Ticket ticket) {
         String sql = "INSERT INTO ticketcompra (idComprador, idLugar, fechaCompra, fechaFuncion, monto) "
                    + "VALUES (?, ?, ?, ?, ?)";
 
@@ -94,31 +96,7 @@ public class TicketData {
         return ticket;
     }
     
-    public void anularTicket(int idTicket) {
-        String sql = "UPDATE ticketcompra SET estado = ? WHERE idTicket = ?"; 
-        
-        try (PreparedStatement ps = conex.prepareStatement(sql)) {
-            
-            ps.setBoolean(1, false); 
-            ps.setInt(2, idTicket);
-            
-            int filasAfectadas = ps.executeUpdate();
-            
-            if (filasAfectadas > 0) {
-                Ticket t = buscarTicket(idTicket); 
-                if (t != null) {
-                    lugarData.liberarLugar(t.getAsiento().getIdLugar());
-                }
-                
-                JOptionPane.showMessageDialog(null, "Ticket Nº " + idTicket + " anulado y asiento liberado.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Advertencia: No se encontró el ticket para anular.");
-            }
-        
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al anular ticket: " + ex.getMessage());
-        }
-    }
+    
     
     public List<Ticket> listarTicketsPorComprador(int idComprador) {
         List<Ticket> lista = new ArrayList<>();
@@ -143,6 +121,43 @@ public class TicketData {
         }
         return lista;
     }
+    
+    public List<Ticket> listarTickets() {
+    List<Ticket> lista = new ArrayList<>();
+    String sql = "SELECT * FROM ticketcompra";
+
+    try (PreparedStatement ps = conex.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            Ticket ticket = new Ticket();
+
+            ticket.setIdTicket(rs.getInt("idTicket"));
+            ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
+            ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
+            ticket.setMonto(rs.getDouble("monto"));
+
+          
+            int idComprador = rs.getInt("idComprador");
+            Comprador comprador = compradorData.buscarComprador(idComprador);
+            ticket.setComprador(comprador);
+            int idLugar = rs.getInt("idLugar");
+            Lugar asiento = lugarData.buscarButaca(idLugar);
+            ticket.setAsiento(asiento);
+
+        
+            lista.add(ticket);
+
+    
 }
     
+    }   catch (SQLException ex) {
+            Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 
+
+
+
+}
