@@ -78,9 +78,6 @@ private SalaData sd=new SalaData(sc.conexionDb());
 
         jLabel2.setText("ID:");
 
-        txtpelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtsala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtsala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsalaActionPerformed(evt);
@@ -211,7 +208,6 @@ private SalaData sd=new SalaData(sc.conexionDb());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel8)
@@ -231,7 +227,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
                                     .addComponent(jLabel9)
                                     .addComponent(txthorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(txtidioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbnuevo)
                     .addComponent(jbguardar)
@@ -304,50 +300,30 @@ private SalaData sd=new SalaData(sc.conexionDb());
     private java.awt.TextField txthorainicio;
     private java.awt.TextField txtid;
     private java.awt.TextField txtidioma;
-    private javax.swing.JComboBox<String> txtpelicula;
+    private javax.swing.JComboBox<Pelicula> txtpelicula;
     private java.awt.TextField txtprecio;
-    private javax.swing.JComboBox<String> txtsala;
+    private javax.swing.JComboBox<Sala> txtsala;
     private javax.swing.JCheckBox txtsubtitulada;
     // End of variables declaration//GEN-END:variables
-public void cargarPelicula(){
-p=ped.listarPeliculasActivas();
-
-
-String[] peliculasStr = new String[p.size()];
-
-
-for (int i = 0; i < p.size(); i++) {
-             Pelicula a = p.get(i);
-             
-             peliculasStr[i] = "ID: " + a.getIdPelicula() + 
-                  " | Título: " + a.getTitulo() + 
-                  " | Director: " + a.getDirector() + 
-                  " | Género: " + a.getGenero() + 
-                  " | Origen: " + a.getOrigen() + 
-                  " | Actores: " + a.getActores() + 
-                  " | Estreno: " + a.getEstreno() + 
-                  " | Activa: " + (a.isActiva() ? "Sí" : "No") + 
-                  " | En cartelera: " + (a.isEnCartelera() );
-        
-
-          }
-     
-             txtpelicula.setModel(new DefaultComboBoxModel<>(peliculasStr));
+public void cargarPelicula() {
+    p = ped.listarPeliculasActivas();
+    DefaultComboBoxModel<Pelicula> modelo = new DefaultComboBoxModel<>();
+    for (Pelicula peli : p) {
+        modelo.addElement(peli);
+    }
+    txtpelicula.setModel(modelo);
 }
+
 public void cargarSala(){
 s=sd.listarSalasActivas();
-String[] salasStr = new String[s.size()];
 
-for(int i=0;i<s.size();i++){
-Sala e=s.get(i);
-salasStr[i] = "ID: " + e.getIdSala() +
-              " | N° Sala: " + e.getNroSala() +
-              " | Capacidad: " + e.getCapacidad() +
-              " | Apta 3D: " + (e.isApta3D() ) +
-              " | Estado: " + (e.getEstado() );
+ DefaultComboBoxModel<Sala>modelo=new DefaultComboBoxModel<>();
+for(Sala sala: s){
+modelo.addElement(sala);
 
 }
-txtsala.setModel(new DefaultComboBoxModel<>(salasStr));
+txtsala.setModel(modelo);
+
 
 }
 
