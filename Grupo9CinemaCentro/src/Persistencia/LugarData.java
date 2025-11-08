@@ -22,14 +22,15 @@ import javax.swing.JOptionPane;
 public class LugarData {
 
     private Connection conex = null;
-
+ private ProyeccionData proyecciondata;
     public LugarData(Conexion conex) {
         this.conex = conex.conectar();
+        this.proyecciondata=new ProyeccionData(conex);
     }
 
     // Metodos CRUD
     public void insertButaca(Lugar asiento) {
-        String insert = "INSERT INTO lugar (fila, numero, estado, idFuncion) VALUES (?,?,?,?)";
+        String insert = "INSERT INTO lugar (fila, numero, estado, id_proyeccion) VALUES (?,?,?,?)";
 
         try (PreparedStatement statement = conex.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, asiento.getFila());
@@ -104,7 +105,7 @@ public class LugarData {
     }
 
     public void actualizarButaca(Lugar lugar) {
-        String update = "UPDATE lugar SET fila = ?, numero = ?, estado = ?, idFuncion = ? WHERE id_lugar = ?";
+        String update = "UPDATE lugar SET fila = ?, numero = ?, estado = ?, id_proyeccion = ? WHERE id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
             statement.setInt(1, lugar.getFila());
@@ -179,7 +180,7 @@ public class LugarData {
     // Alta Logica
     public void ocuparLugar(int idLugar) {
 
-        String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+        String update = "UPDATE lugar SET estado = ? WHERE id_Lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
@@ -202,7 +203,7 @@ public class LugarData {
     // Baja Logica
     public void liberarLugar(int idLugar) {
     
-    String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+    String update = "UPDATE lugar SET estado = ? WHERE id_lugar = ?";
 
     try (PreparedStatement statement = conex.prepareStatement(update)) {
 
@@ -222,5 +223,40 @@ public class LugarData {
         JOptionPane.showMessageDialog(null, "Error al liberar lugar: " + ex.getMessage());
     }
 }
+    public List<Lugar> listLugaresPorProyeccion(int id_proyeccion){
+    String sql = "SELECT * FROM lugar WHERE id_Proyeccion = ? AND estado = 0";
+    List<Lugar> lista = new ArrayList<>();
+    
+    try {
+        PreparedStatement ps = conex.prepareStatement(sql);
+        ps.setInt(1, id_proyeccion);
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Lugar l = new Lugar();
+            l.setIdLugar(rs.getInt("id_Lugar"));
+            l.setFila(rs.getInt("fila"));
+            l.setNumero(rs.getInt("numero"));
+            l.setEstado(rs.getBoolean("estado"));
+            
+            int idpro = rs.getInt("id_Proyeccion");
+            
+            
+            Proyeccion pro =         proyecciondata.buscarProyeccion(idpro);
+            
+            l.setProyeccion(pro);
+            
+            lista.add(l);
+        }
+        
+        ps.close();
+        
+    } catch (SQLException ex) {
+        
+    }
+    
+    return lista;
+}
+
 
 }

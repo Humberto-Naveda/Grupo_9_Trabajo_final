@@ -181,7 +181,7 @@ public class SalaData {
         }
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al dar de alta la sala: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al dar de alta la sala: " );
     }
 }
 

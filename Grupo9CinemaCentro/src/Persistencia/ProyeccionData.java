@@ -34,7 +34,7 @@ public class ProyeccionData {
        conec=conexion.conectar();
     }
     public void agregarProyeccion(Proyeccion proyeccion){
-    String sql="INSERT INTO `proyeccion`( `Id_pelicula`, `Id_sala`, `idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `precio`) VALUES (?,?,?,?,?,?,?,?)";
+    String sql="INSERT INTO `proyeccion`( `Id_pelicula`, `Id_sala`, `idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `precio`, `activa`) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps=conec.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, proyeccion.getPelicula().getIdPelicula());
@@ -45,6 +45,7 @@ public class ProyeccionData {
             ps.setTime(6, Time.valueOf(proyeccion.getHoraInicio()));
             ps.setTime(7, Time.valueOf(proyeccion.getHoraFin()));
             ps.setDouble(8, proyeccion.getPrecio());
+            ps.setBoolean(9, proyeccion.isActiva());
        ps.executeUpdate();
          ResultSet rs=ps.getGeneratedKeys();
         if(rs.next()){
@@ -68,6 +69,7 @@ public class ProyeccionData {
         + "P.horaInicio, "
         + "P.horaFin, "
         + "P.precio, "
+         +"P.activa,"
         + "PE.Id_pelicula, "
         + "PE.titulo, "
         + "PE.director, "
@@ -100,13 +102,13 @@ public class ProyeccionData {
             p=new Proyeccion();
             p.setIdProyeccion(rs.getInt("Id_proyeccion"));
             
-            p.setIdioma(rs.getNString("idioma"));
+            p.setIdioma(rs.getString("idioma"));
           p.setEs3D(rs.getBoolean("es3D"));
           p.setSubtitulada(rs.getBoolean("subtitulada"));
           p.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
           p.setHoraFin(rs.getTime("horaFin").toLocalTime());
           p.setPrecio(rs.getDouble("precio"));
-       
+       p.setActiva(rs.getBoolean("activa"));
         Sala sala=new Sala();
     
            
@@ -131,7 +133,7 @@ public class ProyeccionData {
                     pe.setEnCartelera(rs.getBoolean("enCartelera"));
         p.setPelicula(pe);
 
-            JOptionPane.showMessageDialog(null, "busqueda exitosa");
+         
             }
             ps.close();
         } catch (SQLException ex) {
@@ -141,13 +143,13 @@ public class ProyeccionData {
     
     }
     public List<Proyeccion> listarProyeccion() {
-    String sql = "SELECT p.Id_proyeccion, p.idioma, p.es3D, p.subtitulada, p.horaInicio, p.horaFin, p.precio, " +
-                 "pe.Id_pelicula, pe.titulo, pe.director, pe.actores, pe.genero, pe.origen, pe.estreno, pe.enCartelera, " +
-                 "s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.estado " +
-                 "FROM proyeccion p " +
-                 "JOIN pelicula pe ON p.Id_pelicula = pe.Id_pelicula " +
-                 "JOIN sala s ON p.Id_sala = s.Id_sala " +
-                 "ORDER BY p.Id_proyeccion;";
+    String sql = "SELECT p.Id_proyeccion, p.idioma, p.es3D, p.subtitulada, p.horaInicio, p.horaFin, p.precio, p.activa,  \n" +
+"                 pe.Id_pelicula, pe.titulo, pe.director, pe.actores, pe.genero, pe.origen, pe.estreno, pe.enCartelera, \n" +
+"                 s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.estado  \n" +
+"                 FROM proyeccion p  \n" +
+"                 JOIN pelicula pe ON p.Id_pelicula = pe.Id_pelicula  \n" +
+"                 JOIN sala s ON p.Id_sala = s.Id_sala \n" +
+"                 ORDER BY p.Id_proyeccion;";
 
     List<Proyeccion> lista = new ArrayList<>();
 
@@ -164,7 +166,7 @@ public class ProyeccionData {
             p.setPelicula(pel);
 
             Sala sala = new Sala();
-            sala.setIdSala(rs.getInt("Id_sala"));
+          
             p.setSala(sala);
 
             
@@ -175,6 +177,7 @@ public class ProyeccionData {
             p.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
             p.setHoraFin(rs.getTime("horaFin").toLocalTime());
             p.setPrecio(rs.getDouble("precio"));
+            p.setActiva(rs.getBoolean("activa"));
             
 
              sala.setIdSala(rs.getInt("Id_sala"));
@@ -183,7 +186,7 @@ public class ProyeccionData {
            sala.setEstado(rs.getBoolean("estado"));
            sala.setNroSala(rs.getInt("nroSala"));
             
-             pel.setIdPelicula(rs.getInt("id_Pelicula"));
+            
                     pel.setTitulo(rs.getString("titulo"));
                     pel.setDirector(rs.getString("director"));
                     pel.setActores(rs.getString("actores"));
@@ -205,18 +208,27 @@ public class ProyeccionData {
 }
 public void modificarProyeccion(Proyeccion pro){
 
-String sql="UPDATE `proyeccion` SET  idioma=?,es3D=?,subtitulada=?,horaInicio=?,horaFin=?,precio=? WHERE Id_proyeccion=?";
+String sql="UPDATE `proyeccion` SET id_pelicula=?, id_sala=?, idioma=?,es3D=?,subtitulada=?,horaInicio=?,horaFin=?,precio=?, activa = ? WHERE Id_proyeccion=?";
         try {
             PreparedStatement ps=conec.prepareStatement(sql);
-         
-            ps.setString(1, pro.getIdioma());
-            ps.setBoolean(2, pro.isEs3D());
-            ps.setBoolean(3, pro.isSubtitulada());
-            ps.setTime(4,Time.valueOf(pro.getHoraInicio()));
-            ps.setTime(5, Time.valueOf(pro.getHoraFin()));
-            ps.setDouble(6, pro.getPrecio());
-            ps.setInt(7, pro.getIdProyeccion());
-           
+         ps.setInt(1, pro.getPelicula().getIdPelicula());
+         ps.setInt(2, pro.getSala().getIdSala());
+            ps.setString(3, pro.getIdioma());
+            
+            ps.setBoolean(4, pro.isEs3D());
+            
+            ps.setBoolean(5, pro.isSubtitulada());
+            
+            ps.setTime(6,Time.valueOf(pro.getHoraInicio()));
+            
+            ps.setTime(7, Time.valueOf(pro.getHoraFin()));
+            
+            ps.setDouble(8, pro.getPrecio());
+            
+             ps.setBoolean(9, pro.isActiva());
+            ps.setInt(10, pro.getIdProyeccion());
+            
+          
             int rs=ps.executeUpdate();
             if(rs>=1){
             JOptionPane.showMessageDialog(null, "actualizacion exitosa");
@@ -243,4 +255,53 @@ String sql="DELETE FROM proyeccion WHERE Id_proyeccion=?";
 
 }
     
+public List<Proyeccion> listarActivas(){
+String sql =  "SELECT p.*, pe.*, s.* "
+           + "FROM proyeccion p " 
+          + "JOIN pelicula pe ON pe.id_pelicula = p.id_pelicula " 
+          + "JOIN sala s ON s.id_sala = p.id_sala" 
+          + "WHERE p.activa = 1;";
+
+List<Proyeccion> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps=conec.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+        Proyeccion pr=new Proyeccion();
+        
+        
+        pr.setIdProyeccion(rs.getInt("id_proyeccion"));
+        pr.setIdioma(rs.getString("idioma"));
+        pr.setEs3D(rs.getBoolean("es3D"));
+        pr.setSubtitulada(rs.getBoolean("subtitulada"));
+            pr.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+            pr.setHoraFin(rs.getTime("horaFin").toLocalTime());
+           
+            pr.setActiva(rs.getBoolean("activa"));
+            
+            Pelicula pe=new Pelicula();
+            
+            
+            pe.setEnCartelera(rs.getBoolean("enCartelera")); 
+
+            pe.setTitulo(rs.getString("titulo"));
+            pe.setIdPelicula(rs.getInt("id_pelicula"));
+            
+            pr.setPelicula(pe);
+            
+            Sala sa=new Sala();
+            
+            sa.setIdSala(rs.getInt("id_sala"));
+            sa.setNroSala(rs.getInt("nroSala"));
+            pr.setSala(sa);
+            lista.add(pr);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "error al listar proyecciones");
+        }
+        return lista;
+
+}
+
 }

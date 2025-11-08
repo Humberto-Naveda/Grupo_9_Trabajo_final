@@ -13,6 +13,7 @@ import Persistencia.PeliculaData;
 import Persistencia.ProyeccionData;
 import Persistencia.SalaData;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,7 +38,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
         initComponents();
         cargarPelicula();
        cargarSala();
-       
+       txtid.setVisible(false);
         
     }
 
@@ -70,8 +71,9 @@ private SalaData sd=new SalaData(sc.conexionDb());
         jbguardar = new javax.swing.JButton();
         jbeliminar = new javax.swing.JButton();
         jbnuevo = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbmodificar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
+        txtactivar = new javax.swing.JCheckBox();
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 2, 24)); // NOI18N
         jLabel1.setText("Proyeccion");
@@ -121,12 +123,24 @@ private SalaData sd=new SalaData(sc.conexionDb());
             }
         });
 
-        jButton4.setText("modificar");
+        jbmodificar.setText("modificar");
+        jbmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbmodificarActionPerformed(evt);
+            }
+        });
 
         jbbuscar.setText("buscar");
         jbbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbbuscarActionPerformed(evt);
+            }
+        });
+
+        txtactivar.setText("Activar");
+        txtactivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtactivarActionPerformed(evt);
             }
         });
 
@@ -178,14 +192,18 @@ private SalaData sd=new SalaData(sc.conexionDb());
                                 .addComponent(jLabel8)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txthorainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbguardar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbguardar)
+                                    .addComponent(txthorainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(14, 14, 14)
-                                .addComponent(jbeliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtactivar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jbeliminar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbmodificar))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(jLabel1)))
@@ -224,20 +242,23 @@ private SalaData sd=new SalaData(sc.conexionDb());
                                     .addComponent(txthorainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtes3d)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtsubtitulada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txthorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtactivar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtes3d)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtsubtitulada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(txthorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addComponent(txtidioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbnuevo)
                     .addComponent(jbguardar)
                     .addComponent(jbeliminar)
-                    .addComponent(jButton4)
+                    .addComponent(jbmodificar)
                     .addComponent(jbbuscar))
                 .addGap(78, 78, 78))
         );
@@ -250,7 +271,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
     }//GEN-LAST:event_txtsalaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-       txtid.setEditable(true);
+       txtid.setEditable(false);
       Proyeccion p=  pd.buscarProyeccion(Integer.parseInt(txtid.getText()));
       txtpelicula.setSelectedItem(p.getPelicula());
       txtsala.setSelectedItem(p.getSala());
@@ -273,7 +294,9 @@ private SalaData sd=new SalaData(sc.conexionDb());
        double precio=Double.parseDouble(txtprecio.getText());
        LocalTime inicio=LocalTime.parse(txthorainicio.getText());
        LocalTime fin=LocalTime.parse(txthorafin.getText());
-       p=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio);
+       boolean activa=txtactivar.isSelected();
+       
+       p=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio,activa);
        pd.agregarProyeccion(p);
        limpiar();
        txtid.setText("");
@@ -292,9 +315,37 @@ private SalaData sd=new SalaData(sc.conexionDb());
         limpiar();
     }//GEN-LAST:event_jbeliminarActionPerformed
 
+    private void txtactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtactivarActionPerformed
+        
+    }//GEN-LAST:event_txtactivarActionPerformed
+
+    private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
+     
+        
+        
+       Proyeccion p ;
+       
+        Pelicula peli = (Pelicula) txtpelicula.getSelectedItem();
+        Sala sala = (Sala) txtsala.getSelectedItem();
+
+        
+      
+        String idioma=txtidioma.getText();
+        Boolean es3d=txtes3d.isSelected();
+        Boolean subtitulada=txtsubtitulada.isSelected();
+       LocalTime horainicio =LocalTime.parse(txthorainicio.getText());
+         LocalTime horafin =LocalTime.parse(txthorafin.getText());
+        Double precio=Double.parseDouble(txtprecio.getText()) ;
+        Boolean activa=txtactivar.isSelected();
+
+Proyeccion pr=new Proyeccion(peli,sala,idioma,es3d,subtitulada,horainicio,horafin,precio,activa);
+  pr.setIdProyeccion(Integer.parseInt(txtid.getText()));
+        pd.modificarProyeccion(pr);
+        
+    }//GEN-LAST:event_jbmodificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -306,7 +357,9 @@ private SalaData sd=new SalaData(sc.conexionDb());
     private javax.swing.JButton jbbuscar;
     private javax.swing.JButton jbeliminar;
     private javax.swing.JButton jbguardar;
+    private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
+    private javax.swing.JCheckBox txtactivar;
     private javax.swing.JCheckBox txtes3d;
     private java.awt.TextField txthorafin;
     private java.awt.TextField txthorainicio;
@@ -349,7 +402,8 @@ public void limpiar() {
     txtes3d.setSelected(false);
     txtsubtitulada.setSelected(false);
     txtpelicula.setSelectedIndex(-1); 
-    txtsala.setSelectedIndex(-1);     
+    txtsala.setSelectedIndex(-1);  
+    txtactivar.setSelected(false);
 }
 
 

@@ -4,6 +4,7 @@ import Modelo.Ticket;
 import Modelo.Lugar;
 import Modelo.Comprador;
 import Modelo.Conexion;
+import Modelo.Proyeccion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,18 +23,20 @@ public class TicketData {
     private Connection conex = null;
     private CompradorData compradorData; 
     private LugarData lugarData; 
+    private ProyeccionData proyecciondata;
 
     public TicketData(Conexion conex) {
         this.conex = conex.conectar();
         this.compradorData = new CompradorData(conex); 
         this.lugarData = new LugarData(conex);
+        this.proyecciondata=new ProyeccionData(conex);
     }
 
     // Metodos CRUD
 
     public void guardarTicket(Ticket ticket) {
-        String sql = "INSERT INTO ticketcompra (idComprador, idLugar, fechaCompra, fechaFuncion, monto) "
-                   + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ticketcompra (idComprador, idLugar, fechaCompra, fechaFuncion, monto, activo) "
+                   + "VALUES (?, ?, ?, ?, ?,?)";
 
         try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
@@ -44,6 +47,7 @@ public class TicketData {
             ps.setDate(4, Date.valueOf(ticket.getFechaFuncion()));
             
             ps.setDouble(5, ticket.getMonto());
+            ps.setBoolean(6, ticket.isActivo());
 
             int filasAfectadas = ps.executeUpdate();
             
@@ -156,7 +160,26 @@ public class TicketData {
         }
         return lista;
     }
+    
+    
 
+public void anularTicket(int id){
+String sql="UPDATE ticket SET activo=0 WHERE Id_ticket=?";
+        try {
+            PreparedStatement ps=conex.prepareStatement(sql);
+            ps.setInt(1, id);
+            int r= ps.executeUpdate();
+            if (r > 0) {
+            JOptionPane.showMessageDialog(null, " Ticket anulado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, " No se encontró un ticket con ese ID");
+        }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+}
 
 
 

@@ -17,13 +17,15 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class compradorVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc= new SistemaCine();
-private CompradorData cd=new CompradorData(sc.conexionDb());
+private  SistemaCine sc;
+private CompradorData cd;
     /**
      * Creates new form compradorVista
      */
     public compradorVista() {
         initComponents();
+        sc=new SistemaCine();
+        cd=new CompradorData(sc.conexionDb());
         txtid.setEditable(false);
     }
 
@@ -214,20 +216,34 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
-       Comprador c;
-       int dni=Integer.parseInt(txtdni.getText());
-       String nombre=txtnombre.getText();
+      
+      
+       txtid.setText("");
+        Comprador c;
+      
+      
+      
+      try {
+     int dni=Integer.parseInt(txtdni.getText());  
       int contra=Integer.parseInt(txtpassword.getText());
-        String pago=txtmediopago.getText();
+                 String pago=txtmediopago.getText();
         
-        
+        String nombre=txtnombre.getText();
        LocalDate fecha=txtfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
        
        c= new Comprador(dni,nombre,contra,pago,fecha);
        cd.guardarComprador(c);
-       limpiar();
-       txtid.setText("");
-
+       
+      JOptionPane.showMessageDialog(this, "Comprador guardado correctamente.");
+              
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "El DNI y la contraseña deben ser numéricos.");
+    return;
+}
+      
+      
+     
+limpiar();
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
@@ -307,7 +323,7 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
     // End of variables declaration//GEN-END:variables
 private void limpiar() {
         
-       
+       txtid.setText("");
         txtdni.setText("");
         txtnombre.setText("");
         txtpassword.setText("");
