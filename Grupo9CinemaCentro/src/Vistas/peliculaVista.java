@@ -317,7 +317,8 @@ txtid.setEditable(false);
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
-       int id= Integer.parseInt(txtid.getText());
+       
+        int id= Integer.parseInt(txtid.getText());
        
         pd.borrarPelicula(id);
         txtid.setText("");

@@ -61,32 +61,7 @@ public class ProyeccionData {
     }
     public Proyeccion buscarProyeccion(int Id){
         
- String sql = "SELECT "
-        + "P.Id_proyeccion, "
-        + "P.idioma, "
-        + "P.es3D, "
-        + "P.subtitulada, "
-        + "P.horaInicio, "
-        + "P.horaFin, "
-        + "P.precio, "
-         +"P.activa,"
-        + "PE.Id_pelicula, "
-        + "PE.titulo, "
-        + "PE.director, "
-        + "PE.actores, "
-        + "PE.genero, "
-        + "PE.origen, "
-        + "PE.estreno, "
-        + "PE.enCartelera, "
-        + "S.Id_sala, "
-        + "S.nroSala, "
-        + "S.apta3D, "
-        + "S.capacidad, "
-        + "S.estado "
-        + "FROM proyeccion P "
-        + "JOIN pelicula PE ON P.Id_pelicula = PE.Id_pelicula "
-        + "JOIN sala S ON S.Id_sala = P.Id_sala "
-        + "WHERE P.Id_proyeccion = ?";
+ String sql = "SELECT P.Id_proyeccion, P.idioma,      P.es3D,      P.subtitulada,      P.horaInicio,      P.horaFin,      P.precio,  P.activa, PE.Id_pelicula, PE.titulo,PE.director, PE.actores,  PE.genero,PE.origen,PE.estreno,PE.enCartelera, S.Id_sala, S.nroSala, S.apta3D, S.capacidad, S.estado FROM proyeccion P  JOIN pelicula PE ON P.Id_pelicula = PE.Id_pelicula JOIN sala S ON S.Id_sala = P.Id_sala WHERE P.Id_proyeccion = ?";
 
 
     Proyeccion p=null;

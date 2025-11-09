@@ -62,7 +62,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
 
         jLabel5.setText("capacidad");
 
-        jLabel6.setText("estado");
+        jLabel6.setText("activa");
 
         jbnuevo.setText("nuevo");
         jbnuevo.addActionListener(new java.awt.event.ActionListener() {

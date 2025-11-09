@@ -32,7 +32,7 @@ public class SalaData {
     }
 
     public void guardarSala(Sala sala) {
-        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `estado`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `activa`) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -55,7 +55,7 @@ public class SalaData {
     }
 
     public Sala buscarSala(int nroSala) {
-        String sql = "SELECT  Id_sala,`nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE nroSala=?";
+        String sql = "SELECT  Id_sala,`nroSala`, `apta3D`, `capacidad`, `activa` FROM `sala` WHERE nroSala=?";
         Sala sala = null;
         try {
 
@@ -82,7 +82,7 @@ public class SalaData {
     }
 
     public List<Sala> listarSalasActivas() {
-        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE estado=1 ";
+        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `activa` FROM `sala` WHERE activa=1 ";
         List<Sala> salas = null;
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class SalaData {
                 s.setIdSala(rs.getInt("Id_sala"));
                 s.setApta3D(rs.getBoolean("apta3D"));
                 s.setCapacidad(rs.getInt("capacidad"));
-                s.setEstado(rs.getBoolean("estado"));
+                s.setEstado(rs.getBoolean("activa"));
 
                 s.setNroSala(rs.getInt("nroSala"));
 
@@ -110,7 +110,7 @@ public class SalaData {
     }
 
     public void modificarSala(Sala sala) {
-        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, estado=? WHERE Id_sala=?";
+        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, activa=? WHERE Id_sala=?";
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
             ps.setInt(1, sala.getNroSala());
@@ -151,7 +151,7 @@ public class SalaData {
         }
     }
     public void bajaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET estado = 0 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET activa = 0 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);
@@ -168,7 +168,7 @@ public class SalaData {
     }
 }
     public void altaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET estado = 1 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET activa = 1 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);

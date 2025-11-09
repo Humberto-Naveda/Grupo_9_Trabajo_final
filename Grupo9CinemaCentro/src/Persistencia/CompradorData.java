@@ -32,7 +32,7 @@ public class CompradorData {
             ps.setInt(1, c.getDni());
             ps.setString(2, c.getNombre());
             ps.setDate(3,Date.valueOf(c.getFechaNac()));
-            ps.setInt(4, c.getPassword());
+            ps.setString(4, c.getPassword());
             ps.setString(5,c.getMedioPago());
          
             ps.executeUpdate();
@@ -60,7 +60,7 @@ public class CompradorData {
                 c.setIdComprador(rs.getInt("id_comprador"));
                 c.setDni(rs.getInt("dni"));
                 c.setNombre(rs.getString("nombre"));
-                c.setPassword(rs.getInt("password"));
+                c.setPassword(rs.getString("password"));
                 c.setMedioPago(rs.getString("medioPago"));
                 c.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 lista.add(c);
@@ -86,7 +86,7 @@ public class CompradorData {
                 comprador.setIdComprador(rs.getInt("Id_Comprador"));
                 comprador.setDni(rs.getInt("DNI"));
                 comprador.setNombre(rs.getNString("nombre"));
-                comprador.setPassword(rs.getInt("password"));
+                comprador.setPassword(rs.getString("password"));
                 comprador.setMedioPago(rs.getNString("medioPago"));
                 comprador.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 JOptionPane.showMessageDialog(null,"busqueda exitosa");
@@ -113,7 +113,7 @@ public class CompradorData {
             PreparedStatement ps=conec.prepareStatement(sql);
             ps.setInt(1, comprador.getDni());
             ps.setString(2, comprador.getNombre());
-            ps.setInt(3, comprador.getPassword());
+            ps.setString(3, comprador.getPassword());
             ps.setString(4, comprador.getMedioPago());
             ps.setDate(5, Date.valueOf(comprador.getFechaNac()));
             ps.setInt(6, comprador.getIdComprador());
