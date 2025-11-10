@@ -71,7 +71,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbmodificar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbeliminar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbdarbaja" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="196" max="32767" attributes="0"/>
@@ -113,7 +113,7 @@
                   <Component id="jbnuevo" min="-2" max="-2" attributes="0"/>
                   <Component id="jbguardar" min="-2" max="-2" attributes="0"/>
                   <Component id="jbmodificar" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbeliminar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbdarbaja" min="-2" max="-2" attributes="0"/>
                   <Component id="jbbuscar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="98" max="32767" attributes="0"/>
@@ -171,12 +171,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbmodificarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="jbeliminar">
+    <Component class="java.awt.Button" name="jbdarbaja">
       <Properties>
-        <Property name="label" type="java.lang.String" value="eliminar"/>
+        <Property name="label" type="java.lang.String" value="dar baja"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbeliminarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbdarbajaActionPerformed"/>
       </Events>
     </Component>
     <Component class="java.awt.Button" name="jbbuscar">

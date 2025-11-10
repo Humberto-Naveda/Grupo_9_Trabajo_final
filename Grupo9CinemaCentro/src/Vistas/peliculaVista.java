@@ -54,7 +54,7 @@ txtid.setEditable(false);
         txtactores = new java.awt.TextField();
         txtfecha = new com.toedter.calendar.JDateChooser();
         txtencartelera = new javax.swing.JCheckBox();
-        jbeliminar = new javax.swing.JButton();
+        jbdarbaja = new javax.swing.JButton();
         jbmodificar = new javax.swing.JButton();
         jbguardar = new javax.swing.JButton();
         jbnuevo = new javax.swing.JButton();
@@ -99,10 +99,10 @@ txtid.setEditable(false);
             }
         });
 
-        jbeliminar.setText("Eliminar");
-        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+        jbdarbaja.setText("darbaja");
+        jbdarbaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbeliminarActionPerformed(evt);
+                jbdarbajaActionPerformed(evt);
             }
         });
 
@@ -206,7 +206,7 @@ txtid.setEditable(false);
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbmodificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbeliminar)))
+                        .addComponent(jbdarbaja)))
                 .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
@@ -259,7 +259,7 @@ txtid.setEditable(false);
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbeliminar)
+                            .addComponent(jbdarbaja)
                             .addComponent(jbmodificar)
                             .addComponent(jbguardar)
                             .addComponent(jbnuevo)))
@@ -316,16 +316,16 @@ txtid.setEditable(false);
       
     }//GEN-LAST:event_jbmodificarActionPerformed
 
-    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+    private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
        
         int id= Integer.parseInt(txtid.getText());
        
-        pd.borrarPelicula(id);
+        pd.bajaPelicula(id);
         txtid.setText("");
          txtid.setEditable(false);
         limpiar();
         
-    }//GEN-LAST:event_jbeliminarActionPerformed
+    }//GEN-LAST:event_jbdarbajaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
         txtid.setEditable(true);
@@ -366,7 +366,7 @@ txtid.setEditable(false);
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbbuscar;
-    private javax.swing.JButton jbeliminar;
+    private javax.swing.JButton jbdarbaja;
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;

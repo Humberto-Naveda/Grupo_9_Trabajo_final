@@ -61,7 +61,7 @@ public class ProyeccionData {
     }
     public Proyeccion buscarProyeccion(int Id){
         
- String sql = "SELECT P.Id_proyeccion, P.idioma,      P.es3D,      P.subtitulada,      P.horaInicio,      P.horaFin,      P.precio,  P.activa, PE.Id_pelicula, PE.titulo,PE.director, PE.actores,  PE.genero,PE.origen,PE.estreno,PE.enCartelera, S.Id_sala, S.nroSala, S.apta3D, S.capacidad, S.estado FROM proyeccion P  JOIN pelicula PE ON P.Id_pelicula = PE.Id_pelicula JOIN sala S ON S.Id_sala = P.Id_sala WHERE P.Id_proyeccion = ?";
+ String sql = "SELECT P.Id_proyeccion, P.idioma,      P.es3D,      P.subtitulada,      P.horaInicio,      P.horaFin,      P.precio,  P.activa, PE.Id_pelicula, PE.titulo,PE.director, PE.actores,  PE.genero,PE.origen,PE.estreno,PE.enCartelera, S.Id_sala, S.nroSala, S.apta3D, S.capacidad, S.activa FROM proyeccion P  JOIN pelicula PE ON P.Id_pelicula = PE.Id_pelicula JOIN sala S ON S.Id_sala = P.Id_sala WHERE P.Id_proyeccion = ?";
 
 
     Proyeccion p=null;
@@ -90,7 +90,7 @@ public class ProyeccionData {
            sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getBoolean("estado"));
+           sala.setEstado(rs.getBoolean("activa"));
            
            sala.setNroSala(rs.getInt("nroSala"));
            
@@ -120,7 +120,7 @@ public class ProyeccionData {
     public List<Proyeccion> listarProyeccion() {
     String sql = "SELECT p.Id_proyeccion, p.idioma, p.es3D, p.subtitulada, p.horaInicio, p.horaFin, p.precio, p.activa,  \n" +
 "                 pe.Id_pelicula, pe.titulo, pe.director, pe.actores, pe.genero, pe.origen, pe.estreno, pe.enCartelera, \n" +
-"                 s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.estado  \n" +
+"                 s.Id_sala, s.nroSala, s.apta3D, s.capacidad, s.activa  \n" +
 "                 FROM proyeccion p  \n" +
 "                 JOIN pelicula pe ON p.Id_pelicula = pe.Id_pelicula  \n" +
 "                 JOIN sala s ON p.Id_sala = s.Id_sala \n" +
@@ -158,7 +158,7 @@ public class ProyeccionData {
              sala.setIdSala(rs.getInt("Id_sala"));
            sala.setApta3D(rs.getBoolean("apta3D"));
            sala.setCapacidad(rs.getInt("capacidad"));
-           sala.setEstado(rs.getBoolean("estado"));
+           sala.setEstado(rs.getBoolean("activa"));
            sala.setNroSala(rs.getInt("nroSala"));
             
             
@@ -278,5 +278,25 @@ List<Proyeccion> lista = new ArrayList<>();
         return lista;
 
 }
+public void bajaLogica(int id){
+   String sql="UPDATE `proyeccion` SET activa=0 WHERE Id_proyeccion=?";
+   PreparedStatement ps;
+        try {
+            ps = conec.prepareStatement(sql);
+            ps.setInt(1, id);
+            int r=ps.executeUpdate();
+            if(r>0){
+            
+            JOptionPane.showMessageDialog(null, "fila actualizada");
+            }else{
+            JOptionPane.showMessageDialog(null, "no se a encontrado ninguna fila");
+            }
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "error al dar de baja");
+        }
+   
+   
+   }
 
 }

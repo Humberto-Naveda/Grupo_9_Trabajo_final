@@ -65,7 +65,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jbguardar = new javax.swing.JButton();
-        jbeliminar = new javax.swing.JButton();
+        jbdarbaja = new javax.swing.JButton();
         jbnuevo = new javax.swing.JButton();
         jbmodificar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
@@ -110,10 +110,10 @@ private SalaData sd=new SalaData(sc.conexionDb());
             }
         });
 
-        jbeliminar.setText("eliminar");
-        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+        jbdarbaja.setText("dar baja");
+        jbdarbaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbeliminarActionPerformed(evt);
+                jbdarbajaActionPerformed(evt);
             }
         });
 
@@ -206,13 +206,13 @@ private SalaData sd=new SalaData(sc.conexionDb());
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbguardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbeliminar)))
+                                .addComponent(jbdarbaja)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbmodificar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(jLabel1)))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +261,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbnuevo)
                     .addComponent(jbguardar)
-                    .addComponent(jbeliminar)
+                    .addComponent(jbdarbaja)
                     .addComponent(jbmodificar)
                     .addComponent(jbbuscar))
                 .addGap(78, 78, 78))
@@ -359,21 +359,21 @@ private SalaData sd=new SalaData(sc.conexionDb());
         txtid.setEditable(false);
     }//GEN-LAST:event_jbnuevoActionPerformed
 
-    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+    private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
        
        txtid.setEditable(true);
        if(txtid.getText()==null){
            
-           JOptionPane.showMessageDialog(null, "ingrese el id de la proyeccion q desea eliminar");
+           JOptionPane.showMessageDialog(null, "ingrese el id de la proyeccion q desea dar de baja");
            return;
        };
        try{
-       pd.eliminarProyeccion(Integer.parseInt(txtid.getText()));
+       pd.bajaLogica(Integer.parseInt(txtid.getText()));
         }catch(Exception e){JOptionPane.showMessageDialog(null, "no se a encontrado nada"); }
         txtid.setText("");
         txtid.setEditable(false);
         limpiar();
-    }//GEN-LAST:event_jbeliminarActionPerformed
+    }//GEN-LAST:event_jbdarbajaActionPerformed
 
     private void txtactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtactivarActionPerformed
         
@@ -446,7 +446,7 @@ Proyeccion pr=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio,act
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbbuscar;
-    private javax.swing.JButton jbeliminar;
+    private javax.swing.JButton jbdarbaja;
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;

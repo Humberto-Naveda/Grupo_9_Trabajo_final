@@ -91,7 +91,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbguardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jbeliminar" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbdarbaja" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="186" max="32767" attributes="0"/>
+              <EmptySpace pref="182" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -164,7 +164,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbnuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbguardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbeliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbdarbaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbmodificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -258,12 +258,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbguardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbeliminar">
+    <Component class="javax.swing.JButton" name="jbdarbaja">
       <Properties>
-        <Property name="text" type="java.lang.String" value="eliminar"/>
+        <Property name="text" type="java.lang.String" value="dar baja"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbeliminarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbdarbajaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbnuevo">

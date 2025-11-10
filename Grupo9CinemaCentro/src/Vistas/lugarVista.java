@@ -55,7 +55,7 @@ private ProyeccionData pd;
         jbnuevo = new java.awt.Button();
         jbguardar = new java.awt.Button();
         jbmodificar = new java.awt.Button();
-        jbeliminar = new java.awt.Button();
+        jbdarbaja = new java.awt.Button();
         jbbuscar = new java.awt.Button();
         txtestado = new javax.swing.JCheckBox();
         txtproyeccion = new javax.swing.JComboBox<>();
@@ -96,10 +96,10 @@ private ProyeccionData pd;
             }
         });
 
-        jbeliminar.setLabel("eliminar");
-        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+        jbdarbaja.setLabel("dar baja");
+        jbdarbaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbeliminarActionPerformed(evt);
+                jbdarbajaActionPerformed(evt);
             }
         });
 
@@ -153,7 +153,7 @@ private ProyeccionData pd;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbmodificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbdarbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,7 +185,7 @@ private ProyeccionData pd;
                     .addComponent(jbnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbguardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbmodificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbdarbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
@@ -235,11 +235,11 @@ private ProyeccionData pd;
        
     }//GEN-LAST:event_jbmodificarActionPerformed
 
-    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
-       ld.borrarButaca(Integer.parseInt(txtid.getText()));
+    private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
+       ld.darBaja(Integer.parseInt(txtid.getText()));
        txtid.setText("");
        txtid.setEditable(false);
-    }//GEN-LAST:event_jbeliminarActionPerformed
+    }//GEN-LAST:event_jbdarbajaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
      txtid.setEditable(true);
@@ -261,7 +261,7 @@ private ProyeccionData pd;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private java.awt.Button jbbuscar;
-    private java.awt.Button jbeliminar;
+    private java.awt.Button jbdarbaja;
     private java.awt.Button jbguardar;
     private java.awt.Button jbmodificar;
     private java.awt.Button jbnuevo;

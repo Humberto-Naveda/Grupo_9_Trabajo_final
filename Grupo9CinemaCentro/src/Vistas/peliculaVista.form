@@ -105,7 +105,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jbmodificar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbeliminar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbdarbaja" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -175,7 +175,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbeliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbdarbaja" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbmodificar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbguardar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbnuevo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -262,12 +262,12 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="txtencartelera">
     </Component>
-    <Component class="javax.swing.JButton" name="jbeliminar">
+    <Component class="javax.swing.JButton" name="jbdarbaja">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="text" type="java.lang.String" value="darbaja"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbeliminarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbdarbajaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbmodificar">

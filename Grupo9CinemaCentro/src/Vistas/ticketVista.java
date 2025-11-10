@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -273,6 +274,15 @@ SistemaCine sc=new SistemaCine();
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
         Ticket t;
+        if (txtfechacompra.getDate() == null || txtfechafuncion.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar ambas fechas ");
+            return;
+        }
+        if (txtmonto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el monto del ticket.");
+            return;
+        }
+        try{
         Comprador c=(Comprador) txtcomprador.getSelectedItem();
         Lugar l=(Lugar) txtlugar.getSelectedItem();
         int id=Integer.parseInt(txtid.getText());
@@ -284,13 +294,24 @@ SistemaCine sc=new SistemaCine();
         
         td.guardarTicket(t);
         txtid.setEditable(false);
-
+        }catch(NumberFormatException r){
+        JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
+        
+        }
         
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-          txtid.setEditable(true);
+
+        if(txtid.getText().isEmpty()){
+        
+      JOptionPane.showMessageDialog(null, "ingrese el numero de la sala que desea buscar");
+        return;
+        }
+        try{
+        txtid.setEditable(true);
         int id=Integer.parseInt(txtid.getText());
+        
         
        Ticket t= td.buscarTicket(id);
        
@@ -308,13 +329,24 @@ SistemaCine sc=new SistemaCine();
             txtcomprador.setSelectedItem(t.getComprador());
             txtlugar.setSelectedItem(t.getAsiento());
            txtactivo.setSelected(t.isActivo());
-       
+       }catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
+        }
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jbanularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbanularActionPerformed
-      int id=Integer.parseInt(txtid.getText());
+      if(txtid.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "debe ingresar el id del ticket que desea anular");
+      return;
+      }
+      try{  
+        int id=Integer.parseInt(txtid.getText());
         td.anularTicket(id);
         limpiarcampo();
+      }catch(NumberFormatException e){
+      JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
+      
+      }
     }//GEN-LAST:event_jbanularActionPerformed
 
     private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed

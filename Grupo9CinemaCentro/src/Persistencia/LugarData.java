@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -71,7 +73,7 @@ public class LugarData {
                     asiento.setIdLugar(idLugar);
                     asiento.setFila(rsBuscar.getInt("fila"));
                     asiento.setNumero(rsBuscar.getInt("numero"));
-                    asiento.setEstado(rsBuscar.getBoolean("estado"));
+                    asiento.setEstado(rsBuscar.getBoolean("activa"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el lugar indicado.");
                 }
@@ -105,7 +107,7 @@ public class LugarData {
     }
 
     public void actualizarButaca(Lugar lugar) {
-        String update = "UPDATE lugar SET fila = ?, numero = ?, estado = ?, id_proyeccion = ? WHERE id_lugar = ?";
+        String update = "UPDATE lugar SET fila = ?, numero = ?, estado= ?, id_proyeccion = ? WHERE id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
             statement.setInt(1, lugar.getFila());
@@ -257,6 +259,28 @@ public class LugarData {
     
     return lista;
 }
+    public void darBaja(int id){
+    String sql="UPDATE `lugar` SET estado=0 WHERE Id_lugar=?";
+        try {
+            PreparedStatement ps=conex.prepareStatement(sql);
+            ps.setInt(1, id);
+            int r=ps.executeUpdate();
+            if(r>0){
+            JOptionPane.showMessageDialog(null, "baja exitosa");
+            
+            }else{
+           JOptionPane.showMessageDialog(null, "no se a encontrado la fila");
+            }
+            
+        } catch (SQLException ex) {
+          JOptionPane.showMessageDialog(null, "error al dar de baja");
+        }
+    
+    
+    
+    
+    
+    }
 
 
 }

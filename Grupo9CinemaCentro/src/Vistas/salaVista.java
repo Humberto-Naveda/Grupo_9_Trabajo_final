@@ -8,6 +8,7 @@ package Vistas;
 import Modelo.Comprador;
 import Modelo.Sala;
 import Persistencia.SalaData;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,12 +47,13 @@ private SalaData sd= new SalaData(sc.conexionDb());
         jbmodificar = new javax.swing.JButton();
         jbeliminar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
-        txtid = new java.awt.TextField();
-        txtnrosala = new java.awt.TextField();
-        txtcapacidad = new java.awt.TextField();
         txtapta3d = new javax.swing.JCheckBox();
         txtestado = new javax.swing.JCheckBox();
+        txtid = new javax.swing.JTextField();
+        txtnrosala = new javax.swing.JTextField();
+        txtcapacidad = new javax.swing.JTextField();
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel1.setText("sala");
 
         jLabel2.setText("ID");
@@ -85,7 +87,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
             }
         });
 
-        jbeliminar.setText("eliminar");
+        jbeliminar.setText("dar baja");
         jbeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbeliminarActionPerformed(evt);
@@ -117,26 +119,22 @@ private SalaData sd= new SalaData(sc.conexionDb());
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtapta3d)))
-                        .addContainerGap())
+                        .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbbuscar)
-                                .addGap(50, 50, 50))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtcapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(txtnrosala)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtapta3d))
+                            .addComponent(txtid))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbbuscar)
+                        .addGap(50, 50, 50))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -151,32 +149,34 @@ private SalaData sd= new SalaData(sc.conexionDb());
                     .addGroup(layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbbuscar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtapta3d)
                     .addComponent(jLabel4))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtestado)
                     .addComponent(jLabel6))
@@ -186,7 +186,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
                     .addComponent(jbmodificar)
                     .addComponent(jbnuevo)
                     .addComponent(jbeliminar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,12 +200,26 @@ private SalaData sd= new SalaData(sc.conexionDb());
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
       Sala s;
+      
+      if(txtnrosala.getText().isEmpty()||txtcapacidad.getText().isEmpty()){
+      JOptionPane.showMessageDialog(null, "campos vacios!");
+      return;
+      };
+      try{
       int nrosala=Integer.parseInt(txtnrosala.getText());
       boolean apta3d=txtapta3d.isSelected();
       int capacidad=Integer.parseInt(txtcapacidad.getText());
       boolean estado=txtestado.isSelected();
+      
+      
+      
       s=new Sala(nrosala,apta3d,capacidad,estado);
       sd.guardarSala(s);
+      JOptionPane.showMessageDialog(null, "Sala guardada ");
+      }catch(NumberFormatException e){
+       JOptionPane.showMessageDialog(null, "deben ingresar valores numericos");
+      
+      }
       limpiar();
       txtid.setText("");
     }//GEN-LAST:event_jbguardarActionPerformed
@@ -215,7 +229,13 @@ private SalaData sd= new SalaData(sc.conexionDb());
     }//GEN-LAST:event_txtestadoActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-        txtid.setEditable(true);
+      
+        
+        if(txtnrosala.getText().isEmpty()){
+        
+      JOptionPane.showMessageDialog(null, "ingrese el numero de la sala que desea buscar");
+        return;
+        }
       Sala s= sd.buscarSala(Integer.parseInt(txtnrosala.getText()));
         txtid.setText(s.getIdSala()+"");
         txtnrosala.setText(s.getNroSala()+"");
@@ -229,6 +249,12 @@ private SalaData sd= new SalaData(sc.conexionDb());
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
     
         Sala s;
+       if(txtnrosala.getText().isEmpty()||txtcapacidad.getText().isEmpty()){
+      JOptionPane.showMessageDialog(null, "campos vacios!");
+      return;
+      };
+        
+      try{  
         int nrosala=Integer.parseInt(txtnrosala.getText());
          boolean apta3d=txtapta3d.isSelected();
          int capacidad=Integer.parseInt(txtcapacidad.getText());
@@ -236,14 +262,31 @@ private SalaData sd= new SalaData(sc.conexionDb());
           s=new Sala(nrosala,apta3d,capacidad,estado);
            s.setIdSala(Integer.parseInt(txtid.getText()));
           sd.modificarSala(s);
+      }catch(NumberFormatException e){
+       JOptionPane.showMessageDialog(null, "deben ingresar valores numericos");
+      
+      }
           limpiar();
           txtid.setText("");
+          
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+txtid.setEditable(true);
+        if(txtid.getText().isEmpty()){
+        
+        JOptionPane.showMessageDialog(null, "ingrese el id de la sala que  desea dar de baja");
+        return;
+        }
+        try{
         int id=Integer.parseInt(txtid.getText());
-      
-       sd.eliminarSala(id);
+       
+       sd.bajaLogicaSala(id);
+       
+        }catch(NumberFormatException e){
+        
+          JOptionPane.showMessageDialog(null, "ingrese un valor numerico");
+        }
        txtid.setText("");
         txtid.setEditable(false);
        limpiar();
@@ -264,14 +307,14 @@ private SalaData sd= new SalaData(sc.conexionDb());
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
     private javax.swing.JCheckBox txtapta3d;
-    private java.awt.TextField txtcapacidad;
+    private javax.swing.JTextField txtcapacidad;
     private javax.swing.JCheckBox txtestado;
-    private java.awt.TextField txtid;
-    private java.awt.TextField txtnrosala;
+    private javax.swing.JTextField txtid;
+    private javax.swing.JTextField txtnrosala;
     // End of variables declaration//GEN-END:variables
 private void limpiar() {
         
-       
+       txtid.setText("");
         txtnrosala.setText("");
         txtapta3d.setSelected(false);
         txtcapacidad.setText("");

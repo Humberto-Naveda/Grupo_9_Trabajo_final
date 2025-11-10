@@ -67,13 +67,14 @@ public class SalaData {
                 sala = new Sala();
                 sala.setIdSala(rs.getInt("Id_sala"));
                 sala.setNroSala(rs.getInt("nroSala"));
-                sala.setApta3D(rs.getInt("apta3D") == 1);
+                sala.setApta3D(rs.getBoolean("apta3D"));
                 sala.setCapacidad(rs.getInt("capacidad"));
-                sala.setEstado(rs.getBoolean("estado"));
+                sala.setEstado(rs.getBoolean("activa"));
 
             }
             JOptionPane.showMessageDialog(null, "busqueda exitosa");
             rs.close();
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "busqueda erronea");
         }
@@ -134,22 +135,7 @@ public class SalaData {
 
     }
 
-    public void eliminarSala(int id) {
-        String sql = "DELETE FROM `sala` WHERE Id_sala=?";
-        try {
-            PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, id);
-            int r = ps.executeUpdate();
-            if (r > 0) {
-                JOptionPane.showMessageDialog(null, "se elimino una fila");
-            } else {
-                JOptionPane.showMessageDialog(null, "no se elimino nada");
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al eliminar");
-        }
-    }
+   
     public void bajaLogicaSala(int idSala) {
     String sql = "UPDATE sala SET activa = 0 WHERE Id_sala = ?";
     try {
