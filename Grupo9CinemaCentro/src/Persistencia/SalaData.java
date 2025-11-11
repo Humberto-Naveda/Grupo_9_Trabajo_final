@@ -81,8 +81,8 @@ public class SalaData {
         return sala;
     }
 
-    public List<Sala> listarSalas() {
-        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` ";
+    public List<Sala> listarSalasActivas() {
+        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE estado=1 ";
         List<Sala> salas = null;
         try {
             PreparedStatement ps = conec.prepareStatement(sql);

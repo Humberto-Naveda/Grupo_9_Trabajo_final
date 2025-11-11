@@ -130,15 +130,15 @@ public class CompradorData {
     
    }
    
-   public void eliminarComprador(int dni){
-   String sql="DELETE FROM `comprador` WHERE DNI=?";
+   public void eliminarComprador(int id){
+   String sql="DELETE FROM `comprador` WHERE Id_comprador=?";
         try {
             PreparedStatement ps=conec.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setInt(1, id);
            int r=ps.executeUpdate();
             if(r>0){
              JOptionPane.showInternalInputDialog(null, "Eliminacion exitosa");
-            }else{ JOptionPane.showInternalMessageDialog(null, "no se a encontrado comprador con ese dni");}
+            }else{ JOptionPane.showInternalMessageDialog(null, "no se a encontrado comprador con ese id");}
             ps.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR");
