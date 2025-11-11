@@ -17,13 +17,16 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class compradorVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc= new SistemaCine();
-private CompradorData cd=new CompradorData(sc.conexionDb());
+private  SistemaCine sc;
+private CompradorData cd;
+
     /**
      * Creates new form compradorVista
      */
     public compradorVista() {
         initComponents();
+        sc=new SistemaCine();
+        cd=new CompradorData(sc.conexionDb());
         txtid.setEditable(false);
     }
 
@@ -48,13 +51,15 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
         jbmodificar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
         jbeliminar = new javax.swing.JButton();
-        txtid = new java.awt.TextField();
-        txtdni = new java.awt.TextField();
-        txtnombre = new java.awt.TextField();
-        txtpassword = new java.awt.TextField();
-        txtmediopago = new java.awt.TextField();
         txtfecha = new com.toedter.calendar.JDateChooser();
+        txtid = new javax.swing.JTextField();
+        txtdni = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        txtpassword = new javax.swing.JTextField();
+        txtmediopago = new javax.swing.JTextField();
+        jbsalir = new javax.swing.JButton();
 
+        jLabel1.setFont(new java.awt.Font("Sylfaen", 2, 18)); // NOI18N
         jLabel1.setText("Comprador");
 
         jLabel2.setText("ID");
@@ -104,9 +109,10 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
             }
         });
 
-        txtid.addActionListener(new java.awt.event.ActionListener() {
+        jbsalir.setText("salir");
+        jbsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidActionPerformed(evt);
+                jbsalirActionPerformed(evt);
             }
         });
 
@@ -115,56 +121,60 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbbuscar))
+                        .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(37, 37, 37)
+                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtnombre)
+                                    .addComponent(txtdni))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtmediopago))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbnuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbguardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbmodificar)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(117, 117, 117)
-                                .addComponent(jLabel1))
+                                .addGap(30, 30, 30)
+                                .addComponent(jbbuscar))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addGap(19, 19, 19)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtmediopago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jbnuevo)
+                                .addComponent(jbeliminar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbguardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbmodificar)
-                                .addGap(28, 28, 28)
-                                .addComponent(jbeliminar)))
-                        .addGap(0, 40, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jbsalir)))))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,32 +188,32 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbbuscar)))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jbbuscar))
+                            .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(txtmediopago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtmediopago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbnuevo)
                             .addComponent(jbguardar)
                             .addComponent(jbmodificar)
-                            .addComponent(jbeliminar)))
+                            .addComponent(jbeliminar)
+                            .addComponent(jbsalir)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -214,43 +224,112 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
-       Comprador c;
-       int dni=Integer.parseInt(txtdni.getText());
-       String nombre=txtnombre.getText();
-      int contra=Integer.parseInt(txtpassword.getText());
-        String pago=txtmediopago.getText();
+      
+      
+       txtid.setText("");
+        Comprador c;
+      
+      
+      if(txtdni.getText().isEmpty()||txtpassword.getText().isEmpty()||txtmediopago.getText().isEmpty()||txtnombre.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "todos los campos son obligatorios");
+       return;
+       }
+      try{
+     int dni=Integer.parseInt(txtdni.getText());  
+      String contra=(txtpassword.getText());
+      
+                 String pago=txtmediopago.getText();
         
-        
+        String nombre=txtnombre.getText();
+        if(txtfecha.getDate()==null){
+        JOptionPane.showMessageDialog(null, "debe seleccionar una fecha");
+        return;
+        }
        LocalDate fecha=txtfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
        
        c= new Comprador(dni,nombre,contra,pago,fecha);
        cd.guardarComprador(c);
-       limpiar();
-       txtid.setText("");
+          JOptionPane.showMessageDialog(this, "Comprador guardado correctamente.");
+       }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "dni deben ser numericos");
+       
+      
+       }
+       
+       
+       
+       
+       
+    
+              
 
+      
+      
+     
+limpiar();
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
        Comprador c;
+       if(txtid.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Debe seleccionar un id para realizar una busqueda");
+       return;
+       }
+       if(txtnombre.getText().isEmpty()||txtpassword.getText()==null||txtmediopago.getText()==null){
+       JOptionPane.showMessageDialog(null, "todos los campos son obligatorios");
+       return;
+       }
+      if( txtfecha.getDate()==null){
+      JOptionPane.showMessageDialog(null, "debe ingresar una fecha");
+      return;
+      }
+      if(txtmediopago.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Debe ingresar un medio de pago");
+       return;
+       }
+      
+       try{
+    String contra=(txtpassword.getText());
+    
+    
+      
+      
     int dni = Integer.parseInt(txtdni.getText());
+    
+    
     String nombre=txtnombre.getText();
-    int contra=Integer.parseInt(txtpassword.getText());
+   
     String pago=txtmediopago.getText();
      LocalDate  fecha = txtfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+     
      c=new Comprador(dni,nombre,contra,pago,fecha);
+     
+     
+       }
+    catch(NumberFormatException r){
+             JOptionPane.showMessageDialog(null, "debe ser numerico ");
+    return;
+    }
+     
+     
+     
       c.setIdComprador(Integer.parseInt(txtid.getText()));
      cd.modificarComprador(c);
      limpiar();
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
-      
+      txtid.setEditable(true);
+          if(txtid.getText().isEmpty()){
+              JOptionPane.showMessageDialog(null, "ingrese el id del comprador que desea eliminar");
+              return;
+          }
           
         int id = Integer.parseInt(txtid.getText());
         
         
-        
+        try{
             cd.eliminarComprador(id);
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "no se a encontrado nada"); }
             txtid.setText("");
              txtid.setEditable(false);
             limpiar(); 
@@ -260,17 +339,22 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
     }//GEN-LAST:event_jbeliminarActionPerformed
 
     private void jbnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnuevoActionPerformed
-       limpiar();
-       txtid.setEditable(false);
+     
+        
+        limpiar();
+       txtid.setText("");
+        txtid.setEditable(false);
     }//GEN-LAST:event_jbnuevoActionPerformed
-
-    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtidActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
       txtid.setEditable(true);
-     Comprador c=  cd.buscarComprador(Integer.parseInt(txtdni.getText()));
+    if(txtid.getText().isEmpty()){
+    JOptionPane.showMessageDialog(null, "ingrese el id del comprador q desea buscar");
+    return;
+    } 
+    try{
+     Comprador c=  cd.buscarComprador(Integer.parseInt(txtid.getText()));
+    
      txtid.setText(c.getIdComprador()+"");
      txtdni.setText(c.getDni()+"");
      txtnombre.setText(c.getNombre());
@@ -280,8 +364,12 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
         
               java.util.Date date = java.util.Date.from(pe.atStartOfDay(ZoneId.systemDefault()).toInstant());
      txtfecha.setDate(date);
-       
+       }catch(Exception e){JOptionPane.showMessageDialog(null, "no se a encontrado nada");}
     }//GEN-LAST:event_jbbuscarActionPerformed
+
+    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbsalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -297,23 +385,33 @@ private CompradorData cd=new CompradorData(sc.conexionDb());
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
-    private java.awt.TextField txtdni;
+    private javax.swing.JButton jbsalir;
+    private javax.swing.JTextField txtdni;
     private com.toedter.calendar.JDateChooser txtfecha;
-    private java.awt.TextField txtid;
-    private java.awt.TextField txtmediopago;
-    private java.awt.TextField txtnombre;
-    private java.awt.TextField txtpassword;
+    private javax.swing.JTextField txtid;
+    private javax.swing.JTextField txtmediopago;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtpassword;
     // End of variables declaration//GEN-END:variables
 private void limpiar() {
-        
+    
+    
        
+
+        txtid.setText("");
         txtdni.setText("");
         txtnombre.setText("");
         txtpassword.setText("");
-       txtmediopago.setText("");
+        txtmediopago.setText("");
         txtfecha.setDate(null);
-       
-        
 
-    }
+       
+      
+
+  
+}
+
+
+
+    
 }

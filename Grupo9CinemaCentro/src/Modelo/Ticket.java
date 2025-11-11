@@ -20,19 +20,41 @@ public class Ticket {
     private LocalDate fechaCompra;
     private LocalDate fechaFuncion;
     private double monto;
+    private boolean activo;
+    
 
-    public Ticket(Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, Lugar asiento) {
+    public Ticket() {
+    }
+
+    public Ticket(int idTicket, Lugar asiento, Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, boolean activo) {
+        this.idTicket = idTicket;
+        this.asiento = asiento;
         this.comprador = comprador;
         this.fechaCompra = fechaCompra;
         this.fechaFuncion = fechaFuncion;
         this.monto = monto;
-        this.asiento = asiento;
+        this.activo = activo;
     }
 
+<<<<<<< HEAD
     public Ticket() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+=======
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+
+
+    
+
+>>>>>>> 1f385e69cd0092200282da0800f3049235ccd48b
     public int getIdTicket() {
         return idTicket;
     }
@@ -83,7 +105,11 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "idTicket=" + idTicket + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", asiento=" + asiento + '}';
+        return "Ticket{" + "idTicket=" + idTicket + ", asiento=" + asiento + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", activo=" + activo + '}';
     }
+
+    
+
+   
 
 }

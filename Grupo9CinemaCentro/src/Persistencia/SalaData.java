@@ -32,7 +32,7 @@ public class SalaData {
     }
 
     public void guardarSala(Sala sala) {
-        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `estado`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `activa`) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -54,26 +54,34 @@ public class SalaData {
 
     }
 
-    public Sala buscarSala(int nroSala) {
-        String sql = "SELECT  Id_sala,`nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE nroSala=?";
+    public Sala buscarSala(int id) {
+        String sql = "SELECT  Id_sala,nroSala, apta3D, capacidad, activa FROM sala WHERE Id_sala=?";
         Sala sala = null;
         try {
 
             PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, nroSala);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 sala = new Sala();
                 sala.setIdSala(rs.getInt("Id_sala"));
                 sala.setNroSala(rs.getInt("nroSala"));
-                sala.setApta3D(rs.getInt("apta3D") == 1);
+                sala.setApta3D(rs.getBoolean("apta3D"));
                 sala.setCapacidad(rs.getInt("capacidad"));
-                sala.setEstado(rs.getBoolean("estado"));
+                sala.setEstado(rs.getBoolean("activa"));
+JOptionPane.showMessageDialog(null, "busqueda exitosa");
 
+            }else{
+            
+JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
+            
             }
-            JOptionPane.showMessageDialog(null, "busqueda exitosa");
-            rs.close();
+            
+            
+            ps.close();
+            
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "busqueda erronea");
         }
@@ -82,7 +90,7 @@ public class SalaData {
     }
 
     public List<Sala> listarSalasActivas() {
-        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE estado=1 ";
+        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `activa` FROM `sala` WHERE activa=1 ";
         List<Sala> salas = null;
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
@@ -94,7 +102,7 @@ public class SalaData {
                 s.setIdSala(rs.getInt("Id_sala"));
                 s.setApta3D(rs.getBoolean("apta3D"));
                 s.setCapacidad(rs.getInt("capacidad"));
-                s.setEstado(rs.getBoolean("estado"));
+                s.setEstado(rs.getBoolean("activa"));
 
                 s.setNroSala(rs.getInt("nroSala"));
 
@@ -102,7 +110,7 @@ public class SalaData {
             }
 
             ps.close();
-            JOptionPane.showMessageDialog(null, "lista exitosa");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al listar salas");
         }
@@ -110,7 +118,7 @@ public class SalaData {
     }
 
     public void modificarSala(Sala sala) {
-        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, estado=? WHERE Id_sala=?";
+        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, activa=? WHERE Id_sala=?";
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
             ps.setInt(1, sala.getNroSala());
@@ -134,24 +142,9 @@ public class SalaData {
 
     }
 
-    public void eliminarSala(int id) {
-        String sql = "DELETE FROM `sala` WHERE Id_sala=?";
-        try {
-            PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, id);
-            int r = ps.executeUpdate();
-            if (r > 0) {
-                JOptionPane.showMessageDialog(null, "se elimino una fila");
-            } else {
-                JOptionPane.showMessageDialog(null, "no se elimino nada");
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al eliminar");
-        }
-    }
+   
     public void bajaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET estado = 0 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET activa = 0 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);
@@ -168,7 +161,7 @@ public class SalaData {
     }
 }
     public void altaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET estado = 1 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET activa = 1 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);
@@ -181,7 +174,7 @@ public class SalaData {
         }
         ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al dar de alta la sala: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al dar de alta la sala: " );
     }
 }
 

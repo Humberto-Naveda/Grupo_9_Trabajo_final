@@ -26,8 +26,23 @@ public class Proyeccion {
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private double precio;
+    private boolean activa;
 
-    public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
+    public Proyeccion(Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio, boolean activa) {
+        this.pelicula = pelicula;
+        this.sala = sala;
+        this.idioma = idioma;
+        this.es3D = es3D;
+        this.subtitulada = subtitulada;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.precio = precio;
+        this.activa = activa;
+    }
+
+    
+    
+    public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio, boolean activa) {
         this.idProyeccion = idProyeccion;
         this.pelicula = pelicula;
         this.sala = sala;
@@ -37,18 +52,23 @@ public class Proyeccion {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.precio = precio;
+        this.activa = activa;
     }
 
-    public Proyeccion(Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
-        this.pelicula = pelicula;
-        this.sala = sala;
-        this.idioma = idioma;
-        this.es3D = es3D;
-        this.subtitulada = subtitulada;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.precio = precio;
+    
+    
+    
+    public boolean isActiva() {
+        return activa;
     }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+   
+
+ 
 
     public Proyeccion() {
     }

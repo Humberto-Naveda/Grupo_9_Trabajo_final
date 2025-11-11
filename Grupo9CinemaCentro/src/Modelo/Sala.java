@@ -15,21 +15,21 @@ public class Sala {
     private int nroSala;
     private boolean apta3D;
     private int capacidad;
-    private boolean estado;
+    private boolean activa;
 
     public Sala(int idSala, int nroSala, boolean apta3D, int capacidad, boolean estado) {
         this.idSala = idSala;
         this.nroSala = nroSala;
         this.apta3D = apta3D;
         this.capacidad = capacidad;
-        this.estado = estado;
+        this.activa= estado;
     }
 
     public Sala(int nroSala, boolean apta3D, int capacidad, boolean estado) {
         this.nroSala = nroSala;
         this.apta3D = apta3D;
         this.capacidad = capacidad;
-        this.estado = estado;
+        this.activa = estado;
     }
 
     public Sala() {
@@ -68,16 +68,16 @@ public class Sala {
     }
 
     public boolean getEstado() {
-        return estado;
+        return activa;
     }
 
     public void setEstado(boolean estado) {
-        this.estado = estado;
+        this.activa = estado;
     }
 
     @Override
     public String toString() {
-        return "Sala{" + "idSala=" + idSala + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + estado + '}';
+        return "Sala{" + "idSala=" + idSala + ", nroSala=" + nroSala + ", apta3D=" + apta3D + ", capacidad=" + capacidad + ", estado=" + activa + '}';
     }
 
 }
