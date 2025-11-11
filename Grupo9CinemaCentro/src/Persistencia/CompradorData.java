@@ -71,14 +71,14 @@ public class CompradorData {
         }
         return lista;
     } 
-   public Comprador buscarComprador(int dni) {
+   public Comprador buscarComprador(int id) {
       
       
-        String sql=" SELECT `Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago`, `fechaNac` FROM `comprador` WHERE DNI=?";
+        String sql=" SELECT `Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago`, `fechaNac` FROM `comprador` WHERE id_Comprador=?";
         Comprador comprador=null;
         try {
             PreparedStatement ps=conec.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                  
@@ -98,7 +98,7 @@ public class CompradorData {
             
             
         } catch (SQLException ex) {
-            JOptionPane.showInputDialog("error al buscar alumno");
+            JOptionPane.showInputDialog("error al buscar comprador");
             
         }
         return null;

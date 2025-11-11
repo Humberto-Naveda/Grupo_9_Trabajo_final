@@ -42,6 +42,7 @@ SistemaCine sc=new SistemaCine();
        ld= new LugarData(conexion);
        pd= new ProyeccionData(conexion);
        td=new TicketData(conexion);
+       txtid.setEditable(false);
         llenarCombo();
         
         
@@ -77,6 +78,7 @@ SistemaCine sc=new SistemaCine();
         jbanular = new javax.swing.JButton();
         jbguardar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
+        jbsalir = new javax.swing.JButton();
 
         textField3.setText("textField3");
 
@@ -104,6 +106,7 @@ SistemaCine sc=new SistemaCine();
 
         jLabel6.setText("fecha de funcion");
 
+        txtid.setEnabled(false);
         txtid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtidActionPerformed(evt);
@@ -148,6 +151,13 @@ SistemaCine sc=new SistemaCine();
             }
         });
 
+        jbsalir.setText("salir");
+        jbsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbsalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,52 +165,50 @@ SistemaCine sc=new SistemaCine();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtmonto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jbguardar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtfechacompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfechafuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbanular)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbbuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbsalir))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel1))
+                            .addComponent(txtProyeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtactivo)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtmonto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbguardar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbanular))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtfechacompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jLabel6))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addComponent(jLabel1))
-                                    .addComponent(txtProyeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(224, 224, 224)))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfechafuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbbuscar)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtcomprador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcomprador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +225,7 @@ SistemaCine sc=new SistemaCine();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtcomprador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtProyeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,24 +234,25 @@ SistemaCine sc=new SistemaCine();
                     .addComponent(jLabel4)
                     .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtfechafuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtfechacompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5))
+                    .addComponent(txtfechafuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtmonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtactivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbanular)
                     .addComponent(jbguardar)
-                    .addComponent(jbbuscar))
-                .addGap(15, 15, 15))
+                    .addComponent(jbanular)
+                    .addComponent(jbbuscar)
+                    .addComponent(jbsalir))
+                .addContainerGap())
         );
 
         pack();
@@ -282,6 +291,8 @@ SistemaCine sc=new SistemaCine();
             JOptionPane.showMessageDialog(this, "Debe ingresar el monto del ticket.");
             return;
         }
+      
+
         try{
         Comprador c=(Comprador) txtcomprador.getSelectedItem();
         Lugar l=(Lugar) txtlugar.getSelectedItem();
@@ -293,7 +304,7 @@ SistemaCine sc=new SistemaCine();
         t=new Ticket(id,l,c,fechac,fechaf,monto,activo);
         
         td.guardarTicket(t);
-        txtid.setEditable(false);
+        
         }catch(NumberFormatException r){
         JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
         
@@ -302,14 +313,14 @@ SistemaCine sc=new SistemaCine();
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-
+txtid.setEnabled(true);
         if(txtid.getText().isEmpty()){
         
-      JOptionPane.showMessageDialog(null, "ingrese el numero de la sala que desea buscar");
+      JOptionPane.showMessageDialog(null, "ingrese el id del ticket que desea buscar");
         return;
         }
         try{
-        txtid.setEditable(true);
+        
         int id=Integer.parseInt(txtid.getText());
         
         
@@ -329,13 +340,15 @@ SistemaCine sc=new SistemaCine();
             txtcomprador.setSelectedItem(t.getComprador());
             txtlugar.setSelectedItem(t.getAsiento());
            txtactivo.setSelected(t.isActivo());
+          
        }catch(NumberFormatException e){
         JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
         }
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jbanularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbanularActionPerformed
-      if(txtid.getText().isEmpty()){
+      txtid.setEnabled(true);
+        if(txtid.getText().isEmpty()){
        JOptionPane.showMessageDialog(null, "debe ingresar el id del ticket que desea anular");
       return;
       }
@@ -343,6 +356,7 @@ SistemaCine sc=new SistemaCine();
         int id=Integer.parseInt(txtid.getText());
         td.anularTicket(id);
         limpiarcampo();
+        txtid.setEnabled(false);
       }catch(NumberFormatException e){
       JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");
       
@@ -352,6 +366,10 @@ SistemaCine sc=new SistemaCine();
     private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtidActionPerformed
+
+    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbsalirActionPerformed
 
     
 
@@ -368,6 +386,7 @@ SistemaCine sc=new SistemaCine();
     private javax.swing.JButton jbanular;
     private javax.swing.JButton jbbuscar;
     private javax.swing.JButton jbguardar;
+    private javax.swing.JButton jbsalir;
     private java.awt.TextField textField3;
     private javax.swing.JComboBox<Proyeccion> txtProyeccion;
     private javax.swing.JCheckBox txtactivo;

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class compradorVista extends javax.swing.JInternalFrame {
 private  SistemaCine sc;
 private CompradorData cd;
+
     /**
      * Creates new form compradorVista
      */
@@ -56,6 +57,7 @@ private CompradorData cd;
         txtnombre = new javax.swing.JTextField();
         txtpassword = new javax.swing.JTextField();
         txtmediopago = new javax.swing.JTextField();
+        jbsalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 2, 18)); // NOI18N
         jLabel1.setText("Comprador");
@@ -107,6 +109,13 @@ private CompradorData cd;
             }
         });
 
+        jbsalir.setText("salir");
+        jbsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbsalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,14 +123,6 @@ private CompradorData cd;
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbnuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbguardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbmodificar)
-                        .addGap(28, 28, 28)
-                        .addComponent(jbeliminar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -140,9 +141,7 @@ private CompradorData cd;
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtnombre)
                                     .addComponent(txtdni))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                        .addComponent(jbbuscar)
-                        .addContainerGap(55, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -158,8 +157,24 @@ private CompradorData cd;
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbnuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbguardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbmodificar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jbbuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbeliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbsalir)))))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,16 +188,13 @@ private CompradorData cd;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jbbuscar)))
-                .addGap(14, 14, 14)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,12 +207,13 @@ private CompradorData cd;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbnuevo)
                             .addComponent(jbguardar)
                             .addComponent(jbmodificar)
-                            .addComponent(jbeliminar)))
+                            .addComponent(jbeliminar)
+                            .addComponent(jbsalir)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -237,7 +250,7 @@ private CompradorData cd;
        c= new Comprador(dni,nombre,contra,pago,fecha);
        cd.guardarComprador(c);
           JOptionPane.showMessageDialog(this, "Comprador guardado correctamente.");
-       }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "dni y contraseña deben ser numericos");
+       }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "dni deben ser numericos");
        
       
        }
@@ -269,6 +282,10 @@ limpiar();
       JOptionPane.showMessageDialog(null, "debe ingresar una fecha");
       return;
       }
+      if(txtmediopago.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, "Debe ingresar un medio de pago");
+       return;
+       }
       
        try{
     String contra=(txtpassword.getText());
@@ -336,7 +353,7 @@ limpiar();
     return;
     } 
     try{
-     Comprador c=  cd.buscarComprador(Integer.parseInt(txtdni.getText()));
+     Comprador c=  cd.buscarComprador(Integer.parseInt(txtid.getText()));
     
      txtid.setText(c.getIdComprador()+"");
      txtdni.setText(c.getDni()+"");
@@ -349,6 +366,10 @@ limpiar();
      txtfecha.setDate(date);
        }catch(Exception e){JOptionPane.showMessageDialog(null, "no se a encontrado nada");}
     }//GEN-LAST:event_jbbuscarActionPerformed
+
+    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbsalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,6 +385,7 @@ limpiar();
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
+    private javax.swing.JButton jbsalir;
     private javax.swing.JTextField txtdni;
     private com.toedter.calendar.JDateChooser txtfecha;
     private javax.swing.JTextField txtid;
@@ -373,7 +395,7 @@ limpiar();
     // End of variables declaration//GEN-END:variables
 private void limpiar() {
     
-    try {
+    
        
 
         txtid.setText("");
@@ -386,10 +408,7 @@ private void limpiar() {
        
       
 
-        
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+  
 }
 
 

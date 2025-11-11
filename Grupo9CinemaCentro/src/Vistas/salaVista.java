@@ -39,19 +39,18 @@ private SalaData sd= new SalaData(sc.conexionDb());
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jbnuevo = new javax.swing.JButton();
         jbguardar = new javax.swing.JButton();
         jbmodificar = new javax.swing.JButton();
         jbeliminar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
         txtapta3d = new javax.swing.JCheckBox();
-        txtestado = new javax.swing.JCheckBox();
+        txtactiva = new javax.swing.JCheckBox();
         txtid = new javax.swing.JTextField();
         txtnrosala = new javax.swing.JTextField();
         txtcapacidad = new javax.swing.JTextField();
+        jbsalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel1.setText("sala");
@@ -60,11 +59,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
 
         jLabel3.setText("nroSala");
 
-        jLabel4.setText("apta3D");
-
         jLabel5.setText("capacidad");
-
-        jLabel6.setText("activa");
 
         jbnuevo.setText("nuevo");
         jbnuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +96,19 @@ private SalaData sd= new SalaData(sc.conexionDb());
             }
         });
 
-        txtestado.addActionListener(new java.awt.event.ActionListener() {
+        txtapta3d.setText("apta3D");
+
+        txtactiva.setText("activa");
+        txtactiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtestadoActionPerformed(evt);
+                txtactivaActionPerformed(evt);
+            }
+        });
+
+        jbsalir.setText("salir");
+        jbsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbsalirActionPerformed(evt);
             }
         });
 
@@ -112,81 +117,84 @@ private SalaData sd= new SalaData(sc.conexionDb());
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                .addComponent(jLabel3)
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbbuscar)
+                        .addGap(50, 50, 50))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 116, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtcapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                            .addComponent(txtnrosala)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(txtapta3d))
-                            .addComponent(txtid))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbbuscar)
-                        .addGap(50, 50, 50))))
+                    .addComponent(txtcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbnuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbguardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbmodificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbeliminar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbnuevo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbguardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbmodificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbeliminar)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtapta3d)
+                            .addComponent(txtactiva, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbsalir)
+                        .addGap(74, 74, 74))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(15, 15, 15)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addComponent(jbbuscar)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbbuscar)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtactiva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtapta3d)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtnrosala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtapta3d)
-                    .addComponent(jLabel4))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtestado)
-                    .addComponent(jLabel6))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbguardar)
-                    .addComponent(jbmodificar)
-                    .addComponent(jbnuevo)
-                    .addComponent(jbeliminar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(jbnuevo)
+                            .addComponent(jbguardar)
+                            .addComponent(jbmodificar)
+                            .addComponent(jbeliminar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jbsalir)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,7 +217,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
       int nrosala=Integer.parseInt(txtnrosala.getText());
       boolean apta3d=txtapta3d.isSelected();
       int capacidad=Integer.parseInt(txtcapacidad.getText());
-      boolean estado=txtestado.isSelected();
+      boolean estado=txtactiva.isSelected();
       
       
       
@@ -224,24 +232,24 @@ private SalaData sd= new SalaData(sc.conexionDb());
       txtid.setText("");
     }//GEN-LAST:event_jbguardarActionPerformed
 
-    private void txtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtestadoActionPerformed
+    private void txtactivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtactivaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtestadoActionPerformed
+    }//GEN-LAST:event_txtactivaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
       
+        txtid.setEditable(true);
+        if(txtid.getText().isEmpty()){
         
-        if(txtnrosala.getText().isEmpty()){
-        
-      JOptionPane.showMessageDialog(null, "ingrese el numero de la sala que desea buscar");
+      JOptionPane.showMessageDialog(null, "ingrese el id de la sala que desea buscar");
         return;
         }
-      Sala s= sd.buscarSala(Integer.parseInt(txtnrosala.getText()));
+      Sala s= sd.buscarSala(Integer.parseInt(txtid.getText()));
         txtid.setText(s.getIdSala()+"");
         txtnrosala.setText(s.getNroSala()+"");
         txtapta3d.setSelected(s.isApta3D());
         txtcapacidad.setText(s.getCapacidad()+"");
-        txtestado.setSelected(s.getEstado());
+        txtactiva.setSelected(s.getEstado());
        
         
     }//GEN-LAST:event_jbbuscarActionPerformed
@@ -258,7 +266,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
         int nrosala=Integer.parseInt(txtnrosala.getText());
          boolean apta3d=txtapta3d.isSelected();
          int capacidad=Integer.parseInt(txtcapacidad.getText());
-          boolean estado= txtestado.isSelected();
+          boolean estado= txtactiva.isSelected();
           s=new Sala(nrosala,apta3d,capacidad,estado);
            s.setIdSala(Integer.parseInt(txtid.getText()));
           sd.modificarSala(s);
@@ -272,7 +280,7 @@ private SalaData sd= new SalaData(sc.conexionDb());
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
-txtid.setEditable(true);
+txtid.setEnabled(true);
         if(txtid.getText().isEmpty()){
         
         JOptionPane.showMessageDialog(null, "ingrese el id de la sala que  desea dar de baja");
@@ -283,32 +291,37 @@ txtid.setEditable(true);
        
        sd.bajaLogicaSala(id);
        
+       txtid.setText("");
+        txtid.setEnabled(false);
+       limpiar();
+       
         }catch(NumberFormatException e){
         
           JOptionPane.showMessageDialog(null, "ingrese un valor numerico");
         }
-       txtid.setText("");
-        txtid.setEditable(false);
-       limpiar();
+       
       
     }//GEN-LAST:event_jbeliminarActionPerformed
+
+    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbsalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbbuscar;
     private javax.swing.JButton jbeliminar;
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
+    private javax.swing.JButton jbsalir;
+    private javax.swing.JCheckBox txtactiva;
     private javax.swing.JCheckBox txtapta3d;
     private javax.swing.JTextField txtcapacidad;
-    private javax.swing.JCheckBox txtestado;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtnrosala;
     // End of variables declaration//GEN-END:variables
@@ -318,7 +331,7 @@ private void limpiar() {
         txtnrosala.setText("");
         txtapta3d.setSelected(false);
         txtcapacidad.setText("");
-       txtestado.setSelected(false);
+       txtactiva.setSelected(false);
         
        
         

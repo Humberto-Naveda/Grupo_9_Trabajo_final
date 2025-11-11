@@ -54,13 +54,13 @@ public class SalaData {
 
     }
 
-    public Sala buscarSala(int nroSala) {
-        String sql = "SELECT  Id_sala,`nroSala`, `apta3D`, `capacidad`, `activa` FROM `sala` WHERE nroSala=?";
+    public Sala buscarSala(int id) {
+        String sql = "SELECT  Id_sala,nroSala, apta3D, capacidad, activa FROM sala WHERE Id_sala=?";
         Sala sala = null;
         try {
 
             PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, nroSala);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -70,11 +70,18 @@ public class SalaData {
                 sala.setApta3D(rs.getBoolean("apta3D"));
                 sala.setCapacidad(rs.getInt("capacidad"));
                 sala.setEstado(rs.getBoolean("activa"));
+JOptionPane.showMessageDialog(null, "busqueda exitosa");
 
+            }else{
+            
+JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
+            
             }
-            JOptionPane.showMessageDialog(null, "busqueda exitosa");
-            rs.close();
+            
+            
             ps.close();
+            
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "busqueda erronea");
         }
