@@ -4,19 +4,64 @@
  */
 package Vistas;
 
+import Modelo.*;
+import Persistencia.CompradorData;
 import javax.swing.UIManager;
-
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author PC1
  */
 public class TicketGestor extends javax.swing.JFrame {
+    
+    DefaultTableModel modeloTableComprador; // (DTM Personalizado)
+    TableRowSorter<DefaultTableModel> sortModel; // (Filtrado)
 
-    /**
-     * Creates new form TicketGestor
-     */
+    
+    private void llenarTableCompradores() {
+        
+        DocumentListener listenerFiltro = new DocumentListener() {
+        public void insertUpdate (DocumentEvent e) {filtrar(); }
+        public void removeUpdate (DocumentEvent e) {filtrar(); }
+        public void changedUpdate (DocumentEvent e) {filtrar(); }
+        };
+        Conexion conex = new Conexion("gp9_cinemacentro_basededatos","jdbc:mariadb://localhost/3306","root","","org.mariadb.jdbc.Driver");
+        CompradorData compradorDAO = new CompradorData(conex);
+        List<Comprador> listaCompradores = compradorDAO.listarCompradores();
+        
+        tableCompradores.setShowGrid(false);
+        modeloTableComprador = (DefaultTableModel) tableCompradores.getModel();
+        modeloTableComprador.setRowCount(0);
+        
+        for (Comprador c : listaCompradores) {
+            modeloTableComprador.addRow(new Object[] {
+                c.getNombre(),
+                c.getIdComprador()          
+            });          
+        }
+        
+        sortModel = new TableRowSorter<>(modeloTableComprador);
+        tableCompradores.setRowSorter(sortModel);
+        txtIDComprador.getDocument().addDocumentListener(listenerFiltro);     
+    }
+   
+     private void filtrar() {
+           String txtComprador = txtIDComprador.getText().trim();
+           if (txtComprador.isEmpty()) {
+               sortModel.setRowFilter(null);
+           } else {
+               sortModel.setRowFilter(RowFilter.regexFilter(txtComprador, 2));
+           }
+        }
+
+
     public TicketGestor() {
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -26,6 +71,8 @@ public class TicketGestor extends javax.swing.JFrame {
         setSize(800, 600);
         setResizable(false);
         initComponents();
+        llenarTableCompradores();
+        filtrar();
     }
 
     /**
@@ -57,8 +104,8 @@ public class TicketGestor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtIDComprador = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listCompradores = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableCompradores = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -200,31 +247,35 @@ public class TicketGestor extends javax.swing.JFrame {
             }
         });
 
-        listCompradores.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(listCompradores);
+        tableCompradores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "ID"
+            }
+        ));
+        jScrollPane3.setViewportView(tableCompradores);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
+                        .addGap(69, 69, 69)
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtIDComprador, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,8 +287,8 @@ public class TicketGestor extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtIDComprador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton3.setText("Generar Ticket");
@@ -322,7 +373,7 @@ public class TicketGestor extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,11 +518,11 @@ public class TicketGestor extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JList<String> listCompradores;
+    private javax.swing.JTable tableCompradores;
     private javax.swing.JTextField txtIDComprador;
     // End of variables declaration//GEN-END:variables
 }
