@@ -7,7 +7,6 @@ package Vistas;
 import Modelo.*;
 import Persistencia.CompradorData;
 import javax.swing.UIManager;
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -63,11 +62,6 @@ public class TicketGestor extends javax.swing.JFrame {
 
 
     public TicketGestor() {
-        try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
         setSize(800, 600);
         setResizable(false);
         initComponents();
