@@ -46,3 +46,9 @@ Desktop.ini
 # =========================================
 out/
 target/
+
+*.class
+/build/
+/dist/
+nbproject/private/
+*.orig
