@@ -146,4 +146,33 @@ public class CompradorData {
    
    }
    
+     public Comprador buscarPorDni(int dni){
+    Comprador c = null;
+    
+    String sql = "SELECT * FROM comprador WHERE dni = ?";
+    
+    try {
+        PreparedStatement ps = conec.prepareStatement(sql);
+        ps.setInt(1, dni);
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next()){
+            c = new Comprador();
+            c.setIdComprador(rs.getInt("id_Comprador"));
+            c.setDni(rs.getInt("DNI"));
+            c.setNombre(rs.getString("nombre"));
+            c.setPassword(rs.getString("password"));
+            c.setMedioPago(rs.getString("medioPago"));
+            c.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+        }
+        ps.close();
+        
+    } catch (Exception e){
+        System.out.println("Error al buscar comprador por DNI: " + e.getMessage());
+    }
+    
+    return c;
+}
+   
+   
 }
