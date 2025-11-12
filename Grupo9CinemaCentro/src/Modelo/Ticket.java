@@ -36,12 +36,6 @@ public class Ticket {
         this.activo = activo;
     }
 
-<<<<<<< HEAD
-    public Ticket() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-=======
     public boolean isActivo() {
         return activo;
     }
@@ -50,11 +44,6 @@ public class Ticket {
         this.activo = activo;
     }
 
-
-
-    
-
->>>>>>> 1f385e69cd0092200282da0800f3049235ccd48b
     public int getIdTicket() {
         return idTicket;
     }
