@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import static java.time.temporal.TemporalQueries.localDate;
 import static java.time.temporal.TemporalQueries.localTime;
@@ -14,17 +16,19 @@ import static java.time.temporal.TemporalQueries.localTime;
  * @author Usuario
  */
 public class Proyeccion {
-   private int idProyeccion;
-   private Pelicula pelicula;
-   private Sala sala;
-   private String idioma;
-   private boolean es3D;
-   private boolean subtitulada;
-     private LocalTime horaInicio;
-   private  LocalTime horaFin;
-    private double precio;
 
-    public Proyeccion(Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio) {
+    private int idProyeccion;
+    private Pelicula pelicula;
+    private Sala sala;
+    private String idioma;
+    private boolean es3D;
+    private boolean subtitulada;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
+    private double precio;
+    private boolean activa;
+
+    public Proyeccion(Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio, boolean activa) {
         this.pelicula = pelicula;
         this.sala = sala;
         this.idioma = idioma;
@@ -33,7 +37,38 @@ public class Proyeccion {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.precio = precio;
+        this.activa = activa;
     }
+
+    
+    
+    public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala, String idioma, boolean es3D, boolean subtitulada, LocalTime horaInicio, LocalTime horaFin, double precio, boolean activa) {
+        this.idProyeccion = idProyeccion;
+        this.pelicula = pelicula;
+        this.sala = sala;
+        this.idioma = idioma;
+        this.es3D = es3D;
+        this.subtitulada = subtitulada;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.precio = precio;
+        this.activa = activa;
+    }
+
+    
+    
+    
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+   
+
+ 
 
     public Proyeccion() {
     }
@@ -114,6 +149,5 @@ public class Proyeccion {
     public String toString() {
         return "Proyeccion{" + "idProyeccion=" + idProyeccion + ", pelicula=" + pelicula + ", sala=" + sala + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", precio=" + precio + '}';
     }
-    
-    
+
 }

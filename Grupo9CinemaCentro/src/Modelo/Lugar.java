@@ -16,6 +16,14 @@ public class Lugar {
     private int numero;
     private boolean estado;
 
+    public Lugar(int idLugar, Proyeccion proyeccion, int fila, int numero, boolean estado) {
+        this.idLugar = idLugar;
+        this.proyeccion = proyeccion;
+        this.fila = fila;
+        this.numero = numero;
+        this.estado = estado;
+    }
+
     public Lugar(Proyeccion proyeccion, int fila, int numero, boolean estado) {
         this.proyeccion = proyeccion;
         this.fila = fila;

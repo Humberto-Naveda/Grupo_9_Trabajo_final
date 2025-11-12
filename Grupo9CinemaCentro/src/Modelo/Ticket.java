@@ -13,20 +13,40 @@ import java.util.List;
  * @author Usuario
  */
 public class Ticket {
-   private int idTicket;
-   private Comprador comprador;
-   private LocalDate fechaCompra;
-   private LocalDate fechaFuncion;
-   private double monto;
-   private Lugar asiento;
 
-    public Ticket(Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, Lugar asiento) {
+    private int idTicket;
+    private Lugar asiento;
+    private Comprador comprador;
+    private LocalDate fechaCompra;
+    private LocalDate fechaFuncion;
+    private double monto;
+    private boolean activo;
+    
+
+    public Ticket() {
+    }
+
+    public Ticket(int idTicket, Lugar asiento, Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, boolean activo) {
+        this.idTicket = idTicket;
+        this.asiento = asiento;
         this.comprador = comprador;
         this.fechaCompra = fechaCompra;
         this.fechaFuncion = fechaFuncion;
         this.monto = monto;
-        this.asiento = asiento;
+        this.activo = activo;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+
+
+    
 
     public int getIdTicket() {
         return idTicket;
@@ -78,9 +98,11 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "idTicket=" + idTicket + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", asiento=" + asiento + '}';
+        return "Ticket{" + "idTicket=" + idTicket + ", asiento=" + asiento + ", comprador=" + comprador + ", fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", activo=" + activo + '}';
     }
 
+    
+
    
-   
+
 }

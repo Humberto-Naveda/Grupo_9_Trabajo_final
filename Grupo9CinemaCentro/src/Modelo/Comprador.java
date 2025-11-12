@@ -7,11 +7,20 @@ public class Comprador {
     private int idComprador;
     private int dni;
     private String nombre;
-    private int password;
+    private String password;
     private String medioPago;
     private LocalDate fechaNac;
 
-    public Comprador(int dni, String nombre, int password, String medioPago, LocalDate fechaNac) {
+    public Comprador(int idComprador, int dni, String nombre, String password, String medioPago, LocalDate fechaNac) {
+        this.idComprador = idComprador;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.password = password;
+        this.medioPago = medioPago;
+        this.fechaNac = fechaNac;
+    }
+
+    public Comprador(int dni, String nombre, String password, String medioPago, LocalDate fechaNac) {
         this.dni = dni;
         this.nombre = nombre;
         this.password = password;
@@ -47,11 +56,11 @@ public class Comprador {
         this.nombre = nombre;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
