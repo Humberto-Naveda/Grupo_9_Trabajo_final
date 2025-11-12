@@ -44,10 +44,6 @@ public class Ticket {
         this.activo = activo;
     }
 
-
-
-    
-
     public int getIdTicket() {
         return idTicket;
     }

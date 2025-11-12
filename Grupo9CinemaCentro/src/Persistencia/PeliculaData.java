@@ -24,10 +24,10 @@ import javax.swing.JOptionPane;
  */
 public class PeliculaData {
 
-    private Connection cone = null;
+    private Connection conex = null;
 
     public PeliculaData(Conexion conex) {
-        this.cone = conex.conectar();
+        this.conex = conex.conectar();
     }
 
     // Metodos CRUD
@@ -35,7 +35,7 @@ public class PeliculaData {
 
         String sql = "INSERT INTO `pelicula`( `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`,`activa`) VALUES (?,?,?,?,?,?,?,?)";
 
-        try (PreparedStatement ps = cone.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, p.getTitulo());
             ps.setString(2, p.getDirector());
             ps.setString(3, p.getActores());
@@ -68,7 +68,7 @@ public class PeliculaData {
 
         String search = "SELECT * FROM pelicula WHERE Id_Pelicula = ?";
 
-        try (PreparedStatement statement = cone.prepareStatement(search)) {
+        try (PreparedStatement statement = conex.prepareStatement(search)) {
             statement.setInt(1, idPeli);
 
             try (ResultSet rsBuscar = statement.executeQuery()) {
@@ -98,7 +98,7 @@ public class PeliculaData {
     public void borrarPelicula(int idPeli) {
         String delete = "DELETE FROM pelicula WHERE Id_Pelicula = ?";
 
-        try (PreparedStatement statement = cone.prepareStatement(delete)) {
+        try (PreparedStatement statement = conex.prepareStatement(delete)) {
             statement.setInt(1, idPeli);
 
             int filasAgregadas = statement.executeUpdate();
@@ -116,7 +116,7 @@ public class PeliculaData {
  public void bajaPelicula(int idPelicula) {
         String sql = "UPDATE pelicula SET activa = 0 WHERE id_Pelicula = ?";
 
-        try (PreparedStatement ps = cone.prepareStatement(sql)) {
+        try (PreparedStatement ps = conex.prepareStatement(sql)) {
             ps.setInt(1, idPelicula);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Película dada de baja");
@@ -128,7 +128,7 @@ public class PeliculaData {
         List<Pelicula> lista = new ArrayList<>();
         String sql = "SELECT * FROM pelicula WHERE enCartelera = 1 AND activa = 1";
 
-        try (PreparedStatement ps = cone.prepareStatement(sql);
+        try (PreparedStatement ps = conex.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -152,7 +152,7 @@ public class PeliculaData {
     public void actualizarPelicula(Pelicula peli) {
         String update = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE id_Pelicula = ?";
 
-        try (PreparedStatement statement = cone.prepareStatement(update)) {
+        try (PreparedStatement statement = conex.prepareStatement(update)) {
             statement.setString(1, peli.getTitulo());
             statement.setString(2, peli.getDirector());
             statement.setString(3, peli.getActores());
@@ -175,8 +175,30 @@ public class PeliculaData {
         }
     }
 
- 
+
+    // Metodos Adicionales
     
+    public void reservarButaca(Lugar asiento) {
+        String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+
+        try (PreparedStatement statement = conex.prepareStatement(update)) {
+
+            statement.setBoolean(1, true);
+            statement.setInt(2, asiento.getIdLugar());
+
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, " Lugar con ID " + asiento.getIdLugar() + " reservado correctamente. Filas afectadas: " + filasAfectadas);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el lugar para reservar. Filas afectadas: " + filasAfectadas);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar lugar: " + ex.getMessage());
+        }
+    }
+
 
     public List<Pelicula> listarPeliculasActivas() {
 
@@ -184,7 +206,7 @@ public class PeliculaData {
 
         String list = "SELECT * FROM pelicula WHERE activa=1";
 
-        try (PreparedStatement ps = cone.prepareStatement(list)) {
+        try (PreparedStatement ps = conex.prepareStatement(list)) {
 
             try (ResultSet rs = ps.executeQuery()) {
 
@@ -212,16 +234,15 @@ public class PeliculaData {
     // Baja Logica
     public void sacarDeCartelera(int idPeli) {
     
-    String update = "UPDATE pelicula SET enCartelera = 0 WHERE id_Pelicula = ?";
+    String update = "UPDATE pelicula SET enCartelera = ? WHERE id_Pelicula = ?";
 
-    try (PreparedStatement ps = cone.prepareStatement(update)) {
+    try (PreparedStatement statement = conex.prepareStatement(update)) {
         
-  
-        
-        
-        ps.setInt(1, idPeli);
+        statement.setBoolean(1, false); 
 
-        int filasAfectadas = ps.executeUpdate();
+        statement.setInt(2, idPeli);
+
+        int filasAfectadas = statement.executeUpdate();
 
         if (filasAfectadas > 0) {
             JOptionPane.showMessageDialog(null, "Pelicula con ID " + idPeli + " fue sacada de cartelera.");
