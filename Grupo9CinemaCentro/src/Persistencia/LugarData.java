@@ -24,20 +24,21 @@ import javax.swing.JOptionPane;
 public class LugarData {
 
     private Connection conex = null;
- private ProyeccionData proyecciondata;
+    private ProyeccionData proyecciondata;
+
     public LugarData(Conexion conex) {
         this.conex = conex.conectar();
-        this.proyecciondata=new ProyeccionData(conex);
+        this.proyecciondata = new ProyeccionData(conex);
     }
 
     // Metodos CRUD
     public void insertButaca(Lugar asiento) {
-        String insert = "INSERT INTO lugar (fila, numero, estado, id_proyeccion) VALUES (?,?,?,?)";
+        String insert = "INSERT INTO lugar (fila, numero, disponible, Id_proyeccion) VALUES (?,?,?,?)";
 
         try (PreparedStatement statement = conex.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, asiento.getFila());
             statement.setInt(2, asiento.getNumero());
-            statement.setBoolean(3, asiento.isEstado());
+            statement.setBoolean(3, asiento.getDisponible());
             statement.setInt(4, asiento.getProyeccion().getIdProyeccion());
             int filasAgregadas = statement.executeUpdate();
 
@@ -73,7 +74,7 @@ public class LugarData {
                     asiento.setIdLugar(idLugar);
                     asiento.setFila(rsBuscar.getInt("fila"));
                     asiento.setNumero(rsBuscar.getInt("numero"));
-                    asiento.setEstado(rsBuscar.getBoolean("activa"));
+                    asiento.setDisponible(rsBuscar.getBoolean("activa"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el lugar indicado.");
                 }
@@ -107,19 +108,19 @@ public class LugarData {
     }
 
     public void actualizarButaca(Lugar lugar) {
-        String update = "UPDATE lugar SET fila = ?, numero = ?, estado= ?, id_proyeccion = ? WHERE id_lugar = ?";
+        String update = "UPDATE lugar SET fila = ?, numero = ?, disponible= ?, Id_proyeccion = ? WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
             statement.setInt(1, lugar.getFila());
             statement.setInt(2, lugar.getNumero());
-            statement.setBoolean(3, lugar.isEstado());
+            statement.setBoolean(3, lugar.getDisponible());
             statement.setInt(4, lugar.getProyeccion().getIdProyeccion());
             statement.setInt(5, lugar.getIdLugar());
 
             int filasAfectadas = statement.executeUpdate();
 
             if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, " Lugar con ID " + lugar.getIdLugar() + " actualizado correctamente. Filas afectadas: " + filasAfectadas);
+                JOptionPane.showMessageDialog(null, "Lugar con ID " + lugar.getIdLugar() + " actualizado correctamente. Filas afectadas: " + filasAfectadas);
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró el lugar para actualizar. Filas afectadas: " + filasAfectadas);
             }
@@ -130,27 +131,6 @@ public class LugarData {
     }
 
     // Metodos Adicionales
-    public void reservarButaca(Lugar asiento) {
-        String update = "UPDATE lugar SET estado = ? WHERE id_lugar = ?";
-
-        try (PreparedStatement statement = conex.prepareStatement(update)) {
-
-            statement.setBoolean(1, true);
-            statement.setInt(2, asiento.getIdLugar());
-
-            int filasAfectadas = statement.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, " Lugar con ID " + asiento.getIdLugar() + " reservado correctamente. Filas afectadas: " + filasAfectadas);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró el lugar para reservar. Filas afectadas: " + filasAfectadas);
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar lugar: " + ex.getMessage());
-        }
-    }
-
     public List<Lugar> listarButacas() {
 
         List<Lugar> lista = new ArrayList<>();
@@ -169,7 +149,7 @@ public class LugarData {
                     asiento.setProyeccion(proyeccion);
                     asiento.setFila(rs.getInt("fila"));
                     asiento.setNumero(rs.getInt("numero"));
-                    asiento.setEstado(rs.getBoolean("estado"));
+                    asiento.setDisponible(rs.getBoolean("disponible"));
                     lista.add(asiento);
                 }
             }
@@ -180,107 +160,82 @@ public class LugarData {
     }
 
     // Alta Logica
-    public void ocuparLugar(int idLugar) {
-
-        String update = "UPDATE lugar SET estado = ? WHERE id_Lugar = ?";
+    public void reservarButaca(Lugar asiento) {
+        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
             statement.setBoolean(1, true);
+            statement.setInt(2, asiento.getIdLugar());
+
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Lugar con ID " + asiento.getIdLugar() + " reservado correctamente. Filas afectadas: " + filasAfectadas);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el lugar para reservar. Filas afectadas: " + filasAfectadas);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar lugar: " + ex.getMessage());
+        }
+    }
+
+    // Baja Logica
+    public void liberarLugar(int idLugar) {
+
+        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
+
+        try (PreparedStatement statement = conex.prepareStatement(update)) {
+
+            statement.setBoolean(1, false);
             statement.setInt(2, idLugar);
 
             int filasAfectadas = statement.executeUpdate();
 
             if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Lugar con ID " + idLugar + " ocupado correctamente.");
+                JOptionPane.showMessageDialog(null, "Lugar con ID " + idLugar + " liberado correctamente.");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontró el lugar para ocupar.");
+                JOptionPane.showMessageDialog(null, "No se encontró el lugar para liberar.");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al ocupar lugar: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al liberar lugar: " + ex.getMessage());
         }
     }
-    
-    // Baja Logica
-    public void liberarLugar(int idLugar) {
-    
-    String update = "UPDATE lugar SET estado = ? WHERE id_lugar = ?";
 
-    try (PreparedStatement statement = conex.prepareStatement(update)) {
+    public List<Lugar> lugaresDisponiblesPorProyeccion(int Id_proyeccion) {
+        String sql = "SELECT * FROM lugar WHERE id_Proyeccion = ? AND disponible = 1";
+        List<Lugar> lista = new ArrayList<>();
 
-        
-        statement.setBoolean(1, false); 
-        statement.setInt(2, idLugar);
-
-        int filasAfectadas = statement.executeUpdate();
-
-        if (filasAfectadas > 0) {
-            JOptionPane.showMessageDialog(null, "Lugar con ID " + idLugar + " liberado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el lugar para liberar.");
-        }
-
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al liberar lugar: " + ex.getMessage());
-    }
-}
-    public List<Lugar> listLugaresPorProyeccion(int id_proyeccion){
-    String sql = "SELECT * FROM lugar WHERE id_Proyeccion = ? AND estado = 0";
-    List<Lugar> lista = new ArrayList<>();
-    
-    try {
-        PreparedStatement ps = conex.prepareStatement(sql);
-        ps.setInt(1, id_proyeccion);
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            Lugar l = new Lugar();
-            l.setIdLugar(rs.getInt("id_Lugar"));
-            l.setFila(rs.getInt("fila"));
-            l.setNumero(rs.getInt("numero"));
-            l.setEstado(rs.getBoolean("estado"));
-            
-            int idpro = rs.getInt("id_Proyeccion");
-            
-            
-            Proyeccion pro =         proyecciondata.buscarProyeccion(idpro);
-            
-            l.setProyeccion(pro);
-            
-            lista.add(l);
-        }
-        
-        ps.close();
-        
-    } catch (SQLException ex) {
-        
-    }
-    
-    return lista;
-}
-    public void darBaja(int id){
-    String sql="UPDATE `lugar` SET estado=0 WHERE Id_lugar=?";
         try {
-            PreparedStatement ps=conex.prepareStatement(sql);
-            ps.setInt(1, id);
-            int r=ps.executeUpdate();
-            if(r>0){
-            JOptionPane.showMessageDialog(null, "baja exitosa");
-            
-            }else{
-           JOptionPane.showMessageDialog(null, "no se a encontrado la fila");
-            }
-            
-        } catch (SQLException ex) {
-          JOptionPane.showMessageDialog(null, "error al dar de baja");
-        }
-    
-    
-    
-    
-    
-    }
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, Id_proyeccion);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                Lugar l = new Lugar();
+                l.setIdLugar(rs.getInt("Id_lugar"));
+                l.setFila(rs.getInt("fila"));
+                l.setNumero(rs.getInt("numero"));
+                l.setDisponible(rs.getBoolean("disponible"));
+
+                int idpro = rs.getInt("Id_proyeccion");
+
+                Proyeccion pro = proyecciondata.buscarProyeccion(idpro);
+
+                l.setProyeccion(pro);
+
+                lista.add(l);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+
+        }
+
+        return lista;
+    }
 
 }

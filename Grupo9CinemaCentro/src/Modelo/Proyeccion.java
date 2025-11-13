@@ -147,7 +147,7 @@ public class Proyeccion {
 
     @Override
     public String toString() {
-        return "Proyeccion{" + "idProyeccion=" + idProyeccion + ", pelicula=" + pelicula + ", sala=" + sala + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", precio=" + precio + '}';
+        return horaInicio + " - " + horaFin;
     }
 
 }

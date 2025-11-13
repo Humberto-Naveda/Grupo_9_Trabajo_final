@@ -14,21 +14,21 @@ public class Lugar {
     private Proyeccion proyeccion;
     private int fila;
     private int numero;
-    private boolean estado;
+    private boolean disponible;
 
     public Lugar(int idLugar, Proyeccion proyeccion, int fila, int numero, boolean estado) {
         this.idLugar = idLugar;
         this.proyeccion = proyeccion;
         this.fila = fila;
         this.numero = numero;
-        this.estado = estado;
+        this.disponible = disponible;
     }
 
     public Lugar(Proyeccion proyeccion, int fila, int numero, boolean estado) {
         this.proyeccion = proyeccion;
         this.fila = fila;
         this.numero = numero;
-        this.estado = estado;
+        this.disponible = disponible;
     }
 
     public Lugar() {
@@ -66,17 +66,17 @@ public class Lugar {
         this.numero = numero;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean getDisponible() {
+        return disponible;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     @Override
     public String toString() {
-        return "Lugar{" + "idLugar=" + idLugar + ", proyeccion=" + proyeccion + ", fila=" + fila + ", numero=" + numero + ", estado=" + estado + '}';
+        return "Lugar: " + idLugar;
     }
 
    

@@ -250,12 +250,12 @@ private ProyeccionData pd;
        txtfila.setText(String.valueOf(lugar.getFila()));
        txtnumero.setText(String.valueOf(lugar.getNumero()));
        txtproyeccion.setSelectedItem(lugar.getProyeccion());
-       txtestado.setSelected(lugar.isEstado());
+       txtestado.setSelected(lugar.getDisponible());
        
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
-       ld.darBaja(Integer.parseInt(txtid.getText()));
+       ld.liberarLugar(Integer.parseInt(txtid.getText()));
        txtid.setText("");
        txtid.setEditable(false);
     }//GEN-LAST:event_jbdarbajaActionPerformed
@@ -267,7 +267,7 @@ private ProyeccionData pd;
         txtproyeccion.setSelectedItem(lugar.getProyeccion());
      txtfila.setText(String.valueOf(lugar.getFila()));
       txtnumero.setText(String.valueOf(lugar.getNumero()));
-      txtestado.setSelected(lugar.isEstado());
+      txtestado.setSelected(lugar.getDisponible());
       
     }//GEN-LAST:event_jbbuscarActionPerformed
 

@@ -199,7 +199,6 @@ public class PeliculaData {
         }
     }
 
-
     public List<Pelicula> listarPeliculasActivas() {
 
         List<Pelicula> lista = new ArrayList<>();

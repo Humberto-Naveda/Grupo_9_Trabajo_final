@@ -207,9 +207,8 @@ public class SistemaCine extends javax.swing.JFrame {
     private void jmenuticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuticketActionPerformed
          escritorio1.removeAll();
         escritorio1.repaint();
-        ticketVista gui=new ticketVista();
+        TicketGestor gui = new TicketGestor();
         gui.setVisible(true);
-        escritorio1.add(gui);
         escritorio1.moveToFront(gui);
     }//GEN-LAST:event_jmenuticketActionPerformed
 

@@ -82,7 +82,7 @@ public class Comprador {
 
     @Override
     public String toString() {
-        return "Comprador{" + "idComprador=" + idComprador + ", dni=" + dni + ", nombre=" + nombre + ", password=" + password + ", medioPago=" + medioPago + ", fechaNac=" + fechaNac + '}';
+        return nombre;
     }
     
     

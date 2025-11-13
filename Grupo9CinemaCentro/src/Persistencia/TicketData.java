@@ -35,8 +35,7 @@ public class TicketData {
     // Metodos CRUD
 
     public void guardarTicket(Ticket ticket) {
-        String sql = "INSERT INTO ticketcompra (idComprador, idLugar, fechaCompra, fechaFuncion, monto, activo) "
-                   + "VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO ticket (Id_comprador, Id_lugar, fechaCompra, fechaFuncion, monto, activo) VALUES (?, ?, ?, ?, ?,?)";
 
         try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
@@ -58,7 +57,7 @@ public class TicketData {
             }
             
             if (filasAfectadas > 0) {
-                lugarData.ocuparLugar(ticket.getAsiento().getIdLugar());
+                lugarData.reservarButaca(ticket.getAsiento());
                 JOptionPane.showMessageDialog(null, "Ticket Nº " + ticket.getIdTicket() + " generado con éxito.");
             }
 
@@ -67,31 +66,31 @@ public class TicketData {
         }
     }
 
-    public Ticket buscarTicket(int idTicket) {
+    public Ticket buscarTicket(int Id_ticket) {
         Ticket ticket = null;
-        String sql = "SELECT * FROM ticketcompra WHERE idTicket = ?";
+        String sql = "SELECT * FROM ticket WHERE Id_ticket = ?";
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
-            ps.setInt(1, idTicket);
+            ps.setInt(1, Id_ticket);
             
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     ticket = new Ticket();
                     
-                    ticket.setIdTicket(idTicket);
+                    ticket.setIdTicket(Id_ticket);
                     ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
                     ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
                     
-                    int idComprador = rs.getInt("idComprador");
-                    Comprador comprador = compradorData.buscarComprador(idComprador); 
+                    int Id_comprador = rs.getInt("Id_comprador");
+                    Comprador comprador = compradorData.buscarComprador(Id_comprador); 
                     ticket.setComprador(comprador);
                     
-                    int idLugar = rs.getInt("idLugar");
-                    Lugar asiento = lugarData.buscarButaca(idLugar); 
+                    int Id_lugar = rs.getInt("Id_lugar");
+                    Lugar asiento = lugarData.buscarButaca(Id_lugar); 
                     ticket.setAsiento(asiento);
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se encontró el ticket con ID: " + idTicket);
+                    JOptionPane.showMessageDialog(null, "No se encontró el ticket con ID: " + Id_ticket);
                 }
             }
         } catch (SQLException ex) {
@@ -102,18 +101,18 @@ public class TicketData {
     
     
     
-    public List<Ticket> listarTicketsPorComprador(int idComprador) {
+    public List<Ticket> listarTicketsPorComprador(int Id_comprador) {
         List<Ticket> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ticketcompra WHERE idComprador = ?";
+        String sql = "SELECT * FROM ticket WHERE Id_comprador = ?";
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
-            ps.setInt(1, idComprador);
+            ps.setInt(1, Id_comprador);
             
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Ticket ticket = new Ticket();
                     
-                    ticket.setIdTicket(rs.getInt("idTicket"));
+                    ticket.setIdTicket(rs.getInt("Id_ticket"));
                     ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
                     
@@ -128,7 +127,7 @@ public class TicketData {
     
     public List<Ticket> listarTickets() {
     List<Ticket> lista = new ArrayList<>();
-    String sql = "SELECT * FROM ticketcompra";
+    String sql = "SELECT * FROM ticket";
 
     try (PreparedStatement ps = conex.prepareStatement(sql);
          ResultSet rs = ps.executeQuery()) {
@@ -136,17 +135,17 @@ public class TicketData {
         while (rs.next()) {
             Ticket ticket = new Ticket();
 
-            ticket.setIdTicket(rs.getInt("idTicket"));
+            ticket.setIdTicket(rs.getInt("Id_ticket"));
             ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
             ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
             ticket.setMonto(rs.getDouble("monto"));
 
           
-            int idComprador = rs.getInt("idComprador");
-            Comprador comprador = compradorData.buscarComprador(idComprador);
+            int Id_comprador = rs.getInt("Id_comprador");
+            Comprador comprador = compradorData.buscarComprador(Id_comprador);
             ticket.setComprador(comprador);
-            int idLugar = rs.getInt("idLugar");
-            Lugar asiento = lugarData.buscarButaca(idLugar);
+            int Id_lugar = rs.getInt("Id_lugar");
+            Lugar asiento = lugarData.buscarButaca(Id_lugar);
             ticket.setAsiento(asiento);
 
         

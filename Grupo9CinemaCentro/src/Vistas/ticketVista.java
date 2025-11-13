@@ -84,6 +84,12 @@ SistemaCine sc=new SistemaCine();
 
         jLabel1.setText("Ticket");
 
+        txtcomprador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcompradorActionPerformed(evt);
+            }
+        });
+
         txtProyeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProyeccionActionPerformed(evt);
@@ -371,6 +377,10 @@ txtid.setEnabled(true);
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbsalirActionPerformed
 
+    private void txtcompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcompradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcompradorActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -412,7 +422,7 @@ for(Proyeccion pro:proyecciones){
 public void cargarlugares(int id){
    
     txtlugar.removeAllItems();
-List<Lugar>lugares=ld.listLugaresPorProyeccion(id);
+List<Lugar>lugares=ld.lugaresDisponiblesPorProyeccion(id);
 for(Lugar l:lugares){
 txtlugar.addItem(l);
 
