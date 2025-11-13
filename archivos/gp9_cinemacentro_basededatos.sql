@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2025 a las 03:02:05
+-- Tiempo de generación: 13-11-2025 a las 21:23:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -57,7 +57,7 @@ CREATE TABLE `lugar` (
   `Id_proyeccion` int(11) NOT NULL,
   `fila` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `estado` varchar(11) NOT NULL
+  `disponible` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -214,7 +214,7 @@ ALTER TABLE `comprador`
 -- AUTO_INCREMENT de la tabla `lugar`
 --
 ALTER TABLE `lugar`
-  MODIFY `Id_lugar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
