@@ -21,41 +21,40 @@ import javax.swing.JOptionPane;
 public class TicketData {
 
     private Connection conex = null;
-    private CompradorData compradorData; 
-    private LugarData lugarData; 
+    private CompradorData compradorData;
+    private LugarData lugarData;
     private ProyeccionData proyecciondata;
 
     public TicketData(Conexion conex) {
         this.conex = conex.conectar();
-        this.compradorData = new CompradorData(conex); 
+        this.compradorData = new CompradorData(conex);
         this.lugarData = new LugarData(conex);
-        this.proyecciondata=new ProyeccionData(conex);
+        this.proyecciondata = new ProyeccionData(conex);
     }
 
     // Metodos CRUD
-
     public void guardarTicket(Ticket ticket) {
         String sql = "INSERT INTO ticket (Id_comprador, Id_lugar, fechaCompra, fechaFuncion, monto, activo) VALUES (?, ?, ?, ?, ?,?)";
 
         try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            
+
             ps.setInt(1, ticket.getComprador().getIdComprador());
-            ps.setInt(2, ticket.getAsiento().getIdLugar()); 
-            
-            ps.setDate(3, Date.valueOf(ticket.getFechaCompra())); 
+            ps.setInt(2, ticket.getAsiento().getIdLugar());
+
+            ps.setDate(3, Date.valueOf(ticket.getFechaCompra()));
             ps.setDate(4, Date.valueOf(ticket.getFechaFuncion()));
-            
+
             ps.setDouble(5, ticket.getMonto());
             ps.setBoolean(6, ticket.isActivo());
 
             int filasAfectadas = ps.executeUpdate();
-            
+
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     ticket.setIdTicket(rs.getInt(1));
                 }
             }
-            
+
             if (filasAfectadas > 0) {
                 lugarData.reservarButaca(ticket.getAsiento());
                 JOptionPane.showMessageDialog(null, "Ticket Nº " + ticket.getIdTicket() + " generado con éxito.");
@@ -72,22 +71,22 @@ public class TicketData {
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
             ps.setInt(1, Id_ticket);
-            
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     ticket = new Ticket();
-                    
+
                     ticket.setIdTicket(Id_ticket);
                     ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
                     ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
-                    
+
                     int Id_comprador = rs.getInt("Id_comprador");
-                    Comprador comprador = compradorData.buscarComprador(Id_comprador); 
+                    Comprador comprador = compradorData.buscarComprador(Id_comprador);
                     ticket.setComprador(comprador);
-                    
+
                     int Id_lugar = rs.getInt("Id_lugar");
-                    Lugar asiento = lugarData.buscarButaca(Id_lugar); 
+                    Lugar asiento = lugarData.buscarButaca(Id_lugar);
                     ticket.setAsiento(asiento);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el ticket con ID: " + Id_ticket);
@@ -98,24 +97,84 @@ public class TicketData {
         }
         return ticket;
     }
-    
-    
-    
+
+    // Baja Logica
+    public void anularTicket(int idTicket) {
+        String sql = "UPDATE ticket SET activo = ? WHERE Id_ticket = ?";
+
+        try (PreparedStatement ps = conex.prepareStatement(sql)) {
+
+            ps.setBoolean(1, false);
+            ps.setInt(2, idTicket);
+
+            int filasAfectadas = ps.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                Ticket t = buscarTicket(idTicket);
+                if (t != null) {
+                    lugarData.liberarLugar(t.getAsiento().getIdLugar());
+                }
+
+                JOptionPane.showMessageDialog(null, "Ticket Nº " + idTicket + " anulado y asiento liberado.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Advertencia: No se encontró el ticket para anular.");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al anular ticket: " + ex.getMessage());
+        }
+    }
+
+    // Baja Fisica
+    public void borrarTicket(int idTicket) {
+        Ticket t = buscarTicket(idTicket);
+        if (t != null) {
+            lugarData.liberarLugar(t.getAsiento().getIdLugar());
+
+            String sql = "DELETE FROM ticket WHERE Id_ticket = ?";
+
+            try (PreparedStatement ps = conex.prepareStatement(sql)) {
+
+                ps.setInt(1, idTicket);
+
+                int filasAfectadas = ps.executeUpdate();
+
+                if (filasAfectadas > 0) {
+
+                    JOptionPane.showMessageDialog(null, "Ticket Nº " + idTicket + " eliminado de la base de datos y asiento liberado.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Advertencia: No se encontró el ticket para eliminar.");
+                }
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al eliminar ticket: " + ex.getMessage());
+            }
+        }
+    }
+    // Metodos Adicionales
+
     public List<Ticket> listarTicketsPorComprador(int Id_comprador) {
         List<Ticket> lista = new ArrayList<>();
         String sql = "SELECT * FROM ticket WHERE Id_comprador = ?";
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
             ps.setInt(1, Id_comprador);
-            
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Ticket ticket = new Ticket();
-                    
+
                     ticket.setIdTicket(rs.getInt("Id_ticket"));
                     ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
+                    int Id_lugar = rs.getInt("Id_lugar");
                     
+                    Lugar asiento = lugarData.buscarButaca(Id_lugar);
+                    ticket.setAsiento(asiento);
+                    
+                    Comprador comprador = compradorData.buscarComprador(Id_comprador);
+                    ticket.setComprador(comprador);
+
                     lista.add(ticket);
                 }
             }
@@ -124,62 +183,36 @@ public class TicketData {
         }
         return lista;
     }
-    
+
     public List<Ticket> listarTickets() {
-    List<Ticket> lista = new ArrayList<>();
-    String sql = "SELECT * FROM ticket";
+        List<Ticket> lista = new ArrayList<>();
+        String sql = "SELECT * FROM ticket";
 
-    try (PreparedStatement ps = conex.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = conex.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            Ticket ticket = new Ticket();
+            while (rs.next()) {
+                Ticket ticket = new Ticket();
 
-            ticket.setIdTicket(rs.getInt("Id_ticket"));
-            ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
-            ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
-            ticket.setMonto(rs.getDouble("monto"));
+                ticket.setIdTicket(rs.getInt("Id_ticket"));
+                ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
+                ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
+                ticket.setMonto(rs.getDouble("monto"));
 
-          
-            int Id_comprador = rs.getInt("Id_comprador");
-            Comprador comprador = compradorData.buscarComprador(Id_comprador);
-            ticket.setComprador(comprador);
-            int Id_lugar = rs.getInt("Id_lugar");
-            Lugar asiento = lugarData.buscarButaca(Id_lugar);
-            ticket.setAsiento(asiento);
+                int Id_comprador = rs.getInt("Id_comprador");
+                Comprador comprador = compradorData.buscarComprador(Id_comprador);
+                ticket.setComprador(comprador);
+                int Id_lugar = rs.getInt("Id_lugar");
+                Lugar asiento = lugarData.buscarButaca(Id_lugar);
+                ticket.setAsiento(asiento);
 
-        
-            lista.add(ticket);
+                lista.add(ticket);
 
-    
-}
-    
-    }   catch (SQLException ex) {
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }
-    
-    
-
-public void anularTicket(int id){
-String sql="UPDATE ticket SET activo=0 WHERE Id_ticket=?";
-        try {
-            PreparedStatement ps=conex.prepareStatement(sql);
-            ps.setInt(1, id);
-            int r= ps.executeUpdate();
-            if (r > 0) {
-            JOptionPane.showMessageDialog(null, " Ticket anulado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, " No se encontró un ticket con ese ID");
-        }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-}
-
-
 
 }
