@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2025 a las 21:23:18
+-- Tiempo de generación: 14-11-2025 a las 22:32:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -57,7 +57,7 @@ CREATE TABLE `lugar` (
   `Id_proyeccion` int(11) NOT NULL,
   `fila` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `disponible` tinyint(4) DEFAULT NULL
+  `disponible` tinyint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -162,8 +162,7 @@ CREATE TABLE `ticket` (
 -- Indices de la tabla `comprador`
 --
 ALTER TABLE `comprador`
-  ADD PRIMARY KEY (`Id_Comprador`),
-  ADD UNIQUE KEY `DNI` (`DNI`);
+  ADD PRIMARY KEY (`Id_Comprador`);
 
 --
 -- Indices de la tabla `lugar`
@@ -208,13 +207,13 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT de la tabla `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `Id_Comprador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `Id_Comprador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `lugar`
 --
 ALTER TABLE `lugar`
-  MODIFY `Id_lugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_lugar` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
