@@ -465,7 +465,7 @@ Proyeccion pr=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio,act
     private javax.swing.JCheckBox txtsubtitulada;
     // End of variables declaration//GEN-END:variables
 public void cargarPelicula() {
-    p = ped.listarPeliculasActivas();
+    p = ped.listarPeliculasEnCartelera();
     DefaultComboBoxModel<Pelicula> modelo = new DefaultComboBoxModel<>();
     for (Pelicula peli : p) {
         modelo.addElement(peli);
@@ -497,7 +497,7 @@ public void limpiar() {
     txtsubtitulada.setSelected(false);
     txtpelicula.setSelectedIndex(-1); 
     txtsala.setSelectedIndex(-1);  
-    txtactivar.setSelected(false);
+    
 }
 
 

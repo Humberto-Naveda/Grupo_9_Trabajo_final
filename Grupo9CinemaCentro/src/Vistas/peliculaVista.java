@@ -59,8 +59,6 @@ txtid.setEditable(false);
         jbguardar = new javax.swing.JButton();
         jbnuevo = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtactiva = new javax.swing.JCheckBox();
         jbsalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
@@ -135,8 +133,6 @@ txtid.setEditable(false);
             }
         });
 
-        jLabel10.setText("activa");
-
         jbsalir.setText("salir");
         jbsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,19 +201,11 @@ txtid.setEditable(false);
                 .addComponent(jbguardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbmodificar)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtactiva)
-                        .addGap(117, 117, 117))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbdarbaja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbsalir)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbdarbaja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbsalir)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,13 +218,13 @@ txtid.setEditable(false);
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txttitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txttitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(txtdirector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtdirector, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
@@ -262,9 +250,7 @@ txtid.setEditable(false);
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtactiva, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtencartelera))
+                                .addComponent(txtencartelera)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,12 +259,11 @@ txtid.setEditable(false);
                             .addComponent(jbguardar)
                             .addComponent(jbnuevo)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbdarbaja)
                             .addComponent(jbsalir))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -308,8 +293,8 @@ txtid.setEditable(false);
           LocalDate fecha;
     fecha = txtfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     boolean encartelera=txtencartelera.isSelected();
-    boolean activa=txtactiva.isSelected();
-          Pelicula p=new Pelicula(titulo,director,actores,origen,genero,fecha,encartelera,activa);
+  
+          Pelicula p=new Pelicula(titulo,director,actores,origen,genero,fecha,encartelera);
         pd.agregarPelicula(p);
         limpiar();
     }//GEN-LAST:event_jbguardarActionPerformed
@@ -325,8 +310,8 @@ txtid.setEditable(false);
           String genero=txtgenero.getText();
           LocalDate  fecha = txtfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     boolean encartelera=txtencartelera.isSelected();
-    boolean activa=txtactiva.isSelected();
-           pe=new Pelicula(id,titulo,director,actores,origen,genero,fecha,encartelera,activa);
+    
+           pe=new Pelicula(titulo,director,actores,origen,genero,fecha,encartelera);
            pd.actualizarPelicula(pe);
       
     }//GEN-LAST:event_jbmodificarActionPerformed
@@ -356,7 +341,7 @@ txtid.setEditable(false);
               java.util.Date date = java.util.Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
         txtfecha.setDate(date);
         txtencartelera.setSelected(pe.isEnCartelera());
-            txtactiva.setSelected(pe.isActiva());
+            
 
              
         
@@ -375,7 +360,6 @@ dispose();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -390,7 +374,6 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JButton jbmodificar;
     private javax.swing.JButton jbnuevo;
     private javax.swing.JButton jbsalir;
-    private javax.swing.JCheckBox txtactiva;
     private java.awt.TextField txtactores;
     private java.awt.TextField txtdirector;
     private javax.swing.JCheckBox txtencartelera;
@@ -402,7 +385,7 @@ dispose();        // TODO add your handling code here:
     // End of variables declaration//GEN-END:variables
  private void limpiar() {
         
-        txtactiva.setSelected(false);
+        
         txttitulo.setText("");
         txtdirector.setText("");
         txtorigen.setText("");

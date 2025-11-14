@@ -33,7 +33,7 @@ public class PeliculaData {
     // Metodos CRUD
     public void agregarPelicula(Pelicula p) {
 
-        String sql = "INSERT INTO `pelicula`( `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`,`activa`) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `pelicula`( `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`) VALUES (?,?,?,?,?,?,?)";
 
         try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, p.getTitulo());
@@ -43,7 +43,7 @@ public class PeliculaData {
             ps.setString(5, p.getGenero());
             ps.setDate(6, Date.valueOf(p.getEstreno()));
             ps.setBoolean(7, p.isEnCartelera());
-            ps.setBoolean(8, p.isActiva());
+            
 
             int filasAgregadas = ps.executeUpdate();
 
@@ -114,7 +114,7 @@ public class PeliculaData {
         }
     }
  public void bajaPelicula(int idPelicula) {
-        String sql = "UPDATE pelicula SET activa = 0 WHERE id_Pelicula = ?";
+        String sql = "UPDATE pelicula SET enCartelera = 0 WHERE id_Pelicula = ?";
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
             ps.setInt(1, idPelicula);
@@ -126,7 +126,7 @@ public class PeliculaData {
     }
   public List<Pelicula> listarPeliculasEnCartelera() {
         List<Pelicula> lista = new ArrayList<>();
-        String sql = "SELECT * FROM pelicula WHERE enCartelera = 1 AND activa = 1";
+        String sql = "SELECT * FROM pelicula WHERE enCartelera = 1 ";
 
         try (PreparedStatement ps = conex.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -141,7 +141,7 @@ public class PeliculaData {
                 peli.setGenero(rs.getString("genero"));
                 peli.setEstreno(rs.getDate("estreno").toLocalDate());
                 peli.setEnCartelera(rs.getBoolean("enCartelera"));
-                peli.setActiva(rs.getBoolean("activa"));
+               
                 lista.add(peli);
             }
         } catch (SQLException ex) {
@@ -176,7 +176,7 @@ public class PeliculaData {
     }
 
 
-    // Metodos Adicionales
+    
     
     public void reservarButaca(Lugar asiento) {
         String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
@@ -199,38 +199,8 @@ public class PeliculaData {
         }
     }
 
-    public List<Pelicula> listarPeliculasActivas() {
-
-        List<Pelicula> lista = new ArrayList<>();
-
-        String list = "SELECT * FROM pelicula WHERE activa=1";
-
-        try (PreparedStatement ps = conex.prepareStatement(list)) {
-
-            try (ResultSet rs = ps.executeQuery()) {
-
-                while (rs.next()) {
-                    Pelicula peli = new Pelicula();
-                    peli.setIdPelicula(rs.getInt("id_Pelicula"));
-                    peli.setTitulo(rs.getString("titulo"));
-                    peli.setDirector(rs.getString("director"));
-                    peli.setActores(rs.getString("actores"));
-                    peli.setOrigen(rs.getString("origen"));
-                    peli.setGenero(rs.getString("genero"));
-                    peli.setEstreno(rs.getDate("estreno").toLocalDate());
-                    peli.setEnCartelera(rs.getBoolean("enCartelera"));
-                    peli.setActiva(rs.getBoolean("activa"));
-                    
-                    lista.add(peli);
-                }
-            }
-        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, " Error al listar peliculas: " + ex.getMessage());
-        }
-        return lista;
-    }
     
-    // Baja Logica
+    
     public void sacarDeCartelera(int idPeli) {
     
     String update = "UPDATE pelicula SET enCartelera = ? WHERE id_Pelicula = ?";
