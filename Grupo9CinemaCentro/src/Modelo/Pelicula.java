@@ -37,7 +37,7 @@ public class Pelicula {
         
     }
 
-    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera, boolean activa) {
+    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
         this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.director = director;

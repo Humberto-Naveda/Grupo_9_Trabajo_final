@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2025 a las 22:32:27
+-- Tiempo de generación: 15-11-2025 a las 04:52:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,22 +29,15 @@ USE `gp9_cinemacentro_basededatos`;
 -- Estructura de tabla para la tabla `comprador`
 --
 
+DROP TABLE IF EXISTS `comprador`;
 CREATE TABLE `comprador` (
   `Id_Comprador` int(11) NOT NULL,
   `DNI` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `password` int(11) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `medioPago` varchar(30) NOT NULL,
   `fechaNac` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `comprador`
---
-
-INSERT INTO `comprador` (`Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago`, `fechaNac`) VALUES
-(10, 4, '4', 4, '4', '2025-11-04'),
-(11, 2, 'd', 2, 'dd', '2025-11-09');
 
 -- --------------------------------------------------------
 
@@ -52,6 +45,7 @@ INSERT INTO `comprador` (`Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago
 -- Estructura de tabla para la tabla `lugar`
 --
 
+DROP TABLE IF EXISTS `lugar`;
 CREATE TABLE `lugar` (
   `Id_lugar` int(11) NOT NULL,
   `Id_proyeccion` int(11) NOT NULL,
@@ -66,6 +60,7 @@ CREATE TABLE `lugar` (
 -- Estructura de tabla para la tabla `pelicula`
 --
 
+DROP TABLE IF EXISTS `pelicula`;
 CREATE TABLE `pelicula` (
   `id_Pelicula` int(11) NOT NULL,
   `titulo` varchar(30) NOT NULL,
@@ -74,19 +69,8 @@ CREATE TABLE `pelicula` (
   `origen` varchar(30) NOT NULL,
   `genero` varchar(30) NOT NULL,
   `estreno` date NOT NULL,
-  `enCartelera` int(11) NOT NULL,
-  `activa` tinyint(30) NOT NULL
+  `enCartelera` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pelicula`
---
-
-INSERT INTO `pelicula` (`id_Pelicula`, `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`, `activa`) VALUES
-(9, '', '', 'qqqqq', 'qqqq', 'qqqq', '2025-11-05', 1, 0),
-(10, 'qqqqqq', 'qqqqqq', 'qqqqq', 'qqqq', 'qqqq', '2025-11-05', 0, 1),
-(11, 'la era de hielo', 'qsy', 'andy', 'yankee', 'comedia', '2025-11-14', 1, 1),
-(12, 'eeeeeeeeee', 'eeeeeeeee', 'eeeeeeee', 'eeeeeeee', 'eeeeeeee', '2025-11-30', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -94,6 +78,7 @@ INSERT INTO `pelicula` (`id_Pelicula`, `titulo`, `director`, `actores`, `origen`
 -- Estructura de tabla para la tabla `proyeccion`
 --
 
+DROP TABLE IF EXISTS `proyeccion`;
 CREATE TABLE `proyeccion` (
   `Id_proyeccion` int(11) NOT NULL,
   `Id_pelicula` int(11) NOT NULL,
@@ -107,20 +92,13 @@ CREATE TABLE `proyeccion` (
   `activa` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `proyeccion`
---
-
-INSERT INTO `proyeccion` (`Id_proyeccion`, `Id_pelicula`, `Id_sala`, `idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `precio`, `activa`) VALUES
-(14, 11, 14, 'español', 1, 1, '22:30:00', '23:00:00', 2000, 0),
-(15, 10, 15, 'ingles', 0, 1, '20:00:00', '21:00:00', 10000, 1);
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sala`
 --
 
+DROP TABLE IF EXISTS `sala`;
 CREATE TABLE `sala` (
   `Id_sala` int(11) NOT NULL,
   `nroSala` int(11) NOT NULL,
@@ -129,21 +107,13 @@ CREATE TABLE `sala` (
   `estado` tinyint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `sala`
---
-
-INSERT INTO `sala` (`Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado`) VALUES
-(13, 30, 1, 200, 1),
-(14, 4, 1, 100, 1),
-(15, 6, 0, 7, 1);
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ticket`
 --
 
+DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE `ticket` (
   `Id_ticket` int(11) NOT NULL,
   `Id_comprador` int(11) NOT NULL,
@@ -207,7 +177,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT de la tabla `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `Id_Comprador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id_Comprador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `lugar`
@@ -219,7 +189,7 @@ ALTER TABLE `lugar`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_Pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_Pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `proyeccion`
@@ -231,7 +201,7 @@ ALTER TABLE `proyeccion`
 -- AUTO_INCREMENT de la tabla `sala`
 --
 ALTER TABLE `sala`
-  MODIFY `Id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ticket`

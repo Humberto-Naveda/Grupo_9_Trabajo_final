@@ -66,7 +66,7 @@ public class PeliculaData {
     public Pelicula buscarPelicula(int idPeli) {
         Pelicula peli = null;
 
-        String search = "SELECT * FROM pelicula WHERE Id_Pelicula = ?";
+        String search = "SELECT * FROM pelicula WHERE id_Pelicula = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(search)) {
             statement.setInt(1, idPeli);
@@ -96,7 +96,7 @@ public class PeliculaData {
     
    
     public void borrarPelicula(int idPeli) {
-        String delete = "DELETE FROM pelicula WHERE Id_Pelicula = ?";
+        String delete = "DELETE FROM pelicula WHERE id_Pelicula = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(delete)) {
             statement.setInt(1, idPeli);
@@ -113,11 +113,11 @@ public class PeliculaData {
             JOptionPane.showMessageDialog(null, "Error al eliminar pelicula. " + e.getMessage());
         }
     }
- public void bajaPelicula(int idPelicula) {
+ public void bajaPelicula(int id_Pelicula) {
         String sql = "UPDATE pelicula SET enCartelera = 0 WHERE id_Pelicula = ?";
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
-            ps.setInt(1, idPelicula);
+            ps.setInt(1, id_Pelicula);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Película dada de baja");
         } catch (SQLException ex) {
