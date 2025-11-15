@@ -179,7 +179,7 @@ public class PeliculaData {
     
     
     public void reservarButaca(Lugar asiento) {
-        String update = "UPDATE lugar SET estado = ? WHERE idLugar = ?";
+        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 

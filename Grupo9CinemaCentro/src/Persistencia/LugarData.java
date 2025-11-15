@@ -74,7 +74,7 @@ public class LugarData {
                     asiento.setIdLugar(idLugar);
                     asiento.setFila(rsBuscar.getInt("fila"));
                     asiento.setNumero(rsBuscar.getInt("numero"));
-                    asiento.setDisponible(rsBuscar.getBoolean("activa"));
+                    asiento.setDisponible(rsBuscar.getBoolean("disponible"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el lugar indicado.");
                 }

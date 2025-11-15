@@ -85,9 +85,9 @@ public class CompradorData {
                 comprador=new Comprador();
                 comprador.setIdComprador(rs.getInt("Id_Comprador"));
                 comprador.setDni(rs.getInt("DNI"));
-                comprador.setNombre(rs.getNString("nombre"));
+                comprador.setNombre(rs.getString("nombre"));
                 comprador.setPassword(rs.getString("password"));
-                comprador.setMedioPago(rs.getNString("medioPago"));
+                comprador.setMedioPago(rs.getString("medioPago"));
                 comprador.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 JOptionPane.showMessageDialog(null,"busqueda exitosa");
                 
@@ -138,7 +138,7 @@ public class CompradorData {
            int r=ps.executeUpdate();
             if(r>0){
              JOptionPane.showInternalInputDialog(null, "Eliminacion exitosa");
-            }else{ JOptionPane.showInternalMessageDialog(null, "no se a encontrado comprador con ese id");}
+            }else{ JOptionPane.showMessageDialog(null, "no se a encontrado comprador con ese id");}
             ps.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR");

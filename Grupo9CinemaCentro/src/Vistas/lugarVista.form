@@ -209,8 +209,11 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="txtestado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ocupado"/>
+        <Property name="text" type="java.lang.String" value="disponible"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtestadoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="txtproyeccion">
       <Properties>

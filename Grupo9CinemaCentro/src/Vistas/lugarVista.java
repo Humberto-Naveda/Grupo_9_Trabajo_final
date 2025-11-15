@@ -111,7 +111,12 @@ private ProyeccionData pd;
             }
         });
 
-        txtestado.setText("ocupado");
+        txtestado.setText("disponible");
+        txtestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtestadoActionPerformed(evt);
+            }
+        });
 
         jbsalir.setLabel("salir");
         jbsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +279,10 @@ private ProyeccionData pd;
     private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbsalirActionPerformed
+
+    private void txtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtestadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

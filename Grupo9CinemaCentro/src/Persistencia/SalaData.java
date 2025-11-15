@@ -32,7 +32,7 @@ public class SalaData {
     }
 
     public void guardarSala(Sala sala) {
-        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `activa`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `estado`) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -68,7 +68,7 @@ public class SalaData {
                 sala.setIdSala(rs.getInt("Id_sala"));
                 sala.setNroSala(rs.getInt("nroSala"));
                 sala.setApta3D(rs.getBoolean("apta3D"));
-                sala.setCapacidad(rs.getInt("estado"));
+                sala.setCapacidad(rs.getInt("capacidad"));
                 sala.setEstado(rs.getBoolean("estado"));
 JOptionPane.showMessageDialog(null, "busqueda exitosa");
 
@@ -90,7 +90,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
     }
 
     public List<Sala> listarSalasActivas() {
-        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `estado` FROM `sala` WHERE estado=1 ";
+        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`,`capacidad`, `estado` FROM `sala` WHERE estado=1 ";
         List<Sala> salas = null;
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
