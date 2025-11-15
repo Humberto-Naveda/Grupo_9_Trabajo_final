@@ -17,16 +17,15 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class compradorVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc;
-private CompradorData cd;
+private SistemaCine sc = new SistemaCine();
+    private CompradorData cd = new CompradorData(sc.conexionDb());
 
     /**
      * Creates new form compradorVista
      */
     public compradorVista() {
         initComponents();
-        sc=new SistemaCine();
-        cd=new CompradorData(sc.conexionDb());
+        
         txtid.setEditable(false);
     }
 

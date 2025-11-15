@@ -20,13 +20,13 @@ import javax.swing.JOptionPane;
 
 public class TicketData {
 
-    private Connection conex = null;
+    private Connection conec = null;
     private CompradorData compradorData;
     private LugarData lugarData;
     private ProyeccionData proyecciondata;
 
     public TicketData(Conexion conex) {
-        this.conex = conex.conectar();
+        this.conec = conex.conectar();
         this.compradorData = new CompradorData(conex);
         this.lugarData = new LugarData(conex);
         this.proyecciondata = new ProyeccionData(conex);
@@ -36,7 +36,7 @@ public class TicketData {
     public void guardarTicket(Ticket ticket) {
         String sql = "INSERT INTO ticket (Id_comprador, Id_lugar, fechaCompra, fechaFuncion, monto, activo) VALUES (?, ?, ?, ?, ?,?)";
 
-        try (PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, ticket.getComprador().getIdComprador());
             ps.setInt(2, ticket.getAsiento().getIdLugar());
@@ -69,7 +69,7 @@ public class TicketData {
         Ticket ticket = null;
         String sql = "SELECT * FROM ticket WHERE Id_ticket = ?";
 
-        try (PreparedStatement ps = conex.prepareStatement(sql)) {
+        try (PreparedStatement ps = conec.prepareStatement(sql)) {
             ps.setInt(1, Id_ticket);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -102,7 +102,7 @@ public class TicketData {
     public void anularTicket(int idTicket) {
         String sql = "UPDATE ticket SET activo = ? WHERE Id_ticket = ?";
 
-        try (PreparedStatement ps = conex.prepareStatement(sql)) {
+        try (PreparedStatement ps = conec.prepareStatement(sql)) {
 
             ps.setBoolean(1, false);
             ps.setInt(2, idTicket);
@@ -133,7 +133,7 @@ public class TicketData {
 
             String sql = "DELETE FROM ticket WHERE Id_ticket = ?";
 
-            try (PreparedStatement ps = conex.prepareStatement(sql)) {
+            try (PreparedStatement ps = conec.prepareStatement(sql)) {
 
                 ps.setInt(1, idTicket);
 
@@ -157,7 +157,7 @@ public class TicketData {
         List<Ticket> lista = new ArrayList<>();
         String sql = "SELECT * FROM ticket WHERE Id_comprador = ?";
 
-        try (PreparedStatement ps = conex.prepareStatement(sql)) {
+        try (PreparedStatement ps = conec.prepareStatement(sql)) {
             ps.setInt(1, Id_comprador);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -188,7 +188,7 @@ public class TicketData {
         List<Ticket> lista = new ArrayList<>();
         String sql = "SELECT * FROM ticket";
 
-        try (PreparedStatement ps = conex.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = conec.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Ticket ticket = new Ticket();

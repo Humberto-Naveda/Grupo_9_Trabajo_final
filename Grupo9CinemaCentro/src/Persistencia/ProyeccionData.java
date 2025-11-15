@@ -232,7 +232,7 @@ String sql="DELETE FROM proyeccion WHERE Id_proyeccion=?";
     
 public List<Proyeccion> listarActivas(){
  
-  String sql= " SELECT * FROM proyeccion JOIN pelicula on(proyeccion.Id_pelicula=pelicula.id_Pelicula) JOIN sala on(proyeccion.Id_sala=sala.Id_sala)  WHERE activa=1";
+  String sql= " SELECT * FROM proyeccion pr JOIN pelicula p on(pr.Id_pelicula=p.id_Pelicula) JOIN sala s on(pr.Id_sala=s.Id_sala)  WHERE pr.activa=1";
 
 
 

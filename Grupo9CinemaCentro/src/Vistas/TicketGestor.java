@@ -22,10 +22,11 @@ import javax.swing.table.TableRowSorter;
  *
  * @author PC1
  */
-public class TicketGestor extends javax.swing.JFrame {
+public class TicketGestor extends javax.swing.JInternalFrame {
 
-    Conexion conex = new Conexion("gp9_cinemacentro_basededatos", "jdbc:mariadb://localhost/", "root", "", "org.mariadb.jdbc.Driver"); // Conexion global 
-
+  private SistemaCine sc = new SistemaCine(); 
+    private Conexion con = sc.conexionDb();  
+   
     DefaultTableModel modeloTableComprador; // (DTM Personalizado)
     TableRowSorter<DefaultTableModel> sortModelComprador; // (Filtrado)
 
@@ -48,7 +49,7 @@ public class TicketGestor extends javax.swing.JFrame {
             }
         };
 
-        TicketData ticketDAO = new TicketData(conex);
+        TicketData ticketDAO = new TicketData(con);
         List<Ticket> listaTickets = ticketDAO.listarTickets();
 
         tableTicket.setShowGrid(false);
@@ -98,7 +99,7 @@ public class TicketGestor extends javax.swing.JFrame {
                 filtrarCompradores();
             }
         };
-        CompradorData compradorDAO = new CompradorData(conex);
+        CompradorData compradorDAO = new CompradorData(con);
         List<Comprador> listaCompradores = compradorDAO.listarCompradores();
 
         tableCompradores.setShowGrid(false);
@@ -127,7 +128,7 @@ public class TicketGestor extends javax.swing.JFrame {
     }
 
     private void llenarListPeliculas() {
-        PeliculaData peliculaDAO = new PeliculaData(conex);
+        PeliculaData peliculaDAO = new PeliculaData(con);
         List<Pelicula> listaPeliculas = peliculaDAO.listarPeliculasEnCartelera();
 
         for (Pelicula p : listaPeliculas) {
@@ -137,7 +138,7 @@ public class TicketGestor extends javax.swing.JFrame {
     }
 
     private void llenarListProyeccion() {
-        ProyeccionData proyeccionDAO = new ProyeccionData(conex);
+        ProyeccionData proyeccionDAO = new ProyeccionData(con);
         List<Proyeccion> listaProyecciones = proyeccionDAO.listarActivas();
 
         for (Proyeccion p : listaProyecciones) {
@@ -147,7 +148,7 @@ public class TicketGestor extends javax.swing.JFrame {
 
     private void llenarListButacas() {
         Proyeccion itemSeleccionado = (Proyeccion) comboBoxProyeccion.getSelectedItem();
-        LugarData lugarDAO = new LugarData(conex);
+        LugarData lugarDAO = new LugarData(con);
 
         if (itemSeleccionado != null) {
             List<Lugar> listaLugares = lugarDAO.lugaresDisponiblesPorProyeccion(itemSeleccionado.getIdProyeccion());
@@ -551,7 +552,7 @@ public class TicketGestor extends javax.swing.JFrame {
 
         int id = (int) tableTicket.getValueAt(tableTicket.getSelectedRow(), 0);
 
-        TicketData ticketDAO = new TicketData(conex);
+        TicketData ticketDAO = new TicketData(con);
 
         Object[] opciones = {"Si", "No"};
 
@@ -608,7 +609,7 @@ public class TicketGestor extends javax.swing.JFrame {
             return;
         }
 
-        TicketData ticketDAO = new TicketData(conex);
+        TicketData ticketDAO = new TicketData(con);
         Ticket ticket = new Ticket(id, asiento, nombreComprador, fechaEmision, fechaFuncion, monto, estado, funcion);
         ticketDAO.guardarTicket(ticket);
     }//GEN-LAST:event_botonGenerarTicketActionPerformed
@@ -625,7 +626,7 @@ public class TicketGestor extends javax.swing.JFrame {
 
         int id = (int) tableTicket.getValueAt(tableTicket.getSelectedRow(), 0);
 
-        TicketData ticketDAO = new TicketData(conex);
+        TicketData ticketDAO = new TicketData(con);
 
         Object[] opciones = {"Si", "No"};
 
@@ -656,37 +657,7 @@ public class TicketGestor extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TicketGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TicketGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TicketGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TicketGestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TicketGestor().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAnularTicket;

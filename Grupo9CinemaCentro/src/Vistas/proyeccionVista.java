@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import Modelo.Conexion;
 import Modelo.Pelicula;
 import Modelo.Proyeccion;
 import Modelo.Sala;
@@ -21,14 +22,20 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *S
  * @author Usuario
  */
 public class proyeccionVista extends javax.swing.JInternalFrame {
 private  SistemaCine sc= new SistemaCine();
-private ProyeccionData pd=new ProyeccionData(sc.conexionDb());
-private PeliculaData ped=new PeliculaData(sc.conexionDb());
-private SalaData sd=new SalaData(sc.conexionDb());
+
+private Conexion con = sc.conexionDb();
+
+
+private ProyeccionData pd=new ProyeccionData(con);
+private PeliculaData ped=new PeliculaData(con);
+private SalaData sd=new SalaData(con);
+
+
 
     /**
      * Creates new form proyeccionVista
