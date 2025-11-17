@@ -89,7 +89,6 @@ public class CompradorData {
                 comprador.setPassword(rs.getString("password"));
                 comprador.setMedioPago(rs.getString("medioPago"));
                 comprador.setFechaNac(rs.getDate("fechaNac").toLocalDate());
-                JOptionPane.showMessageDialog(null,"busqueda exitosa");
                 
                    return comprador;
                 
