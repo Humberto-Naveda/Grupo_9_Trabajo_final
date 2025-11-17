@@ -16,7 +16,7 @@ public class Lugar {
     private int numero;
     private boolean disponible;
 
-    public Lugar(int idLugar, Proyeccion proyeccion, int fila, int numero, boolean estado) {
+    public Lugar(int idLugar, Proyeccion proyeccion, int fila, int numero, boolean disponible) {
         this.idLugar = idLugar;
         this.proyeccion = proyeccion;
         this.fila = fila;
@@ -24,7 +24,7 @@ public class Lugar {
         this.disponible = disponible;
     }
 
-    public Lugar(Proyeccion proyeccion, int fila, int numero, boolean estado) {
+    public Lugar(Proyeccion proyeccion, int fila, int numero, boolean disponible) {
         this.proyeccion = proyeccion;
         this.fila = fila;
         this.numero = numero;
@@ -76,7 +76,7 @@ public class Lugar {
 
     @Override
     public String toString() {
-        return "Lugar: " + idLugar;
+        return "N°: " + idLugar;
     }
 
    

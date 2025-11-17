@@ -5,6 +5,7 @@
 package Vistas;
 
 import Modelo.Conexion;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -16,7 +17,7 @@ public class SistemaCine extends javax.swing.JFrame {
      * Creates new form SistemaCine
      */
     public SistemaCine() {
-        setSize(800, 600);
+        setSize(1080, 800);
         setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
@@ -49,6 +50,7 @@ public class SistemaCine extends javax.swing.JFrame {
         menu8 = new java.awt.Menu();
         escritorio = new javax.swing.JDesktopPane();
         escritorio1 = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuticket = new javax.swing.JMenu();
         menusala = new javax.swing.JMenuItem();
@@ -92,6 +94,11 @@ public class SistemaCine extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        escritorio1.add(jPanel1);
+        jPanel1.setBounds(0, 0, 900, 670);
+
         getContentPane().add(escritorio1, java.awt.BorderLayout.CENTER);
 
         menuticket.setText("gestor");
@@ -157,67 +164,74 @@ public class SistemaCine extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menupeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menupeliculaActionPerformed
-       escritorio1.removeAll();
+        escritorio1.removeAll();
         escritorio1.repaint();
-        
+
         peliculaVista GUI = new peliculaVista();
         GUI.setVisible(true);
-        
+
         escritorio1.add(GUI);
         escritorio1.moveToFront(GUI);
     }//GEN-LAST:event_menupeliculaActionPerformed
 
     private void menuproyeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuproyeccionActionPerformed
-         escritorio1.removeAll();
+        escritorio1.removeAll();
         escritorio1.repaint();
-        
-        proyeccionVista GUI = new proyeccionVista ();
+
+        proyeccionVista GUI = new proyeccionVista();
         GUI.setVisible(true);
-        
+
         escritorio1.add(GUI);
         escritorio1.moveToFront(GUI);
     }//GEN-LAST:event_menuproyeccionActionPerformed
 
     private void menucompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menucompradorActionPerformed
+        compradorVista GUI = new compradorVista();
+        escritorio1.moveToFront(GUI);
         escritorio1.removeAll();
         escritorio1.repaint();
-        
-        compradorVista GUI = new compradorVista();
-        GUI.setVisible(true);
-        
+
         escritorio1.add(GUI);
-        escritorio1.moveToFront(GUI);
+        GUI.setVisible(true);
+
+        GUI.setBorder(null); 
+        ((BasicInternalFrameUI) GUI.getUI()).setNorthPane(null);
+  
     }//GEN-LAST:event_menucompradorActionPerformed
 
     private void menusalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusalaActionPerformed
-         escritorio1.removeAll();
+        escritorio1.removeAll();
         escritorio1.repaint();
-        
+
         salaVista GUI = new salaVista();
         GUI.setVisible(true);
-        
+
         escritorio1.add(GUI);
         escritorio1.moveToFront(GUI);
     }//GEN-LAST:event_menusalaActionPerformed
 
     private void menuticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuticketActionPerformed
-       
+
     }//GEN-LAST:event_menuticketActionPerformed
 
     private void jmenuticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuticketActionPerformed
-         escritorio1.removeAll();
-        escritorio1.repaint();
-       TicketGestor gui = new TicketGestor();
-        // ticketVista gui = new ticketVista();
-        // escritorio1.add(gui);
-        gui.setVisible(true);
+        TicketGestor gui = new TicketGestor();
         escritorio1.moveToFront(gui);
+        escritorio1.removeAll();
+        escritorio1.repaint();
+        
+        escritorio1.add(gui);
+        gui.setVisible(true);
+        
+        gui.setBorder(null); 
+        ((BasicInternalFrameUI) gui.getUI()).setNorthPane(null);
+
     }//GEN-LAST:event_jmenuticketActionPerformed
 
     private void LugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LugarActionPerformed
-         escritorio1.removeAll();
+        escritorio1.removeAll();
         escritorio1.repaint();
-        lugarVista gui=new lugarVista();
+        lugarVista gui = new lugarVista();
         gui.setVisible(true);
         escritorio1.add(gui);
         escritorio1.moveToFront(gui);
@@ -267,6 +281,7 @@ public class SistemaCine extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem jmenuticket;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
@@ -287,11 +302,8 @@ public class SistemaCine extends javax.swing.JFrame {
     private javax.swing.JMenu menuticket;
     // End of variables declaration//GEN-END:variables
 
-
-
-
-
-public Conexion conexionDb(){
-    Conexion conn = new Conexion("gp9_cinemacentro_basededatos","jdbc:mariadb://localhost/","root","","org.mariadb.jdbc.Driver");
-    return conn;
-}}
+    public Conexion conexionDb() {
+        Conexion conn = new Conexion("gp9_cinemacentro_basededatos", "jdbc:mariadb://localhost/", "root", "", "org.mariadb.jdbc.Driver");
+        return conn;
+    }
+}

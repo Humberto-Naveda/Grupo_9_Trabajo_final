@@ -56,8 +56,10 @@ public class TicketData {
             }
 
             if (filasAfectadas > 0) {
-                lugarData.reservarButaca(ticket.getAsiento());
+                
                 JOptionPane.showMessageDialog(null, "Ticket Nº " + ticket.getIdTicket() + " generado con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo generar el ticket.");
             }
 
         } catch (SQLException ex) {

@@ -21,20 +21,22 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class lugarVista extends javax.swing.JInternalFrame {
-private SistemaCine sc=new SistemaCine();
-Conexion con= sc.conexionDb();
-private LugarData ld;
-private ProyeccionData pd;
+
+    private SistemaCine sc = new SistemaCine();
+    Conexion con = sc.conexionDb();
+    private LugarData ld;
+    private ProyeccionData pd;
+
     /**
      * Creates new form lugarVista
      */
     public lugarVista() {
-        ld= new LugarData(con);
-        pd= new ProyeccionData(con);
+        ld = new LugarData(con);
+        pd = new ProyeccionData(con);
         initComponents();
         txtid.setEditable(false);
         llenarcombo();
-        
+
     }
 
     /**
@@ -213,29 +215,29 @@ private ProyeccionData pd;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
-     
-        
-            if (txtfila.getText().trim().isEmpty() || txtnumero.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Debe completar los campos de fila y número.");
-                return;
-            }
-           
+
+        if (txtfila.getText().trim().isEmpty() || txtnumero.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe completar los campos de fila y número.");
+            return;
+        }
+
         Lugar lugar;
-        
-       Proyeccion pe=(Proyeccion) txtproyeccion.getSelectedItem();
-      try{
-       int fila=Integer.parseInt(txtfila.getText());
-       int nro=Integer.parseInt(txtnumero.getText());
-     
-       boolean estado=txtestado.isSelected();
-       lugar=new Lugar(pe,fila,nro,estado);
-       ld.insertButaca(lugar);
-       limpiar();
-       txtid.setEditable(false);
+
+        Proyeccion pe = (Proyeccion) txtproyeccion.getSelectedItem();
+        try {
+            int fila = Integer.parseInt(txtfila.getText());
+            int nro = Integer.parseInt(txtnumero.getText());
+
+            boolean estado = true;
+            
+            lugar = new Lugar(pe, fila, nro, estado);
+            ld.insertButaca(lugar);
+            limpiar();
+            txtid.setEditable(false);
         } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Fila y número deben ser valores numéricos");
-                return;
-            }
+            JOptionPane.showMessageDialog(this, "Fila y número deben ser valores numéricos");
+            return;
+        }
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jbnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnuevoActionPerformed
@@ -245,30 +247,30 @@ private ProyeccionData pd;
     }//GEN-LAST:event_jbnuevoActionPerformed
 
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
-       txtid.setEditable(true);
-       Lugar lugar=  ld.buscarButaca(Integer.parseInt(txtid.getText()));
-       txtfila.setText(String.valueOf(lugar.getFila()));
-       txtnumero.setText(String.valueOf(lugar.getNumero()));
-       txtproyeccion.setSelectedItem(lugar.getProyeccion());
-       txtestado.setSelected(lugar.getDisponible());
-       
+        txtid.setEditable(true);
+        Lugar lugar = ld.buscarButaca(Integer.parseInt(txtid.getText()));
+        txtfila.setText(String.valueOf(lugar.getFila()));
+        txtnumero.setText(String.valueOf(lugar.getNumero()));
+        txtproyeccion.setSelectedItem(lugar.getProyeccion());
+        txtestado.setSelected(lugar.getDisponible());
+
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
-       ld.liberarLugar(Integer.parseInt(txtid.getText()));
-       txtid.setText("");
-       txtid.setEditable(false);
+        ld.liberarLugar(Integer.parseInt(txtid.getText()));
+        txtid.setText("");
+        txtid.setEditable(false);
     }//GEN-LAST:event_jbdarbajaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-     txtid.setEditable(true);
-        int id=  Integer.parseInt(txtid.getText());
-      Lugar lugar=  ld.buscarButaca(id);
+        txtid.setEditable(true);
+        int id = Integer.parseInt(txtid.getText());
+        Lugar lugar = ld.buscarButaca(id);
         txtproyeccion.setSelectedItem(lugar.getProyeccion());
-     txtfila.setText(String.valueOf(lugar.getFila()));
-      txtnumero.setText(String.valueOf(lugar.getNumero()));
-      txtestado.setSelected(lugar.getDisponible());
-      
+        txtfila.setText(String.valueOf(lugar.getFila()));
+        txtnumero.setText(String.valueOf(lugar.getNumero()));
+        txtestado.setSelected(lugar.getDisponible());
+
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
@@ -295,23 +297,21 @@ private ProyeccionData pd;
     private javax.swing.JTextField txtnumero;
     private javax.swing.JComboBox<Proyeccion> txtproyeccion;
     // End of variables declaration//GEN-END:variables
-public void llenarcombo(){
-    txtproyeccion.removeAllItems();
-    for(Proyeccion p: pd.listarProyeccion()){
-    
-    txtproyeccion.addItem(p);
+public void llenarcombo() {
+        txtproyeccion.removeAllItems();
+        for (Proyeccion p : pd.listarProyeccion()) {
+
+            txtproyeccion.addItem(p);
+        }
+
     }
 
-
-
-}
-public void limpiar() {
-    txtid.setText("");
-    txtfila.setText("");
-    txtnumero.setText("");
-    txtestado.setSelected(false);
-    txtproyeccion.setSelectedIndex(-1); 
-}
-
+    public void limpiar() {
+        txtid.setText("");
+        txtfila.setText("");
+        txtnumero.setText("");
+        txtestado.setSelected(false);
+        txtproyeccion.setSelectedIndex(-1);
+    }
 
 }

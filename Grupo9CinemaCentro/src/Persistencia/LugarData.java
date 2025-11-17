@@ -33,13 +33,13 @@ public class LugarData {
 
     // Metodos CRUD
     public void insertButaca(Lugar asiento) {
-        String insert = "INSERT INTO lugar (fila, numero, disponible, Id_proyeccion) VALUES (?,?,?,?)";
+        String insert = "INSERT INTO lugar (Id_proyeccion, fila, numero, disponible) VALUES (?,?,?,?)";
 
         try (PreparedStatement statement = conex.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, asiento.getFila());
-            statement.setInt(2, asiento.getNumero());
-            statement.setBoolean(3, asiento.getDisponible());
-            statement.setInt(4, asiento.getProyeccion().getIdProyeccion());
+            statement.setInt(1, asiento.getProyeccion().getIdProyeccion());
+            statement.setInt(2, asiento.getFila());
+            statement.setInt(3, asiento.getNumero());
+            statement.setBoolean(4, asiento.getDisponible());
             int filasAgregadas = statement.executeUpdate();
 
             try (ResultSet rsId = statement.getGeneratedKeys()) {
@@ -161,6 +161,7 @@ public class LugarData {
 
     // Alta Logica
     public void reservarButaca(Lugar asiento) {
+        System.out.println("SE LLAMo A reservarButaca()");
         String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
