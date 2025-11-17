@@ -6,6 +6,7 @@
 package Vistas;
 
 import Modelo.Comprador;
+import Modelo.Conexion;
 import Persistencia.CompradorData;
 import Persistencia.PeliculaData;
 import java.time.LocalDate;
@@ -17,14 +18,18 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class compradorVista extends javax.swing.JInternalFrame {
-private SistemaCine sc = new SistemaCine();
-    private CompradorData cd = new CompradorData(sc.conexionDb());
+private SistemaCine sc;
+private Conexion con;
+private CompradorData cd;
 
     /**
      * Creates new form compradorVista
      */
-    public compradorVista() {
+    public compradorVista(SistemaCine sc) {
         initComponents();
+        this.sc=sc;
+        this.con= sc.conexionDb();
+        this.cd= new CompradorData(con);
         
         txtid.setEditable(false);
     }

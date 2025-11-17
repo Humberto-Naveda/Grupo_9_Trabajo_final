@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import Modelo.Conexion;
 import Modelo.Pelicula;
 import Persistencia.PeliculaData;
 import java.sql.Date;
@@ -16,14 +17,25 @@ import java.time.ZoneId;
  * @author Usuario
  */
 public class peliculaVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc= new SistemaCine();
-private PeliculaData pd=new PeliculaData(sc.conexionDb());
+private  SistemaCine sc;
+private Conexion con;
+private PeliculaData pd;
 
     /**
      * Creates new form peliculaVista
      */
-    public peliculaVista() {
+    public peliculaVista(SistemaCine sc) {
         initComponents();
+        
+        this.sc=sc;
+        this.con=sc.conexionDb();
+        this.pd=new PeliculaData(con);
+        
+        
+        
+        
+        
+        
 txtid.setEditable(false);
      // txtid.setEditable(false);
     }

@@ -6,6 +6,7 @@
 package Vistas;
 
 import Modelo.Comprador;
+import Modelo.Conexion;
 import Modelo.Sala;
 import Persistencia.SalaData;
 import javax.swing.JOptionPane;
@@ -15,15 +16,21 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class salaVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc= new SistemaCine();
-
-private SalaData sd= new SalaData(sc.conexionDb());
+private  SistemaCine sc;
+private Conexion con;
+private SalaData sd;
 
     /**
      * Creates new form salaVista
      */
-    public salaVista() {
+    public salaVista(SistemaCine sc) {
         initComponents();
+        
+        this.sc=sc;
+        this.con=sc.conexionDb();
+        this.sd=new SalaData(con);
+        
+        
         txtid.setEditable(false);
     }
 

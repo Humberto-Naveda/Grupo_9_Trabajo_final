@@ -24,8 +24,8 @@ import javax.swing.table.TableRowSorter;
  */
 public class TicketGestor extends javax.swing.JInternalFrame {
 
-  private SistemaCine sc = new SistemaCine(); 
-    private Conexion con = sc.conexionDb();  
+  private SistemaCine sc ; 
+    private Conexion con ; 
    
     DefaultTableModel modeloTableComprador; // (DTM Personalizado)
     TableRowSorter<DefaultTableModel> sortModelComprador; // (Filtrado)
@@ -57,13 +57,13 @@ public class TicketGestor extends javax.swing.JInternalFrame {
         modeloTableTicket.setRowCount(0);
 
         for (Ticket t : listaTickets) {
-            modeloTableComprador.addRow(new Object[]{
-                t.getIdTicket(),
-                t.getComprador(),
-                t.getAsiento(),
+            modeloTableTicket.addRow(new Object[]{
+               
+                t.getComprador().getIdComprador(),
+                t.getAsiento().getIdLugar(),
                 t.getFechaCompra(),
-                t.getFuncion(),
-                t.getFuncion().getPelicula(),
+                t.getFechaFuncion(),
+                
                 t.getMonto(),
                 t.isActivo()
             });
@@ -160,10 +160,16 @@ public class TicketGestor extends javax.swing.JInternalFrame {
         }
     }
 
-    public TicketGestor() {
+    public TicketGestor(SistemaCine sc) {
+        initComponents();
+        this.sc = sc;
+    this.con = sc.conexionDb();
+        
+        
+        
         setSize(800, 600);
         setResizable(false);
-        initComponents();
+        
         llenarTableCompradores();
         filtrarCompradores();
         llenarTableTicket();
@@ -614,8 +620,10 @@ public class TicketGestor extends javax.swing.JInternalFrame {
         }
 
         TicketData ticketDAO = new TicketData(con);
-        Ticket ticket = new Ticket(id, asiento, nombreComprador, fechaEmision, fechaFuncion, monto, estado, funcion);
+        Ticket ticket = new Ticket( asiento, nombreComprador, fechaEmision, fechaFuncion, monto, estado, funcion);
         ticketDAO.guardarTicket(ticket);
+        llenarTableTicket(); 
+
     }//GEN-LAST:event_botonGenerarTicketActionPerformed
 
     private void txtIDTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDTicketActionPerformed
@@ -699,4 +707,6 @@ public class TicketGestor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtIDTicket;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
+
+   
 }

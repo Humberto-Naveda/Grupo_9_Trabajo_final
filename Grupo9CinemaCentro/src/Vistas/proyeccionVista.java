@@ -26,14 +26,14 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class proyeccionVista extends javax.swing.JInternalFrame {
-private  SistemaCine sc= new SistemaCine();
+private  SistemaCine sc;
 
-private Conexion con = sc.conexionDb();
+private Conexion con ;
 
 
-private ProyeccionData pd=new ProyeccionData(con);
-private PeliculaData ped=new PeliculaData(con);
-private SalaData sd=new SalaData(con);
+private ProyeccionData pd;
+private PeliculaData ped;
+private SalaData sd;
 
 
 
@@ -42,8 +42,21 @@ private SalaData sd=new SalaData(con);
      */
     private List<Pelicula> p;
     private List<Sala>s;
-    public proyeccionVista() {
+    public proyeccionVista(SistemaCine sc) {
         initComponents();
+        this.sc=sc;
+        this.con=sc.conexionDb();
+        this.pd=new ProyeccionData(con);
+         this.ped = new PeliculaData(con);    
+         this.sd=new SalaData(con);
+        
+        
+        
+        
+        
+        
+        
+        
         cargarPelicula();
        cargarSala();
        txtid.setEditable(false);

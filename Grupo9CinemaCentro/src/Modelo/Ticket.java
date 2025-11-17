@@ -27,8 +27,8 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int idTicket, Lugar asiento, Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, boolean activo, Proyeccion funcion) {
-        this.idTicket = idTicket;
+    public Ticket( Lugar asiento, Comprador comprador, LocalDate fechaCompra, LocalDate fechaFuncion, double monto, boolean activo, Proyeccion funcion) {
+        
         this.asiento = asiento;
         this.comprador = comprador;
         this.fechaCompra = fechaCompra;

@@ -22,15 +22,21 @@ import javax.swing.JOptionPane;
  */
 public class lugarVista extends javax.swing.JInternalFrame {
 
-    private SistemaCine sc = new SistemaCine();
+    private SistemaCine sc ;
     
-    private Conexion con = sc.conexionDb(); 
- LugarData ld= new LugarData(con);
-     ProyeccionData pd= new ProyeccionData(con);
-    public lugarVista() {
+    private Conexion con ;
+  private LugarData ld;
+   private  ProyeccionData pd;
+    public lugarVista(SistemaCine sc) {
         
-       
         initComponents();
+        
+        
+        this.sc=sc;
+        this.con=sc.conexionDb();
+       this.ld=new LugarData(con);
+        this.pd=new ProyeccionData(con);
+        
         txtid.setEditable(false);
         llenarcombo();
         

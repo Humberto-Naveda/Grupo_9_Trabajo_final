@@ -160,7 +160,7 @@ public class SistemaCine extends javax.swing.JFrame {
        escritorio1.removeAll();
         escritorio1.repaint();
         
-        peliculaVista GUI = new peliculaVista();
+        peliculaVista GUI = new peliculaVista(this);
         GUI.setVisible(true);
         
         escritorio1.add(GUI);
@@ -171,7 +171,7 @@ public class SistemaCine extends javax.swing.JFrame {
          escritorio1.removeAll();
         escritorio1.repaint();
         
-        proyeccionVista GUI = new proyeccionVista ();
+        proyeccionVista GUI = new proyeccionVista (this);
         GUI.setVisible(true);
         
         escritorio1.add(GUI);
@@ -182,7 +182,7 @@ public class SistemaCine extends javax.swing.JFrame {
         escritorio1.removeAll();
         escritorio1.repaint();
         
-        compradorVista GUI = new compradorVista();
+        compradorVista GUI = new compradorVista(this);
         GUI.setVisible(true);
         
         escritorio1.add(GUI);
@@ -193,7 +193,7 @@ public class SistemaCine extends javax.swing.JFrame {
          escritorio1.removeAll();
         escritorio1.repaint();
         
-        salaVista GUI = new salaVista();
+        salaVista GUI = new salaVista(this);
         GUI.setVisible(true);
         
         escritorio1.add(GUI);
@@ -205,19 +205,21 @@ public class SistemaCine extends javax.swing.JFrame {
     }//GEN-LAST:event_menuticketActionPerformed
 
     private void jmenuticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuticketActionPerformed
-         escritorio1.removeAll();
-        escritorio1.repaint();
-       TicketGestor gui = new TicketGestor();
          
-         escritorio1.add(gui);
-        gui.setVisible(true);
-        escritorio1.moveToFront(gui);
+        TicketGestor gui = new TicketGestor(this);
+
+    
+    escritorio1.removeAll();
+    escritorio1.add(gui);
+    escritorio1.repaint();
+
+    gui.setVisible(true);
     }//GEN-LAST:event_jmenuticketActionPerformed
 
     private void LugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LugarActionPerformed
          escritorio1.removeAll();
         escritorio1.repaint();
-        lugarVista gui=new lugarVista();
+        lugarVista gui=new lugarVista(this);
         gui.setVisible(true);
         escritorio1.add(gui);
         escritorio1.moveToFront(gui);
