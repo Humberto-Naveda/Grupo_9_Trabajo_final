@@ -92,6 +92,9 @@ public class SistemaCine extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
+
+        escritorio1.setMinimumSize(new java.awt.Dimension(800, 800));
+        escritorio1.setPreferredSize(new java.awt.Dimension(1500, 1200));
         getContentPane().add(escritorio1, java.awt.BorderLayout.CENTER);
 
         menuticket.setText("gestor");
@@ -205,11 +208,15 @@ public class SistemaCine extends javax.swing.JFrame {
     }//GEN-LAST:event_menuticketActionPerformed
 
     private void jmenuticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuticketActionPerformed
-         
-        TicketGestor gui = new TicketGestor(this);
+          escritorio1.removeAll();
+escritorio1.repaint();
 
-    gui.setLocationRelativeTo(null); 
-    gui.setVisible(true);
+TicketGestor gui = new TicketGestor(this);
+
+escritorio1.add(gui);
+gui.setVisible(true);     
+escritorio1.moveToFront(gui);
+
     
     }//GEN-LAST:event_jmenuticketActionPerformed
 

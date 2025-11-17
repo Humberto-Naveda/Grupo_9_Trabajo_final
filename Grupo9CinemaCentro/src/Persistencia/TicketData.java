@@ -185,34 +185,59 @@ public class TicketData {
     }
 
     public List<Ticket> listarTickets() {
-        List<Ticket> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ticket";
+    List<Ticket> lista = new ArrayList<>();
+    String sql = "SELECT * FROM ticket";
 
-        try (PreparedStatement ps = conec.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+    try (PreparedStatement ps = conec.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                Ticket ticket = new Ticket();
+        while (rs.next()) {
+            Ticket ticket = new Ticket();
 
-                ticket.setIdTicket(rs.getInt("Id_ticket"));
-                ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
-                ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
-                ticket.setMonto(rs.getDouble("monto"));
+            ticket.setIdTicket(rs.getInt("Id_ticket"));
 
-                int Id_comprador = rs.getInt("Id_comprador");
-                Comprador comprador = compradorData.buscarComprador(Id_comprador);
-                ticket.setComprador(comprador);
-                int Id_lugar = rs.getInt("Id_lugar");
-                Lugar asiento = lugarData.buscarButaca(Id_lugar);
-                ticket.setAsiento(asiento);
+            int Id_comprador = rs.getInt("Id_comprador");
+            int Id_lugar = rs.getInt("Id_lugar");
 
-                lista.add(ticket);
-
+            // --- Manejo seguro de fechas ---
+            Date fCompra = rs.getDate("fechaCompra");
+            if (fCompra != null) {
+                ticket.setFechaCompra(fCompra.toLocalDate());
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
+            Date fFuncion = rs.getDate("fechaFuncion");
+            if (fFuncion != null) {
+                ticket.setFechaFuncion(fFuncion.toLocalDate());
+            }
+
+            ticket.setMonto(rs.getDouble("monto"));
+            ticket.setActivo(rs.getBoolean("activo"));
+
+            // --- Buscar comprador ---
+            Comprador comprador = compradorData.buscarComprador(Id_comprador);
+            if (comprador == null) {
+                System.out.println("⚠ Comprador no encontrado: " + Id_comprador);
+            }
+            ticket.setComprador(comprador);
+
+            // --- Buscar asiento ---
+            Lugar asiento = lugarData.buscarButaca(Id_lugar);
+            if (asiento == null) {
+                System.out.println("⚠ Asiento no encontrado: " + Id_lugar);
+            }
+            ticket.setAsiento(asiento);
+
+            lista.add(ticket);
         }
-        return lista;
+
+    } catch (SQLException ex) {
+        Logger.getLogger(TicketData.class.getName()).log(Level.SEVERE, null, ex);
     }
+
+    return lista;
+}
+
+               
+            
 
 }

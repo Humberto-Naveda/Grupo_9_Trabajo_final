@@ -22,18 +22,45 @@ import javax.swing.table.TableRowSorter;
  *
  * @author PC1
  */
-public class TicketGestor extends javax.swing.JFrame {
+public class TicketGestor extends javax.swing.JInternalFrame {
 
   private SistemaCine sc ; 
     private Conexion con ; 
-   
+  private  ProyeccionData pd;
+     private LugarData ld;
+    public TicketGestor(SistemaCine sc) {
+        
+        initComponents();
+        
+
+        
+        this.sc = sc;
+    this.con = sc.conexionDb();
+        this.pd=new ProyeccionData(con);
+        this.ld=new  LugarData(con);
+        llenarTableTicket();
+        
+        setSize(800, 600);
+        setResizable(false);
+        
+        llenarTableCompradores();
+        filtrarCompradores();
+        
+        filtrarTickets();
+        llenarListPeliculas();
+        llenarListProyeccion();
+        llenarListButacas();
+        buttonGroup1.add(radioButtonEfectivo);
+        buttonGroup1.add(radioButtonTransfer);
+
+    }
     DefaultTableModel modeloTableComprador; // (DTM Personalizado)
     TableRowSorter<DefaultTableModel> sortModelComprador; // (Filtrado)
 
     DefaultTableModel modeloTableTicket;
     TableRowSorter<DefaultTableModel> sortModelTicket;
 
-    // Metodos Table Ticket
+    
     private void llenarTableTicket() {
         DocumentListener listenerFiltro = new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
@@ -56,18 +83,29 @@ public class TicketGestor extends javax.swing.JFrame {
         modeloTableTicket = (DefaultTableModel) tableTicket.getModel();
         modeloTableTicket.setRowCount(0);
 
-        for (Ticket t : listaTickets) {
-            modeloTableTicket.addRow(new Object[]{
-               
-                t.getComprador().getIdComprador(),
-                t.getAsiento().getIdLugar(),
-                t.getFechaCompra(),
-                t.getFechaFuncion(),
-                
-                t.getMonto(),
-                t.isActivo()
-            });
-        }
+       for (Ticket t : listaTickets) {
+
+    Comprador nombreComprador = t.getComprador() ;
+    Comprador idComprador = t.getComprador() ;
+
+    Lugar asiento = t.getAsiento() ;
+
+    String tituloPelicula = "—";
+   
+
+    modeloTableTicket.addRow(new Object[]{
+        t.getIdTicket(),
+        nombreComprador,
+        idComprador,
+        asiento,
+        t.getFechaCompra(),
+        t.getFechaFuncion(),
+        tituloPelicula,
+        t.getMonto(),
+        t.isActivo()
+    });
+}
+
 
         sortModelTicket = new TableRowSorter<>(modeloTableTicket);
         tableTicket.setRowSorter(sortModelTicket);
@@ -83,7 +121,7 @@ public class TicketGestor extends javax.swing.JFrame {
         }
     }
 
-    // Metodos Table Comprador
+    
     private void llenarTableCompradores() {
 
         DocumentListener listenerFiltro = new DocumentListener() {
@@ -138,8 +176,10 @@ public class TicketGestor extends javax.swing.JFrame {
     }
 
     private void llenarListProyeccion() {
-        ProyeccionData proyeccionDAO = new ProyeccionData(con);
-        List<Proyeccion> listaProyecciones = proyeccionDAO.listarActivas();
+        comboBoxProyeccion.removeAllItems();
+    comboBoxButaca.removeAllItems();
+        
+        List<Proyeccion> listaProyecciones = pd.listarActivas();
 
         for (Proyeccion p : listaProyecciones) {
             comboBoxProyeccion.addItem(p);
@@ -148,10 +188,11 @@ public class TicketGestor extends javax.swing.JFrame {
 
     private void llenarListButacas() {
         Proyeccion itemSeleccionado = (Proyeccion) comboBoxProyeccion.getSelectedItem();
-        LugarData lugarDAO = new LugarData(con);
+      ;
 
         if (itemSeleccionado != null) {
-            List<Lugar> listaLugares = lugarDAO.lugaresDisponiblesPorProyeccion(itemSeleccionado.getIdProyeccion());
+            List<Lugar> listaLugares = ld.lugaresDisponiblesPorProyeccion(itemSeleccionado.getIdProyeccion());
+            comboBoxButaca.removeAllItems();
             for (Lugar butaca : listaLugares) {
                 comboBoxButaca.addItem(butaca);
             }
@@ -160,27 +201,6 @@ public class TicketGestor extends javax.swing.JFrame {
         }
     }
 
-    public TicketGestor(SistemaCine sc) {
-        initComponents();
-        this.sc = sc;
-    this.con = sc.conexionDb();
-        
-        
-        
-        setSize(800, 600);
-        setResizable(false);
-        
-        llenarTableCompradores();
-        filtrarCompradores();
-        llenarTableTicket();
-        filtrarTickets();
-        llenarListPeliculas();
-        llenarListProyeccion();
-        llenarListButacas();
-        buttonGroup1.add(radioButtonEfectivo);
-        buttonGroup1.add(radioButtonTransfer);
-
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -663,7 +683,8 @@ public class TicketGestor extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxPeliculasActionPerformed
 
     private void comboBoxProyeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxProyeccionActionPerformed
-        // TODO add your handling code here:
+     comboBoxButaca.removeAllItems();
+     llenarListButacas();
     }//GEN-LAST:event_comboBoxProyeccionActionPerformed
 
     /**
