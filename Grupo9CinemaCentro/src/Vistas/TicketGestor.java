@@ -22,7 +22,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author PC1
  */
-public class TicketGestor extends javax.swing.JInternalFrame {
+public class TicketGestor extends javax.swing.JFrame {
 
   private SistemaCine sc ; 
     private Conexion con ; 

@@ -208,12 +208,9 @@ public class SistemaCine extends javax.swing.JFrame {
          
         TicketGestor gui = new TicketGestor(this);
 
-    
-    escritorio1.removeAll();
-    escritorio1.add(gui);
-    escritorio1.repaint();
-
+    gui.setLocationRelativeTo(null); 
     gui.setVisible(true);
+    
     }//GEN-LAST:event_jmenuticketActionPerformed
 
     private void LugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LugarActionPerformed
