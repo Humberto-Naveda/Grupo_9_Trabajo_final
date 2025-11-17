@@ -74,7 +74,7 @@ public class CompradorData {
    public Comprador buscarComprador(int id) {
       
       
-        String sql=" SELECT `Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago`, `fechaNac` FROM `comprador` WHERE id_Comprador=?";
+        String sql=" SELECT `Id_Comprador`, `DNI`, `nombre`, `password`, `medioPago`, `fechaNac` FROM `comprador` WHERE Id_Comprador=?";
         Comprador comprador=null;
         try {
             PreparedStatement ps=conec.prepareStatement(sql);

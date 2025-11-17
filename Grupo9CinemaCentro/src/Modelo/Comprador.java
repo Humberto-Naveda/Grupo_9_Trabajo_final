@@ -8,24 +8,36 @@ public class Comprador {
     private int dni;
     private String nombre;
     private String password;
+    private String medioPago;
     private LocalDate fechaNac;
 
-    public Comprador(int idComprador, int dni, String nombre, String password, LocalDate fechaNac) {
+    public Comprador(int idComprador, int dni, String nombre, String password,String medioPago, LocalDate fechaNac) {
         this.idComprador = idComprador;
         this.dni = dni;
         this.nombre = nombre;
         this.password = password;
+        this.medioPago= medioPago;
         this.fechaNac = fechaNac;
     }
 
-    public Comprador(int dni, String nombre, String password, LocalDate fechaNac) {
+    public Comprador(int dni, String nombre, String password, String medioPago, LocalDate fechaNac) {
         this.dni = dni;
         this.nombre = nombre;
         this.password = password;
+        this.medioPago = medioPago;
         this.fechaNac = fechaNac;
     }
 
+
     public Comprador() {
+    }
+
+    public String getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
     }
     
 
