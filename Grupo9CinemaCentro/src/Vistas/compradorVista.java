@@ -230,7 +230,7 @@ private CompradorData cd;
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
       
-       txtid.setText("");
+       
         Comprador c;
       
       if(txtdni.getText().isEmpty()||txtpassword.getText().isEmpty()||txtmediopago.getSelectedIndex()== -1||txtnombre.getText().isEmpty()){
@@ -252,6 +252,7 @@ private CompradorData cd;
        c= new Comprador(dni,nombre,contra,pago,fecha);
        cd.guardarComprador(c);
           JOptionPane.showMessageDialog(this, "Comprador guardado correctamente.");
+          txtid.setText("");
        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "dni deben ser numericos");
        
      }
@@ -313,7 +314,7 @@ private CompradorData cd;
         
         try{
             cd.eliminarComprador(id);
-        }catch(Exception e){JOptionPane.showMessageDialog(null, "Eliminado exitosamente"); }
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "error al eliminar"); }
          
             limpiar(); 
       

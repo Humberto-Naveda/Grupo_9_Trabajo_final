@@ -71,10 +71,16 @@ public class LugarData {
 
                 if (rsBuscar.next()) {
                     asiento = new Lugar();
-                    asiento.setIdLugar(idLugar);
+                    asiento.setIdLugar(rsBuscar.getInt("Id_lugar"));
+                   Proyeccion p=  proyecciondata.buscarProyeccion(rsBuscar.getInt("Id_proyeccion"));
                     asiento.setFila(rsBuscar.getInt("fila"));
                     asiento.setNumero(rsBuscar.getInt("numero"));
                     asiento.setDisponible(rsBuscar.getBoolean("disponible"));
+                    asiento.setProyeccion(p);
+                    
+                    
+                    
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el lugar indicado.");
                 }
@@ -159,14 +165,14 @@ public class LugarData {
         return lista;
     }
 
-    // Alta Logica
+   
     public void reservarButaca(Lugar asiento) {
-        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
+        String update = "UPDATE lugar SET disponible = 0 WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
-            statement.setBoolean(1, true);
-            statement.setInt(2, asiento.getIdLugar());
+           
+            statement.setInt(1, asiento.getIdLugar());
 
             int filasAfectadas = statement.executeUpdate();
 
@@ -184,12 +190,12 @@ public class LugarData {
     // Baja Logica
     public void liberarLugar(int idLugar) {
 
-        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
+        String update = "UPDATE lugar SET disponible = 1 WHERE Id_lugar = ?";
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
-            statement.setBoolean(1, false);
-            statement.setInt(2, idLugar);
+           
+            statement.setInt(1, idLugar);
 
             int filasAfectadas = statement.executeUpdate();
 
@@ -205,7 +211,7 @@ public class LugarData {
     }
 
     public List<Lugar> lugaresDisponiblesPorProyeccion(int Id_proyeccion) {
-        String sql = "SELECT * FROM lugar WHERE Id_proyeccion = ? AND disponible = 0";
+        String sql = "SELECT * FROM lugar WHERE Id_proyeccion = ? AND disponible = 1";
         List<Lugar> lista = new ArrayList<>();
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {

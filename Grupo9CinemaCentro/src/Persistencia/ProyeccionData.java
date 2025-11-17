@@ -53,6 +53,7 @@ public class ProyeccionData {
         proyeccion.setIdProyeccion(rs.getInt(1));
          JOptionPane.showMessageDialog(null, "proyeccion guardada con id "+proyeccion.getIdProyeccion());
         } 
+            rs.close();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al agregar fila");
@@ -110,7 +111,7 @@ public class ProyeccionData {
 
          
             }
-            ps.close();
+            rs.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar");
         }
@@ -137,14 +138,14 @@ public class ProyeccionData {
 
             
             Pelicula pel= new Pelicula();
-            pel.setIdPelicula(rs.getInt("Id_pelicula"));
-            p.setPelicula(pel);
-
+            
+            
             Sala sala = new Sala();
           
             p.setSala(sala);
 
-            
+            pel.setIdPelicula(rs.getInt("Id_pelicula"));
+
             p.setIdProyeccion(rs.getInt("Id_proyeccion"));
             p.setIdioma(rs.getString("idioma"));
             p.setEs3D(rs.getBoolean("es3D"));
@@ -174,7 +175,7 @@ public class ProyeccionData {
             lista.add(p);
         }
 
-        ps.close();
+        rs.close();
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al mostrar la lista: " + ex.getMessage());
     }
@@ -232,7 +233,7 @@ String sql="DELETE FROM proyeccion WHERE Id_proyeccion=?";
     
 public List<Proyeccion> listarActivas(){
  
-  String sql= " SELECT * FROM proyeccion pr JOIN pelicula p on(pr.Id_pelicula=p.id_Pelicula) JOIN sala s on(pr.Id_sala=s.Id_sala)  WHERE pr.activa=1";
+  String sql= " SELECT * FROM proyeccion pr JOIN pelicula p ON(pr.Id_pelicula=p.Id_Pelicula) JOIN sala s on(pr.Id_sala=s.Id_sala)  WHERE pr.activa=1";
 
 
 
@@ -244,13 +245,14 @@ List<Proyeccion> lista = new ArrayList<>();
         Proyeccion pr=new Proyeccion();
         
         
-        pr.setIdProyeccion(rs.getInt("id_proyeccion"));
+        pr.setIdProyeccion(rs.getInt("Id_proyeccion"));
         pr.setIdioma(rs.getString("idioma"));
         pr.setEs3D(rs.getBoolean("es3D"));
         pr.setSubtitulada(rs.getBoolean("subtitulada"));
             pr.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
             pr.setHoraFin(rs.getTime("horaFin").toLocalTime());
-           
+           pr.setPrecio(rs.getDouble("precio"));
+
             pr.setActiva(rs.getBoolean("activa"));
             
             Pelicula pe=new Pelicula();
@@ -259,13 +261,13 @@ List<Proyeccion> lista = new ArrayList<>();
             pe.setEnCartelera(rs.getBoolean("enCartelera")); 
 
             pe.setTitulo(rs.getString("titulo"));
-            pe.setIdPelicula(rs.getInt("id_pelicula"));
+            pe.setIdPelicula(rs.getInt("Id_pelicula"));
             
             pr.setPelicula(pe);
             
             Sala sa=new Sala();
             
-            sa.setIdSala(rs.getInt("id_sala"));
+            sa.setIdSala(rs.getInt("Id_sala"));
             sa.setNroSala(rs.getInt("nroSala"));
             sa.setCapacidad(rs.getInt("capacidad"));
             sa.setApta3D(rs.getBoolean("apta3D"));

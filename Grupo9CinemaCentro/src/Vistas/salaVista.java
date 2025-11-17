@@ -244,21 +244,32 @@ private SalaData sd;
     }//GEN-LAST:event_txtactivaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
-      
+      try{
         txtid.setEditable(true);
-        if(txtid.getText().isEmpty()){
+         if(txtid.getText().isEmpty()){
+           
+           JOptionPane.showMessageDialog(this, "debe ingresar un id");
+           return;
+           } 
         
-      JOptionPane.showMessageDialog(null, "ingrese el id de la sala que desea buscar");
-        return;
-        }
-      Sala s= sd.buscarSala(Integer.parseInt(txtid.getText()));
+        int id=Integer.parseInt(txtid.getText());
+            
+      Sala s= sd.buscarSala(id);
+      
+      
+      if (s == null) {
+    JOptionPane.showMessageDialog(this, "No existe la sala con ese ID");
+    return;
+}
         txtid.setText(s.getIdSala()+"");
         txtnrosala.setText(s.getNroSala()+"");
         txtapta3d.setSelected(s.isApta3D());
         txtcapacidad.setText(s.getCapacidad()+"");
         txtactiva.setSelected(s.getEstado());
        
-        
+      }catch(Exception e){
+          JOptionPane.showMessageDialog(this, "error, vuelva a intentar");
+      }
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
@@ -288,6 +299,8 @@ private SalaData sd;
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
 txtid.setEnabled(true);
+
+
         if(txtid.getText().isEmpty()){
         
         JOptionPane.showMessageDialog(null, "ingrese el id de la sala que  desea dar de baja");
@@ -295,9 +308,17 @@ txtid.setEnabled(true);
         }
         try{
         int id=Integer.parseInt(txtid.getText());
-       
-       sd.bajaLogicaSala(id);
-       
+        Sala sala= sd.buscarSala(id);
+        if(sala==null){
+        JOptionPane.showMessageDialog(null, "no hay ninguna sala con ese ID");
+        return;
+        }else{
+         sd.bajaLogicaSala(id);
+        
+        }
+        
+      
+      
        txtid.setText("");
         txtid.setEnabled(false);
        limpiar();
@@ -305,6 +326,7 @@ txtid.setEnabled(true);
         }catch(NumberFormatException e){
         
           JOptionPane.showMessageDialog(null, "ingrese un valor numerico");
+          return;
         }
        
       

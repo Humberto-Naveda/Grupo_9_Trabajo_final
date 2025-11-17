@@ -273,12 +273,18 @@ public class lugarVista extends javax.swing.JInternalFrame {
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
      txtid.setEditable(true);
         int id=  Integer.parseInt(txtid.getText());
+        try{
       Lugar lugar=  ld.buscarButaca(id);
+       
+      
         txtproyeccion.setSelectedItem(lugar.getProyeccion());
      txtfila.setText(String.valueOf(lugar.getFila()));
       txtnumero.setText(String.valueOf(lugar.getNumero()));
       txtestado.setSelected(lugar.getDisponible());
-      
+       }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "ingrese el id");
+        return;
+        }
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed

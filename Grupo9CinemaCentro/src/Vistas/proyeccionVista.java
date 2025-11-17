@@ -294,21 +294,13 @@ private SalaData sd;
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
         txtid.setEnabled(true);
-    
-    
-    if (txtid.getText().trim().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Ingrese el ID de la proyección que desea buscar.");
-        txtid.requestFocus();
-        return;
-    }
-
-       
-       
-       
-       
+  
        
       Proyeccion p=  pd.buscarProyeccion(Integer.parseInt(txtid.getText()));
+      if (p == null) {
+    JOptionPane.showMessageDialog(this, "No existe la proyección con ese ID.");
+    return;
+}
       txtpelicula.setSelectedItem(p.getPelicula());
       txtsala.setSelectedItem(p.getSala());
       txtidioma.setText(p.getIdioma());
@@ -346,7 +338,7 @@ private SalaData sd;
        
        if(txthorainicio.getText().isEmpty()||txthorafin.getText().isEmpty()){
          JOptionPane.showMessageDialog(null, "debe ingresar la hora");
-       
+       return;
        }
        
        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");

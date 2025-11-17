@@ -7,7 +7,7 @@ package Persistencia;
 
 import Modelo.Conexion;
 import Modelo.Sala;
-import java.sql.Array;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

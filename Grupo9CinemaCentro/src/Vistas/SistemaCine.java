@@ -16,10 +16,11 @@ public class SistemaCine extends javax.swing.JFrame {
      * Creates new form SistemaCine
      */
     public SistemaCine() {
-        setSize(800, 600);
-        setResizable(false);
+        
         initComponents();
         setLocationRelativeTo(null);
+        setSize(800, 600);
+        setResizable(false);
     }
 
     /**

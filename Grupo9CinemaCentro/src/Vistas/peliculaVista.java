@@ -11,6 +11,7 @@ import Persistencia.PeliculaData;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -295,7 +296,10 @@ txtid.setEditable(false);
     }//GEN-LAST:event_txtdirectorActionPerformed
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
-      
+      if(txtfecha.getDate() == null){
+    JOptionPane.showMessageDialog(null, "Debe elegir una fecha");
+    return;
+}
        
         String titulo=txttitulo.getText();
          String director=txtdirector.getText();
@@ -313,8 +317,9 @@ txtid.setEditable(false);
 
     private void jbmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmodificarActionPerformed
       Pelicula pe=new Pelicula();
-      
+      try{
       int id=Integer.parseInt(txtid.getText());
+      
        String titulo=txttitulo.getText();
          String director=txtdirector.getText();
       String actores=txtactores.getText();
@@ -324,24 +329,36 @@ txtid.setEditable(false);
     boolean encartelera=txtencartelera.isSelected();
     
            pe=new Pelicula(titulo,director,actores,origen,genero,fecha,encartelera);
+           pe.setIdPelicula(Integer.parseInt(txtid.getText()));
            pd.actualizarPelicula(pe);
-      
+      limpiar();
+          txtid.setText("");
+          }catch(Exception e){
+      JOptionPane.showMessageDialog(null, "ingrese el id");
+      }
+          
     }//GEN-LAST:event_jbmodificarActionPerformed
 
     private void jbdarbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbdarbajaActionPerformed
-       
+       txtid.setEditable(true);
+       try{
         int id= Integer.parseInt(txtid.getText());
-       
+      
         pd.bajaPelicula(id);
         txtid.setText("");
          txtid.setEditable(false);
         limpiar();
-        
+         }catch(Exception e){
+       JOptionPane.showMessageDialog(null, "ingrese el id");
+       }
     }//GEN-LAST:event_jbdarbajaActionPerformed
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
         txtid.setEditable(true);
+        try{
        Pelicula pe= pd.buscarPelicula(Integer.parseInt(txtid.getText()));
+       
+        
         txtid.setText(pe.getIdPelicula()+"");
         txttitulo.setText(pe.getTitulo());
         txtdirector.setText(pe.getDirector());
@@ -353,7 +370,10 @@ txtid.setEditable(false);
               java.util.Date date = java.util.Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
         txtfecha.setDate(date);
         txtencartelera.setSelected(pe.isEnCartelera());
-            
+            }catch(Exception e){
+        
+        JOptionPane.showMessageDialog(null, "ingrese el id");
+        }
 
              
         

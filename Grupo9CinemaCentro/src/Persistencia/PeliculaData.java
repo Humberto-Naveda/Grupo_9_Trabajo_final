@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class PeliculaData {
 
-    private Connection conex = null;
+    private Connection conex ;
 
     public PeliculaData(Conexion conex) {
         this.conex = conex.conectar();
@@ -57,6 +57,7 @@ public class PeliculaData {
             if (filasAgregadas > 0) {
                 JOptionPane.showMessageDialog(null, "Pelicula guardada con el id: " + p.getIdPelicula());
             }
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar pelicula. " + ex.getMessage());
         }
@@ -84,7 +85,7 @@ public class PeliculaData {
                     peli.setEstreno(rsBuscar.getDate("estreno").toLocalDate());
                     peli.setEnCartelera(rsBuscar.getBoolean("enCartelera"));
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se encontró la pelicula indicado.");
+                    System.out.println("No se encontró la pelicula indicado.");
                 }
             }
 
@@ -120,8 +121,9 @@ public class PeliculaData {
             ps.setInt(1, id_Pelicula);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Película dada de baja");
+           
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al dar de baja película: ");
+            JOptionPane.showMessageDialog(null, "Error al dar de baja película ");
         }
     }
   public List<Pelicula> listarPeliculasEnCartelera() {
@@ -144,6 +146,7 @@ public class PeliculaData {
                
                 lista.add(peli);
             }
+          
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar películas en cartelera: " );
         }
@@ -178,38 +181,19 @@ public class PeliculaData {
 
     
     
-    public void reservarButaca(Lugar asiento) {
-        String update = "UPDATE lugar SET disponible = ? WHERE Id_lugar = ?";
-
-        try (PreparedStatement statement = conex.prepareStatement(update)) {
-
-            statement.setBoolean(1, true);
-            statement.setInt(2, asiento.getIdLugar());
-
-            int filasAfectadas = statement.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, " Lugar con ID " + asiento.getIdLugar() + " reservado correctamente. Filas afectadas: " + filasAfectadas);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró el lugar para reservar. Filas afectadas: " + filasAfectadas);
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar lugar: " + ex.getMessage());
-        }
-    }
+   
 
     
     
     public void sacarDeCartelera(int idPeli) {
     
-    String update = "UPDATE pelicula SET enCartelera = ? WHERE id_Pelicula = ?";
+    String update = "UPDATE pelicula SET enCartelera = 0 WHERE id_Pelicula = ?";
 
     try (PreparedStatement statement = conex.prepareStatement(update)) {
         
-        statement.setBoolean(1, false); 
+         
 
-        statement.setInt(2, idPeli);
+        statement.setInt(1, idPeli);
 
         int filasAfectadas = statement.executeUpdate();
 
