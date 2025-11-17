@@ -307,9 +307,9 @@ SistemaCine sc=new SistemaCine();
         LocalDate fechaf=txtfechafuncion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         Double monto=Double.parseDouble(txtmonto.getText());
         boolean activo=txtactivo.isSelected();
-        t=new Ticket(id,l,c,fechac,fechaf,monto,activo);
+      //  t=new Ticket(id,l,c,fechac,fechaf,monto,activo);
         
-        td.guardarTicket(t);
+      //  td.guardarTicket(t);
         
         }catch(NumberFormatException r){
         JOptionPane.showMessageDialog(null, "debe ingresar un valor numerico");

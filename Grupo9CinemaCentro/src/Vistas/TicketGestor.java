@@ -6,6 +6,7 @@ package Vistas;
 
 import Modelo.*;
 import Persistencia.*;
+import java.awt.event.ItemEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashSet;
@@ -56,7 +57,7 @@ public class TicketGestor extends javax.swing.JFrame {
         modeloTableTicket.setRowCount(0);
 
         for (Ticket t : listaTickets) {
-            modeloTableComprador.addRow(new Object[]{
+            modeloTableTicket.addRow(new Object[]{
                 t.getIdTicket(),
                 t.getComprador(),
                 t.getAsiento(),
@@ -129,34 +130,63 @@ public class TicketGestor extends javax.swing.JFrame {
     private void llenarListPeliculas() {
         PeliculaData peliculaDAO = new PeliculaData(conex);
         List<Pelicula> listaPeliculas = peliculaDAO.listarPeliculasEnCartelera();
-
+        
         for (Pelicula p : listaPeliculas) {
             comboBoxPeliculas.addItem(p);
         }
-
+        listenerPeliculas();
+        
+        if (comboBoxPeliculas.getItemCount() > 0) {
+            Pelicula preseleccionada = (Pelicula) comboBoxPeliculas.getSelectedItem();
+            comboBoxProyeccion.removeAllItems();
+            llenarListProyeccion(preseleccionada);
+        }
     }
+    
+    private void listenerPeliculas() {
+    
+    comboBoxPeliculas.addItemListener(e -> {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
 
-    private void llenarListProyeccion() {
+            Pelicula peliculaSeleccionada = (Pelicula) e.getItem();
+            comboBoxProyeccion.removeAllItems();
+            llenarListProyeccion(peliculaSeleccionada);
+                
+        }
+    });
+}
+
+    private void llenarListProyeccion(Pelicula peli) {
         ProyeccionData proyeccionDAO = new ProyeccionData(conex);
-        List<Proyeccion> listaProyecciones = proyeccionDAO.listarActivas();
-
+        List<Proyeccion> listaProyecciones = proyeccionDAO.listarProyeccionesPorPelicula(peli.getIdPelicula());
         for (Proyeccion p : listaProyecciones) {
             comboBoxProyeccion.addItem(p);
         }
+        listenerProyeccion();
+    }
+    
+    private void listenerProyeccion() {
+        comboBoxProyeccion.addItemListener(e -> {
+            if (e.getStateChange() ==ItemEvent.SELECTED) {
+                
+                Proyeccion proyeccionSeleccionada = (Proyeccion) e.getItem();
+                comboBoxButaca.removeAllItems();
+                llenarListButacas(proyeccionSeleccionada);
+            }
+        });      
     }
 
-    private void llenarListButacas() {
-        Proyeccion itemSeleccionado = (Proyeccion) comboBoxProyeccion.getSelectedItem();
+    private void llenarListButacas(Proyeccion pro) {
+        //Proyeccion itemSeleccionado = (Proyeccion) comboBoxProyeccion.getSelectedItem();
         LugarData lugarDAO = new LugarData(conex);
 
-        if (itemSeleccionado != null) {
-            List<Lugar> listaLugares = lugarDAO.lugaresDisponiblesPorProyeccion(itemSeleccionado.getIdProyeccion());
+        if (pro != null) {
+            List<Lugar> listaLugares = lugarDAO.lugaresDisponiblesPorProyeccion(pro.getIdProyeccion());
+            System.out.println(pro.getIdProyeccion());
             for (Lugar butaca : listaLugares) {
                 comboBoxButaca.addItem(butaca);
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione una proyeccion.");
-        }
+        } 
     }
 
     public TicketGestor() {
@@ -168,8 +198,7 @@ public class TicketGestor extends javax.swing.JFrame {
         llenarTableTicket();
         filtrarTickets();
         llenarListPeliculas();
-        llenarListProyeccion();
-        llenarListButacas();
+       
         buttonGroup1.add(radioButtonEfectivo);
         buttonGroup1.add(radioButtonTransfer);
 

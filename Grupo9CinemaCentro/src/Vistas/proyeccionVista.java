@@ -337,7 +337,7 @@ private SalaData sd=new SalaData(sc.conexionDb());
            JOptionPane.showMessageDialog(null, " ingrese la hora correctamente");
            return;
        }
-       boolean activa=txtactivar.isSelected();
+       boolean activa=true;
        
        p=new Proyeccion(pe,sa,idioma,es3d,subtitulada,inicio,fin,precio,activa);
       

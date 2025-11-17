@@ -32,7 +32,7 @@ public class SalaData {
     }
 
     public void guardarSala(Sala sala) {
-        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `activa`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `sala`( `nroSala`, `apta3D`, `capacidad`, `estado`) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -55,7 +55,7 @@ public class SalaData {
     }
 
     public Sala buscarSala(int id) {
-        String sql = "SELECT  Id_sala,nroSala, apta3D, capacidad, activa FROM sala WHERE Id_sala=?";
+        String sql = "SELECT  Id_sala,nroSala, apta3D, capacidad, estado FROM sala WHERE Id_sala=?";
         Sala sala = null;
         try {
 
@@ -69,8 +69,7 @@ public class SalaData {
                 sala.setNroSala(rs.getInt("nroSala"));
                 sala.setApta3D(rs.getBoolean("apta3D"));
                 sala.setCapacidad(rs.getInt("capacidad"));
-                sala.setEstado(rs.getBoolean("activa"));
-JOptionPane.showMessageDialog(null, "busqueda exitosa");
+                sala.setEstado(rs.getBoolean("estado"));
 
             }else{
             
@@ -90,7 +89,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
     }
 
     public List<Sala> listarSalasActivas() {
-        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `activa` FROM `sala` WHERE activa=1 ";
+        String sql = "SELECT `Id_sala`, `nroSala`, `apta3D`, `capacidad`, `estado` FROM `sala` WHERE estado=1 ";
         List<Sala> salas = null;
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
@@ -102,7 +101,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
                 s.setIdSala(rs.getInt("Id_sala"));
                 s.setApta3D(rs.getBoolean("apta3D"));
                 s.setCapacidad(rs.getInt("capacidad"));
-                s.setEstado(rs.getBoolean("activa"));
+                s.setEstado(rs.getBoolean("estado"));
 
                 s.setNroSala(rs.getInt("nroSala"));
 
@@ -118,7 +117,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
     }
 
     public void modificarSala(Sala sala) {
-        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, activa=? WHERE Id_sala=?";
+        String sql = "UPDATE `sala` SET `nroSala`=?,`apta3D`=?,`capacidad`=?, estado=? WHERE Id_sala=?";
         try {
             PreparedStatement ps = conec.prepareStatement(sql);
             ps.setInt(1, sala.getNroSala());
@@ -144,7 +143,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
 
    
     public void bajaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET activa = 0 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET estado = 0 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);
@@ -161,7 +160,7 @@ JOptionPane.showMessageDialog(null, "no se a encontrado el id de esa sala");
     }
 }
     public void altaLogicaSala(int idSala) {
-    String sql = "UPDATE sala SET activa = 1 WHERE Id_sala = ?";
+    String sql = "UPDATE sala SET estado = 1 WHERE Id_sala = ?";
     try {
         PreparedStatement ps = conec.prepareStatement(sql);
         ps.setInt(1, idSala);

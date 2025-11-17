@@ -205,34 +205,34 @@ public class LugarData {
     }
 
     public List<Lugar> lugaresDisponiblesPorProyeccion(int Id_proyeccion) {
-        String sql = "SELECT * FROM lugar WHERE id_Proyeccion = ? AND disponible = 1";
+        String sql = "SELECT * FROM lugar WHERE Id_proyeccion = ? AND disponible = 0";
         List<Lugar> lista = new ArrayList<>();
 
-        try {
-            PreparedStatement ps = conex.prepareStatement(sql);
+        try (PreparedStatement ps = conex.prepareStatement(sql)) {
             ps.setInt(1, Id_proyeccion);
-            ResultSet rs = ps.executeQuery();
+            try (ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                Lugar l = new Lugar();
-                l.setIdLugar(rs.getInt("Id_lugar"));
-                l.setFila(rs.getInt("fila"));
-                l.setNumero(rs.getInt("numero"));
-                l.setDisponible(rs.getBoolean("disponible"));
+                while (rs.next()) {
+                    Lugar l = new Lugar();
+                    l.setIdLugar(rs.getInt("Id_lugar"));
+                    l.setFila(rs.getInt("fila"));
+                    l.setNumero(rs.getInt("numero"));
+                    l.setDisponible(rs.getBoolean("disponible"));
 
-                int idpro = rs.getInt("Id_proyeccion");
+                    int idpro = rs.getInt("Id_proyeccion");
 
-                Proyeccion pro = proyecciondata.buscarProyeccion(idpro);
+                    Proyeccion pro = proyecciondata.buscarProyeccion(idpro);
+                    
+                    if (pro != null) {
+                    l.setProyeccion(pro);
 
-                l.setProyeccion(pro);
+                    lista.add(l);
+                    }
+                }
 
-                lista.add(l);
             }
-
-            ps.close();
-
         } catch (SQLException ex) {
-
+            JOptionPane.showMessageDialog(null, "Error" + ex.getMessage());
         }
 
         return lista;
