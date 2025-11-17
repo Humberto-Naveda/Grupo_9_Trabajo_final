@@ -49,6 +49,9 @@ public class SistemaCine extends javax.swing.JFrame {
         menu7 = new java.awt.Menu();
         menu8 = new java.awt.Menu();
         escritorio = new javax.swing.JDesktopPane();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         escritorio1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuticket = new javax.swing.JMenu();
@@ -58,6 +61,10 @@ public class SistemaCine extends javax.swing.JFrame {
         Lugar = new javax.swing.JMenuItem();
         jmenuticket = new javax.swing.JMenuItem();
         menupelicula = new javax.swing.JMenuItem();
+        jventa = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -90,6 +97,12 @@ public class SistemaCine extends javax.swing.JFrame {
 
         menu8.setLabel("Edit");
         menuBar4.add(menu8);
+
+        jMenu1.setText("File");
+        jMenuBar3.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar3.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -154,6 +167,19 @@ public class SistemaCine extends javax.swing.JFrame {
         menuticket.add(menupelicula);
 
         jMenuBar1.add(menuticket);
+
+        jventa.setText("venta");
+
+        jMenuItem1.setText("Pelicula");
+        jventa.add(jMenuItem1);
+
+        jMenuItem2.setText("Butacas");
+        jventa.add(jMenuItem2);
+
+        jMenuItem3.setText("Confirmacion");
+        jventa.add(jMenuItem3);
+
+        jMenuBar1.add(jventa);
 
         setJMenuBar(jMenuBar1);
 
@@ -269,12 +295,19 @@ escritorio1.moveToFront(gui);
     private javax.swing.JMenuItem Lugar;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JDesktopPane escritorio1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmenuticket;
+    private javax.swing.JMenu jventa;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
