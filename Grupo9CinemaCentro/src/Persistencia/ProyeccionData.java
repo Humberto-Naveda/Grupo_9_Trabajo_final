@@ -315,12 +315,16 @@ public class ProyeccionData {
                     proyeccion = new Proyeccion();
 
                     proyeccion.setIdProyeccion(idProyeccion);
-                    proyeccion.setIdioma(rs.getString("idioma"));
-                    proyeccion.setPrecio(rs.getDouble("precio"));
-
                     int idPelicula = rs.getInt("Id_pelicula");
                     int idSala = rs.getInt("Id_sala");
 
+                    proyeccion.setIdioma(rs.getString("idioma"));                   
+                    proyeccion.setEs3D(rs.getBoolean("es3D"));
+                    proyeccion.setSubtitulada(rs.getBoolean("subtitulada"));
+                    proyeccion.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+                    proyeccion.setHoraFin(rs.getTime("horaFin").toLocalTime());
+                    proyeccion.setPrecio(rs.getDouble("precio"));
+                    proyeccion.setActiva(rs.getBoolean("activa"));
                     Pelicula pelicula = peliDAO.buscarPelicula(idPelicula);
                     Sala sala = salaDAO.buscarSala(idSala);
 
@@ -343,7 +347,7 @@ public class ProyeccionData {
             ps.setInt(1, idPeli);
 
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) { 
+                while (rs.next()) {
                     Proyeccion proyeccion = new Proyeccion();
 
                     proyeccion.setIdProyeccion(rs.getInt("Id_proyeccion"));
@@ -358,8 +362,8 @@ public class ProyeccionData {
                         listaProyecciones.add(proyeccion);
                     } else {
 
-                    System.out.println("ADVERTENCIA DE INTEGRIDAD: Proyección ID " + proyeccion.getIdProyeccion() + 
-                                       " omitida por falta de Película o Sala.");
+                        System.out.println("ADVERTENCIA DE INTEGRIDAD: Proyección ID " + proyeccion.getIdProyeccion()
+                                + " omitida por falta de Película o Sala.");
                     }
                 }
             }

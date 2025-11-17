@@ -62,16 +62,19 @@ public class TicketGestor extends javax.swing.JFrame {
                 t.getComprador(),
                 t.getAsiento(),
                 t.getFechaCompra(),
-                t.getFuncion(),
+                t.getFechaFuncion(),
+                t.getFuncion().getHoraInicio(),
                 t.getFuncion().getPelicula(),
                 t.getMonto(),
                 t.isActivo()
             });
+            System.out.println(t.getFuncion());
         }
 
         sortModelTicket = new TableRowSorter<>(modeloTableTicket);
         tableTicket.setRowSorter(sortModelTicket);
         txtIDTicket.getDocument().addDocumentListener(listenerFiltro);
+        
     }
 
     private void filtrarTickets() {
@@ -198,6 +201,7 @@ public class TicketGestor extends javax.swing.JFrame {
         llenarTableTicket();
         filtrarTickets();
         llenarListPeliculas();
+        listenerProyeccion();
        
         buttonGroup1.add(radioButtonEfectivo);
         buttonGroup1.add(radioButtonTransfer);
@@ -589,6 +593,8 @@ public class TicketGestor extends javax.swing.JFrame {
         if (resultado == 0) {
             ticketDAO.anularTicket(id);
         }
+        modeloTableTicket.setRowCount(0);
+        llenarTableTicket();
     }//GEN-LAST:event_botonAnularTicketActionPerformed
 
     private void botonNuevoTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoTicketActionPerformed
@@ -638,8 +644,11 @@ public class TicketGestor extends javax.swing.JFrame {
         }
 
         TicketData ticketDAO = new TicketData(conex);
+        LugarData lugarDAO = new LugarData(conex);
         Ticket ticket = new Ticket(id, asiento, nombreComprador, fechaEmision, fechaFuncion, monto, estado, funcion);
         ticketDAO.guardarTicket(ticket);
+        llenarTableTicket();
+        lugarDAO.reservarButaca(asiento);
     }//GEN-LAST:event_botonGenerarTicketActionPerformed
 
     private void txtIDTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDTicketActionPerformed
@@ -661,8 +670,10 @@ public class TicketGestor extends javax.swing.JFrame {
         int resultado = JOptionPane.showOptionDialog(rootPane, "¿Seguro que desea anular el ticket?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
         if (resultado == 0) {
-            ticketDAO.anularTicket(id);
+            ticketDAO.borrarTicket(id);
         }
+        modeloTableTicket.setRowCount(0);
+        llenarTableTicket();
 
     }//GEN-LAST:event_botonBorrarTicketActionPerformed
 

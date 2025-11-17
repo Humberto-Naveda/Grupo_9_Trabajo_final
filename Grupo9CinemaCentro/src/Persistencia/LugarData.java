@@ -74,7 +74,7 @@ public class LugarData {
                     asiento.setIdLugar(idLugar);
                     asiento.setFila(rsBuscar.getInt("fila"));
                     asiento.setNumero(rsBuscar.getInt("numero"));
-                    asiento.setDisponible(rsBuscar.getBoolean("activa"));
+                    asiento.setDisponible(rsBuscar.getBoolean("disponible"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No se encontró el lugar indicado.");
                 }
@@ -165,7 +165,7 @@ public class LugarData {
 
         try (PreparedStatement statement = conex.prepareStatement(update)) {
 
-            statement.setBoolean(1, true);
+            statement.setBoolean(1, false);
             statement.setInt(2, asiento.getIdLugar());
 
             int filasAfectadas = statement.executeUpdate();
@@ -205,7 +205,7 @@ public class LugarData {
     }
 
     public List<Lugar> lugaresDisponiblesPorProyeccion(int Id_proyeccion) {
-        String sql = "SELECT * FROM lugar WHERE Id_proyeccion = ? AND disponible = 0";
+        String sql = "SELECT * FROM lugar WHERE Id_proyeccion = ? AND disponible = 1";
         List<Lugar> lista = new ArrayList<>();
 
         try (PreparedStatement ps = conex.prepareStatement(sql)) {
